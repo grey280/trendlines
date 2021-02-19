@@ -14,7 +14,7 @@ struct RangedBarChartView<X: XPoint>: View {
         let yMax: Double
     }
     
-    public init(data: [DataPoint], unit: String, color: Color = .gray, axisAlignment: YAxisView.AxisAlignment = .leading) {
+    public init(data: [DataPoint], unit: String, color: Color = .gray, axisAlignment: YAxisView.AxisAlignment = .leading, hasOverlay: Bool = false) {
         self.data = data.sorted(by: { (a, b) -> Bool in
             a.x < b.x
         })
@@ -23,12 +23,14 @@ struct RangedBarChartView<X: XPoint>: View {
         self.axisAlignment = axisAlignment
         let ySorted = data.flatMap { [$0.yMin, $0.yMax] }.sorted()
         yRange = (ySorted.first ?? 0.0, ySorted.last ?? 0.0)
+        self.hasOverlay = hasOverlay
     }
     
     let data: [DataPoint]
     let color: Color
     let unit: String
     let axisAlignment: YAxisView.AxisAlignment
+    let hasOverlay: Bool
     
     private let yRange: (min: Double, max: Double)
     
@@ -62,6 +64,8 @@ struct RangedBarChartView<X: XPoint>: View {
             HStack(alignment: .bottom, spacing: spacing) {
                 if axisAlignment == .leading {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
+                } else if hasOverlay {
+                    Spacer().frame(width: YAxisView.width)
                 }
                 ForEach(data, id: \.x) { dataPoint in
                     ZStack {
@@ -74,6 +78,8 @@ struct RangedBarChartView<X: XPoint>: View {
                 }
                 if axisAlignment == .trailing {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
+                } else if hasOverlay {
+                    Spacer().frame(width: YAxisView.width)
                 }
             }
         }
