@@ -56,9 +56,13 @@ struct BarChartView<X: XPoint>: View {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
                 }
                 ForEach(data, id: \.x) { dataPoint in
-                    PartialRoundedRectangle(topLeft: barWidth(geo.size) / 4, topRight: barWidth(geo.size) / 4)
-                        .fill(self.color)
-                        .frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
+                    ZStack {
+                        PartialRoundedRectangle(topLeft: barWidth(geo.size) / 4, topRight: barWidth(geo.size) / 4)
+                            .fill(self.color.opacity(0.5))
+                        PartialRoundedRectangle(topLeft: barWidth(geo.size) / 4, topRight: barWidth(geo.size) / 4)
+                            .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                    }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
+                    
                 }
                 if axisAlignment == .trailing {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
