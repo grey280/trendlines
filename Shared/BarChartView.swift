@@ -18,10 +18,14 @@ struct BarChartView<X: Hashable & Comparable>: View {
             a.x < b.x
         })
         self.color = color
+        let ySorted = data.map { $0.y }.sorted()
+        yRange = (ySorted.first ?? 0.0, ySorted.last ?? 0.0)
     }
     
     let data: [DataPoint]
     let color: Color
+    
+    private let yRange: (min: Double, max: Double)
     
     var spacing: CGFloat {
         switch data.count {
@@ -37,18 +41,23 @@ struct BarChartView<X: Hashable & Comparable>: View {
     private func barWidth(_ source: CGSize) -> CGFloat {
         (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
+    private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
+        CGFloat(y / yRange.max) * source.height
+    }
     
     var body: some View {
         GeometryReader { geo in
-            HStack(spacing: spacing) {
+            HStack(alignment: .bottom, spacing: spacing) {
                 // todo: y axis
+                VStack {
+                    Text(yRange.max)
+                    Spacer()
+                    Text(yRange.min)
+                }.font(.footnote)
                 ForEach(data, id: \.x) { dataPoint in
-                    VStack {
-                        Spacer()
-                        Rectangle()
-                            .fill(self.color)
-                            .frame(width: barWidth(geo.size), height: CGFloat(dataPoint.y) * 15.0)
-                    }
+                    Rectangle()
+                        .fill(self.color)
+                        .frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
                 }
             }
         }
