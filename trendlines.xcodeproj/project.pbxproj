@@ -13,6 +13,8 @@
 		2D33C75525E0556300E3C6C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C74025E0556300E3C6C3 /* ContentView.swift */; };
 		2D33C75625E0556300E3C6C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D33C74125E0556300E3C6C3 /* Assets.xcassets */; };
 		2D33C75725E0556300E3C6C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D33C74125E0556300E3C6C3 /* Assets.xcassets */; };
+		2D33C76325E055ED00E3C6C3 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C76225E055ED00E3C6C3 /* BarChartView.swift */; };
+		2D33C76425E055ED00E3C6C3 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C76225E055ED00E3C6C3 /* BarChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,7 @@
 		2D33C74E25E0556300E3C6C3 /* trendlines.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trendlines.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D33C75025E0556300E3C6C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D33C75125E0556300E3C6C3 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		2D33C76225E055ED00E3C6C3 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +63,7 @@
 				2D33C73F25E0556300E3C6C3 /* trendlinesApp.swift */,
 				2D33C74025E0556300E3C6C3 /* ContentView.swift */,
 				2D33C74125E0556300E3C6C3 /* Assets.xcassets */,
+				2D33C76225E055ED00E3C6C3 /* BarChartView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -189,6 +193,7 @@
 			files = (
 				2D33C75425E0556300E3C6C3 /* ContentView.swift in Sources */,
 				2D33C75225E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
+				2D33C76325E055ED00E3C6C3 /* BarChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +203,7 @@
 			files = (
 				2D33C75525E0556300E3C6C3 /* ContentView.swift in Sources */,
 				2D33C75325E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
+				2D33C76425E055ED00E3C6C3 /* BarChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
