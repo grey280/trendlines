@@ -23,16 +23,32 @@ struct BarChartView<X: Hashable & Comparable>: View {
     let data: [DataPoint]
     let color: Color
     
+    var spacing: CGFloat {
+        switch data.count {
+        case 0..<10:
+            return 8
+        case 10..<20:
+            return 4
+        default:
+            return 2
+        }
+    }
+    
+    private func barWidth(_ source: CGSize) -> CGFloat {
+        (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
+    }
+    
     var body: some View {
-        HStack {
-            // todo: y axis
-            ForEach(data, id: \.x) { dataPoint in
-                VStack {
-                    Spacer()
-                    Rectangle()
-                        .fill(self.color)
-                        .frame(width: 20, height: CGFloat(dataPoint.y) * 15.0)
-                    
+        GeometryReader { geo in
+            HStack(spacing: spacing) {
+                // todo: y axis
+                ForEach(data, id: \.x) { dataPoint in
+                    VStack {
+                        Spacer()
+                        Rectangle()
+                            .fill(self.color)
+                            .frame(width: barWidth(geo.size), height: CGFloat(dataPoint.y) * 15.0)
+                    }
                 }
             }
         }
