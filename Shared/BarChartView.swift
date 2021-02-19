@@ -54,7 +54,7 @@ struct BarChartView<X: Hashable & Comparable>: View {
                     Text("0")
                 }.font(.footnote).frame(width: 30)
                 ForEach(data, id: \.x) { dataPoint in
-                    Rectangle()
+                    RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
                         .fill(self.color)
                         .frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
                 }
