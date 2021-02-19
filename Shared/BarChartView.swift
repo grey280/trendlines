@@ -7,6 +7,35 @@
 
 import SwiftUI
 
+struct YAxisView: View {
+    public static let width: CGFloat = 30
+    
+    public init(min: String, max: String, unit: String, alignment: HorizontalAlignment = .trailing, color: Color = .gray) {
+        self.min = min
+        self.max = max
+        self.unit = unit
+        self.alignment = alignment
+        self.color = color
+    }
+    
+    let min: String
+    let max: String
+    let unit: String
+    let alignment: HorizontalAlignment
+    let color: Color
+    
+    var body: some View {
+        VStack(alignment: alignment) {
+            Text(max)
+            Spacer()
+            Text(unit).rotationEffect(.degrees(90))
+            Spacer()
+            Text(min)
+        }.foregroundColor(color)
+        .frame(width: YAxisView.width)
+    }
+}
+
 struct BarChartView<X: Hashable & Comparable>: View {
     struct DataPoint {
         let x: X
