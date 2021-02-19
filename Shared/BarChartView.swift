@@ -28,10 +28,10 @@ struct YAxisView: View {
         VStack(alignment: alignment) {
             Text(max)
             Spacer()
-            Text(unit).rotationEffect(.degrees(90))
+            Text(unit).rotationEffect(.degrees(-90)).fixedSize()
             Spacer()
             Text(min)
-        }.foregroundColor(color)
+        }.foregroundColor(color).font(.footnote)
         .frame(width: YAxisView.width)
     }
 }
@@ -42,10 +42,11 @@ struct BarChartView<X: Hashable & Comparable>: View {
         let y: Double
     }
     
-    public init(data: [DataPoint], color: Color = .gray) {
+    public init(data: [DataPoint], unit: String, color: Color = .gray) {
         self.data = data.sorted(by: { (a, b) -> Bool in
             a.x < b.x
         })
+        self.unit = unit
         self.color = color
         let ySorted = data.map { $0.y }.sorted()
         yRange = (ySorted.first ?? 0.0, ySorted.last ?? 0.0)
@@ -53,6 +54,7 @@ struct BarChartView<X: Hashable & Comparable>: View {
     
     let data: [DataPoint]
     let color: Color
+    let unit: String
     
     private let yRange: (min: Double, max: Double)
     
