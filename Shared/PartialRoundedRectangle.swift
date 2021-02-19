@@ -42,7 +42,7 @@ struct PartialRoundedRectangle: Shape {
         path.addLine(to: CGPoint(x: 0, y: tl))
         path.addArc(center: CGPoint(x: tl, y: tl), radius: tl,
                     startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 270), clockwise: false)
-
+        path.closeSubpath()
         return path
     }
 }
@@ -50,11 +50,11 @@ struct PartialRoundedRectangle: Shape {
 struct PartialRoundedRectangle_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            PartialRoundedRectangle().fill(Color.black).frame(width: 100, height: 100, alignment: .center)
-            PartialRoundedRectangle(topLeft: 10).fill(Color.black).frame(width: 100, height: 100, alignment: .center)
-            PartialRoundedRectangle(topRight: 10).fill(Color.black).frame(width: 100, height: 100, alignment: .center)
-            PartialRoundedRectangle(bottomLeft: 10).fill(Color.black).frame(width: 100, height: 100, alignment: .center)
-            PartialRoundedRectangle(bottomRight: 10).fill(Color.black).frame(width: 100, height: 100, alignment: .center)
+            PartialRoundedRectangle().stroke(Color.black).frame(width: 100, height: 100, alignment: .center)
+            PartialRoundedRectangle(topLeft: 10).stroke(Color.black).frame(width: 100, height: 100, alignment: .center)
+            PartialRoundedRectangle(topRight: 10).stroke(Color.black).frame(width: 100, height: 100, alignment: .center)
+            PartialRoundedRectangle(bottomLeft: 10).stroke(Color.black).frame(width: 100, height: 100, alignment: .center)
+            PartialRoundedRectangle(bottomRight: 10).stroke(Color.black).frame(width: 100, height: 100, alignment: .center)
         }
     }
 }
