@@ -56,7 +56,7 @@ struct BarChartView<X: Hashable & Comparable>: View {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
                 }
                 ForEach(data, id: \.x) { dataPoint in
-                    RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
+                    PartialRoundedRectangle(topLeft: barWidth(geo.size) / 4, topRight: barWidth(geo.size) / 4)
                         .fill(self.color)
                         .frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
                 }
