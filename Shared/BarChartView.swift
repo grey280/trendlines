@@ -49,7 +49,7 @@ struct BarChartView<X: Hashable & Comparable>: View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
                 VStack {
-                    Text("\(yRange.max)")
+                    Text("\(yRange.max, specifier: "%.0f")")
                     Spacer()
                     Text("0")
                 }.font(.footnote).frame(width: 30)
