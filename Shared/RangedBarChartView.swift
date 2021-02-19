@@ -74,7 +74,16 @@ struct RangedBarChartView<X: XPoint>: View {
 }
 
 struct RangedBarChartView_Previews: PreviewProvider {
+    static let testData: [RangedBarChartView<Int>.DataPoint] = [
+        .init(x: 1, yMin: 1, yMax: 2),
+        .init(x: 2, yMin: 2, yMax: 4),
+        .init(x: 3, yMin: 3, yMax: 6)
+    ]
+    
     static var previews: some View {
-        RangedBarChartView()
+        Group {
+            RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
+            RangedBarChartView<Int>(data: (0...30).map { RangedBarChartView<Int>.DataPoint(x: $0, yMin: Double($0), yMax: Double($0 + 2) )}, unit: "Things")
+        }
     }
 }
