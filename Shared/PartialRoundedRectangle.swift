@@ -1,7 +1,7 @@
 import SwiftUI
 
 // Lightly modified from https://stackoverflow.com/a/56763282
-struct PartialRoundedRectangle: Shape {
+public struct PartialRoundedRectangle: Shape {
     public init(topLeft: CGFloat = 0.0, topRight: CGFloat = 0.0, bottomLeft: CGFloat = 0.0, bottomRight: CGFloat = 0.0) {
         tl = topLeft
         tr = topRight
@@ -14,7 +14,7 @@ struct PartialRoundedRectangle: Shape {
     let bl: CGFloat
     let br: CGFloat
 
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         var path = Path()
 
         let w = rect.size.width
@@ -44,6 +44,21 @@ struct PartialRoundedRectangle: Shape {
                     startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 270), clockwise: false)
         path.closeSubpath()
         return path
+    }
+}
+
+public extension PartialRoundedRectangle {
+    init(top: CGFloat) {
+        self.init(topLeft: top, topRight: top)
+    }
+    init(left: CGFloat) {
+        self.init(topLeft: left, bottomLeft: left)
+    }
+    init(right: CGFloat) {
+        self.init(topRight: right, bottomRight: right)
+    }
+    init(bottom: CGFloat) {
+        self.init(bottomLeft: bottom, bottomRight: bottom)
     }
 }
 
