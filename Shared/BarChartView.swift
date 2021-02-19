@@ -14,31 +14,20 @@ struct YAxisView: View {
     
     public static let width: CGFloat = 30
     
-    public init(min: String, max: String, unit: String, alignment: AxisAlignment = .trailing, color: Color = .gray) {
+    public init(min: String, max: String, unit: String, color: Color = .gray) {
         self.min = min
         self.max = max
         self.unit = unit
-        self.alignment = alignment
         self.color = color
     }
     
     let min: String
     let max: String
     let unit: String
-    let alignment: AxisAlignment
     let color: Color
     
-    var horizontalAlignment: HorizontalAlignment {
-        switch alignment {
-        case .leading:
-            return .leading
-        case .trailing:
-            return .trailing
-        }
-    }
-    
     var body: some View {
-        VStack(alignment: horizontalAlignment) {
+        VStack(alignment: .center) {
             Text(max)
             Spacer()
             Text(unit).rotationEffect(.degrees(-90)).fixedSize()
@@ -95,7 +84,7 @@ struct BarChartView<X: Hashable & Comparable>: View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
                 if axisAlignment == .leading {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, alignment: axisAlignment)
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
                 }
                 ForEach(data, id: \.x) { dataPoint in
                     RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
@@ -103,7 +92,7 @@ struct BarChartView<X: Hashable & Comparable>: View {
                         .frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
                 }
                 if axisAlignment == .trailing {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, alignment: axisAlignment)
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
                 }
             }
         }
@@ -119,7 +108,7 @@ struct BarChartView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            BarChartView<Int>(data: testData, unit: "Number")
+            BarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
             BarChartView<Int>(data: (0...30).map { BarChartView<Int>.DataPoint(x: $0, y: Double($0) )}, unit: "Things")
         }
     }
