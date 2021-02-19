@@ -48,7 +48,11 @@ struct BarChartView<X: XPoint>: View {
         (source.width - CGFloat(hasOverlay ? (2 * YAxisView.width) : YAxisView.width) - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
     private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
-        CGFloat(y / yRange.max) * source.height
+        let calculated = CGFloat(y / yRange.max) * source.height
+        if (calculated < 10) {
+            return 10
+        }
+        return calculated
     }
     
     var body: some View {
