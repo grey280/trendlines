@@ -79,11 +79,7 @@ struct BarChartView<X: Hashable & Comparable>: View {
     var body: some View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
-                VStack {
-                    Text("\(yRange.max, specifier: "%.0f")")
-                    Spacer()
-                    Text("0")
-                }.font(.footnote).frame(width: 30)
+                YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
                 ForEach(data, id: \.x) { dataPoint in
                     RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
                         .fill(self.color)
@@ -103,8 +99,8 @@ struct BarChartView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            BarChartView<Int>(data: testData)
-            BarChartView<Int>(data: (0...30).map { BarChartView<Int>.DataPoint(x: $0, y: Double($0) )})
+            BarChartView<Int>(data: testData, unit: "Number")
+            BarChartView<Int>(data: (0...30).map { BarChartView<Int>.DataPoint(x: $0, y: Double($0) )}, unit: "Things")
         }
     }
 }
