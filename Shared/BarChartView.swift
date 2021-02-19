@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct YAxisView: View {
+    enum AxisAlignment {
+        case leading, trailing
+    }
+    
     public static let width: CGFloat = 30
     
-    public init(min: String, max: String, unit: String, alignment: HorizontalAlignment = .trailing, color: Color = .gray) {
+    public init(min: String, max: String, unit: String, alignment: AxisAlignment = .trailing, color: Color = .gray) {
         self.min = min
         self.max = max
         self.unit = unit
@@ -21,11 +25,20 @@ struct YAxisView: View {
     let min: String
     let max: String
     let unit: String
-    let alignment: HorizontalAlignment
+    let alignment: AxisAlignment
     let color: Color
     
+    var horizontalAlignment: HorizontalAlignment {
+        switch alignment {
+        case .leading:
+            return .leading
+        case .trailing:
+            return .trailing
+        }
+    }
+    
     var body: some View {
-        VStack(alignment: alignment) {
+        VStack(alignment: horizontalAlignment) {
             Text(max)
             Spacer()
             Text(unit).rotationEffect(.degrees(-90)).fixedSize()
@@ -42,12 +55,13 @@ struct BarChartView<X: Hashable & Comparable>: View {
         let y: Double
     }
     
-    public init(data: [DataPoint], unit: String, color: Color = .gray) {
+    public init(data: [DataPoint], unit: String, color: Color = .gray, axisAlignment: YAxisView.AxisAlignment = .leading) {
         self.data = data.sorted(by: { (a, b) -> Bool in
             a.x < b.x
         })
         self.unit = unit
         self.color = color
+        self.axisAlignment = axisAlignment
         let ySorted = data.map { $0.y }.sorted()
         yRange = (ySorted.first ?? 0.0, ySorted.last ?? 0.0)
     }
@@ -55,6 +69,7 @@ struct BarChartView<X: Hashable & Comparable>: View {
     let data: [DataPoint]
     let color: Color
     let unit: String
+    let axisAlignment: YAxisView.AxisAlignment
     
     private let yRange: (min: Double, max: Double)
     
@@ -79,11 +94,16 @@ struct BarChartView<X: Hashable & Comparable>: View {
     var body: some View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
-                YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
+                if axisAlignment == .leading {
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, alignment: axisAlignment)
+                }
                 ForEach(data, id: \.x) { dataPoint in
                     RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
                         .fill(self.color)
                         .frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
+                }
+                if axisAlignment == .trailing {
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, alignment: axisAlignment)
                 }
             }
         }
