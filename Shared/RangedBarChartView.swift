@@ -46,7 +46,7 @@ struct RangedBarChartView<X: XPoint>: View {
     }
     
     private func barWidth(_ source: CGSize) -> CGFloat {
-        (source.width - CGFloat(30) - (spacing * CGFloat(data.count))) / CGFloat(data.count)
+        (source.width - CGFloat(hasOverlay ? (2 * YAxisView.width) : YAxisView.width) - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
     private func barOffset(_ source: CGSize, y: Double) -> CGFloat {
         CGFloat(y / yRange.max) * source.height
@@ -65,7 +65,7 @@ struct RangedBarChartView<X: XPoint>: View {
                 if axisAlignment == .leading {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
                 } else if hasOverlay {
-                    Spacer().frame(width: YAxisView.width)
+                   Spacer().frame(width: YAxisView.width)
                 }
                 ForEach(data, id: \.x) { dataPoint in
                     ZStack {
@@ -97,6 +97,7 @@ struct RangedBarChartView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
+            RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing, hasOverlay: true)
             RangedBarChartView<Int>(data: (0...30).map { RangedBarChartView<Int>.DataPoint(x: $0, yMin: Double($0), yMax: Double($0 + 2) )}, unit: "Things")
         }
     }
