@@ -36,9 +36,9 @@ struct BarChartView<X: XPoint>: View {
         case 0..<10:
             return 8
         case 10..<20:
-            return 4
+            return 6
         default:
-            return 2
+            return 4
         }
     }
     
