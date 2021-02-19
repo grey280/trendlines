@@ -39,7 +39,7 @@ struct BarChartView<X: Hashable & Comparable>: View {
     }
     
     private func barWidth(_ source: CGSize) -> CGFloat {
-        (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
+        (source.width - CGFloat(30) - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
     private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
         CGFloat(y / yRange.max) * source.height
@@ -48,12 +48,11 @@ struct BarChartView<X: Hashable & Comparable>: View {
     var body: some View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
-                // todo: y axis
                 VStack {
-                    Text(yRange.max)
+                    Text("\(yRange.max)")
                     Spacer()
-                    Text(yRange.min)
-                }.font(.footnote)
+                    Text("0")
+                }.font(.footnote).frame(width: 30)
                 ForEach(data, id: \.x) { dataPoint in
                     Rectangle()
                         .fill(self.color)
