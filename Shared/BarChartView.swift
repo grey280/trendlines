@@ -47,6 +47,9 @@ struct BarChartView_Previews: PreviewProvider {
     ]
     
     static var previews: some View {
-        BarChartView<Int>(data: testData)
+        Group {
+            BarChartView<Int>(data: testData)
+            BarChartView<Int>(data: (0...30).map { BarChartView<Int>.DataPoint(x: $0, y: Double($0) )})
+        }
     }
 }
