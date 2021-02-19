@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BarChartView<X: Hashable & Comparable>: View {
+struct BarChartView<X: XPoint>: View {
     struct DataPoint {
         let x: X
         let y: Double
