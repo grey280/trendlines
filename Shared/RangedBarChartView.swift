@@ -46,8 +46,15 @@ struct RangedBarChartView<X: XPoint>: View {
     private func barWidth(_ source: CGSize) -> CGFloat {
         (source.width - CGFloat(30) - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
-    private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
+    private func barOffset(_ source: CGSize, y: Double) -> CGFloat {
         CGFloat(y / yRange.max) * source.height
+    }
+    private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
+        let calculated = CGFloat(y / yRange.max) * source.height
+        if (calculated < 10) {
+            return 10
+        }
+        return calculated
     }
     
     var body: some View {
@@ -62,7 +69,7 @@ struct RangedBarChartView<X: XPoint>: View {
                             .fill(self.color.opacity(0.5))
                         RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
                             .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
-                    }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.yMax - dataPoint.yMin)).padding(.bottom, barHeight(geo.size, y: dataPoint.yMin))
+                    }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.yMax - dataPoint.yMin)).padding(.bottom, barOffset(geo.size, y: dataPoint.yMin))
                     
                 }
                 if axisAlignment == .trailing {
@@ -77,7 +84,8 @@ struct RangedBarChartView_Previews: PreviewProvider {
     static let testData: [RangedBarChartView<Int>.DataPoint] = [
         .init(x: 1, yMin: 1, yMax: 2),
         .init(x: 2, yMin: 2, yMax: 4),
-        .init(x: 3, yMin: 3, yMax: 6)
+        .init(x: 3, yMin: 3, yMax: 6),
+        .init(x: 4, yMin: 1, yMax: 1)
     ]
     
     static var previews: some View {
