@@ -13,7 +13,7 @@ struct BarChartView<X: Hashable & Comparable>: View {
         let y: Double
     }
     
-    public init?(data: [DataPoint], color: Color = .gray) {
+    public init(data: [DataPoint], color: Color = .gray) {
         self.data = data.sorted(by: { (a, b) -> Bool in
             a.x < b.x
         })
@@ -22,14 +22,6 @@ struct BarChartView<X: Hashable & Comparable>: View {
     
     let data: [DataPoint]
     let color: Color
-    
-//    private var xRange: (start: X, end: X)? {
-//        guard data.count > 0 else {
-//            return nil
-//        }
-//        let sorted = data.map { $0.x }.sorted()
-//        return (sorted.first!, sorted.last ?? sorted.first!)
-//    }
     
     var body: some View {
         HStack {
@@ -44,15 +36,6 @@ struct BarChartView<X: Hashable & Comparable>: View {
                 }
             }
         }
-        
-//        if let xRange = xRange {
-//            HStack {
-//                // todo: y axis
-//
-//            }
-//        } else {
-//            EmptyView()
-//        }
     }
 }
 
