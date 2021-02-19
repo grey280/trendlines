@@ -21,6 +21,8 @@
 		2D33C77525E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C77325E06DD800E3C6C3 /* PartialRoundedRectangle.swift */; };
 		2D33C77925E06F5700E3C6C3 /* XPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C77825E06F5700E3C6C3 /* XPoint.swift */; };
 		2D33C77A25E06F5700E3C6C3 /* XPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C77825E06F5700E3C6C3 /* XPoint.swift */; };
+		2D33C77E25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */; };
+		2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,7 @@
 		2D33C76E25E06D9F00E3C6C3 /* YAxisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAxisView.swift; sourceTree = "<group>"; };
 		2D33C77325E06DD800E3C6C3 /* PartialRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialRoundedRectangle.swift; sourceTree = "<group>"; };
 		2D33C77825E06F5700E3C6C3 /* XPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPoint.swift; sourceTree = "<group>"; };
+		2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RangedBarChartView.swift; path = Shared/RangedBarChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +62,7 @@
 		2D33C73925E0556300E3C6C3 = {
 			isa = PBXGroup;
 			children = (
+				2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */,
 				2D33C73E25E0556300E3C6C3 /* Shared */,
 				2D33C74825E0556300E3C6C3 /* iOS */,
 				2D33C74F25E0556300E3C6C3 /* macOS */,
@@ -205,6 +209,7 @@
 			files = (
 				2D33C75425E0556300E3C6C3 /* ContentView.swift in Sources */,
 				2D33C77925E06F5700E3C6C3 /* XPoint.swift in Sources */,
+				2D33C77E25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
 				2D33C77425E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
 				2D33C75225E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76325E055ED00E3C6C3 /* BarChartView.swift in Sources */,
@@ -218,6 +223,7 @@
 			files = (
 				2D33C75525E0556300E3C6C3 /* ContentView.swift in Sources */,
 				2D33C77A25E06F5700E3C6C3 /* XPoint.swift in Sources */,
+				2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
 				2D33C77525E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
 				2D33C75325E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76425E055ED00E3C6C3 /* BarChartView.swift in Sources */,
