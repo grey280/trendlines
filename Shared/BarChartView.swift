@@ -55,7 +55,7 @@ struct BarChartView<X: XPoint>: View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
                 if axisAlignment == .leading {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }
@@ -69,7 +69,7 @@ struct BarChartView<X: XPoint>: View {
                     
                 }
                 if axisAlignment == .trailing {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit)
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }
