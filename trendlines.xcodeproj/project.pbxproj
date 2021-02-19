@@ -38,7 +38,7 @@
 		2D33C76E25E06D9F00E3C6C3 /* YAxisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAxisView.swift; sourceTree = "<group>"; };
 		2D33C77325E06DD800E3C6C3 /* PartialRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialRoundedRectangle.swift; sourceTree = "<group>"; };
 		2D33C77825E06F5700E3C6C3 /* XPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPoint.swift; sourceTree = "<group>"; };
-		2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RangedBarChartView.swift; path = Shared/RangedBarChartView.swift; sourceTree = "<group>"; };
+		2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangedBarChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,6 @@
 		2D33C73925E0556300E3C6C3 = {
 			isa = PBXGroup;
 			children = (
-				2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */,
 				2D33C73E25E0556300E3C6C3 /* Shared */,
 				2D33C74825E0556300E3C6C3 /* iOS */,
 				2D33C74F25E0556300E3C6C3 /* macOS */,
@@ -73,6 +72,7 @@
 		2D33C73E25E0556300E3C6C3 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */,
 				2D33C73F25E0556300E3C6C3 /* trendlinesApp.swift */,
 				2D33C74025E0556300E3C6C3 /* ContentView.swift */,
 				2D33C74125E0556300E3C6C3 /* Assets.xcassets */,
