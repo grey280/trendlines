@@ -16,6 +16,10 @@ fileprivate struct _ChartView: View {
     let overlay: Overlay
     
     var body: some View {
+        switch source.effectiveChartType {
+        case .bar:
+            BarChartView(data: <#T##[BarChartView<_>.DataPoint]#>, unit: <#T##String#>)
+        }
         EmptyView() // TODO: Implement
     }
 }
