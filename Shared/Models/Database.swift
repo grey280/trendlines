@@ -26,5 +26,22 @@ class Database: ObservableObject {
             logger.error("Could not create database: \(error.localizedDescription, privacy: .public)")
             return nil
         }
+        do {
+            try initializeDatabase()
+        } catch {
+            logger.error("Could not confiugre database: \(error.localizedDescription, privacy: .public)")
+            return nil
+        }
+    }
+    
+    private func initializeDatabase() throws {
+        try dbQueue.write { db in
+            try db.create(table: "charts", ifNotExists: true, body: { t in
+                t.autoIncrementedPrimaryKey("id")
+                t.column("sortNo", .integer).notNull().unique()
+                t.column("source1", .text).notNull()
+                t.column("source2", .text)
+            })
+        }
     }
 }
