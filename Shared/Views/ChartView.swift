@@ -7,14 +7,36 @@
 
 import SwiftUI
 
-struct ChartView: View {
+fileprivate struct _ChartView: View {
+    enum Overlay {
+        case none, has, `is`
+    }
+    
+    let source: DataSource
+    let overlay: Overlay
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        EmptyView() // TODO: Implement
+    }
+}
+
+struct ChartView: View {
+    let chart: Chart
+    
+    var body: some View {
+        if let source2 = chart.source2 {
+            ZStack {
+                _ChartView(source: chart.source1, overlay: .has)
+                _ChartView(source: source2, overlay: .is)
+            }
+        } else {
+            _ChartView(source: chart.source1, overlay: .none)
+        }
     }
 }
 
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView()
+        ChartView(chart: Chart(id: nil, sortNo: 1, source1: DataSource(sourceType: .health(.activity(.activeEnergy)), title: "Active Energy", color: .red, chartType: .bar), source2: nil))
     }
 }
