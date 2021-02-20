@@ -77,7 +77,7 @@ struct BarChartView<X: XPoint>: View {
                 ForEach(data, id: \.x) { dataPoint in
                     ZStack {
                         PartialRoundedRectangle(top: barWidth(geo.size) / 4)
-                            .fill(self.color.opacity(0.5))
+                            .fill(self.color.opacity(0.4))
                         PartialRoundedRectangle(top: barWidth(geo.size) / 4)
                             .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                     }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
