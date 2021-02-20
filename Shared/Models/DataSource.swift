@@ -25,3 +25,6 @@ extension DataSource: MutablePersistableRecord {
         id = rowID
     }
 }
+
+extension DataSource: FetchableRecord { }
+extension DataSource: TableRecord { }
