@@ -58,4 +58,12 @@ class Database: ObservableObject {
             logger.error("Could not load charts. \(error.localizedDescription, privacy: .public)")
         }
     }
+    
+    func save(chart: Chart) throws -> Chart {
+        var chart = chart
+        try dbQueue.write { db in
+            try chart.save(db)
+        }
+        return chart
+    }
 }
