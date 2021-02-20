@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,7 +25,8 @@
 		2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */; };
 		2D33C78525E0904700E3C6C3 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C78425E0904700E3C6C3 /* LineChartView.swift */; };
 		2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C78425E0904700E3C6C3 /* LineChartView.swift */; };
-		2DCB046425E1815F00CD58F8 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 2DCB046325E1815F00CD58F8 /* SQLite */; };
+		2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
+		2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		2D33C77825E06F5700E3C6C3 /* XPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPoint.swift; sourceTree = "<group>"; };
 		2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangedBarChartView.swift; sourceTree = "<group>"; };
 		2D33C78425E0904700E3C6C3 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
+		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +52,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCB046425E1815F00CD58F8 /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				2D33C77825E06F5700E3C6C3 /* XPoint.swift */,
+				2DCB046925E1820500CD58F8 /* DataSourceType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -149,7 +151,6 @@
 			);
 			name = "trendlines (iOS)";
 			packageProductDependencies = (
-				2DCB046325E1815F00CD58F8 /* SQLite */,
 			);
 			productName = "trendlines (iOS)";
 			productReference = 2D33C74625E0556300E3C6C3 /* trendlines.app */;
@@ -199,7 +200,6 @@
 			);
 			mainGroup = 2D33C73925E0556300E3C6C3;
 			packageReferences = (
-				2DCB046225E1815F00CD58F8 /* XCRemoteSwiftPackageReference "SQLite" */,
 			);
 			productRefGroup = 2D33C74725E0556300E3C6C3 /* Products */;
 			projectDirPath = "";
@@ -240,6 +240,7 @@
 				2D33C77E25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
 				2D33C78525E0904700E3C6C3 /* LineChartView.swift in Sources */,
 				2D33C77425E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
+				2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */,
 				2D33C75225E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76325E055ED00E3C6C3 /* BarChartView.swift in Sources */,
 				2D33C76F25E06D9F00E3C6C3 /* YAxisView.swift in Sources */,
@@ -255,6 +256,7 @@
 				2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
 				2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */,
 				2D33C77525E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
+				2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */,
 				2D33C75325E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76425E055ED00E3C6C3 /* BarChartView.swift in Sources */,
 				2D33C77025E06D9F00E3C6C3 /* YAxisView.swift in Sources */,
@@ -499,25 +501,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		2DCB046225E1815F00CD58F8 /* XCRemoteSwiftPackageReference "SQLite" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.2;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		2DCB046325E1815F00CD58F8 /* SQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2DCB046225E1815F00CD58F8 /* XCRemoteSwiftPackageReference "SQLite" */;
-			productName = SQLite;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2D33C73A25E0556300E3C6C3 /* Project object */;
 }
