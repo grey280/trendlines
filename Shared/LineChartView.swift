@@ -39,7 +39,7 @@ struct LineChart<X: XPoint>: Shape {
             return path
         }
         let step = xStep(in: rect.width)
-        var x = rect.minX + (step / 0.5)
+        var x = rect.minX + (step / 2)
         path.move(to: CGPoint(x: rect.minX, y: yLocation(in: rect, dataPoint: first)))
         for dataPoint in data {
             let y = yLocation(in: rect, dataPoint: dataPoint)
