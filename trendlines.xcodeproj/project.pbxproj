@@ -33,6 +33,8 @@
 		2DCD53BD25E18B5000BBA89B /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53BB25E18B5000BBA89B /* DataSource.swift */; };
 		2DCD53C225E18BE500BBA89B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */; };
 		2DCD53C325E18BE500BBA89B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */; };
+		2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C825E18D0600BBA89B /* Chart.swift */; };
+		2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C825E18D0600BBA89B /* Chart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,7 @@
 		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		2DCD53BB25E18B5000BBA89B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		2DCD53C825E18D0600BBA89B /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +145,7 @@
 				2DCB046925E1820500CD58F8 /* DataSourceType.swift */,
 				2DCD53B625E18B3000BBA89B /* ChartType.swift */,
 				2DCD53BB25E18B5000BBA89B /* DataSource.swift */,
+				2DCD53C825E18D0600BBA89B /* Chart.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -262,6 +266,7 @@
 				2D33C78525E0904700E3C6C3 /* LineChartView.swift in Sources */,
 				2D33C77425E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
 				2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */,
+				2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */,
 				2D33C75225E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76325E055ED00E3C6C3 /* BarChartView.swift in Sources */,
 				2DCD53BC25E18B5000BBA89B /* DataSource.swift in Sources */,
@@ -281,6 +286,7 @@
 				2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */,
 				2D33C77525E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
 				2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */,
+				2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */,
 				2D33C75325E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76425E055ED00E3C6C3 /* BarChartView.swift in Sources */,
 				2DCD53BD25E18B5000BBA89B /* DataSource.swift in Sources */,
