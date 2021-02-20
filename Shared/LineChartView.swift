@@ -28,11 +28,20 @@ struct LineChart<X: XPoint>: Shape {
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        guard let first = data.first else {
+        guard let first = data.first, let last = data.last else {
             return path
         }
+        let step = xStep(in: rect.width)
+        var x = rect.minX + (step / 0.5)
         path.move(to: CGPoint(x: rect.minX, y: yLocation(in: rect, dataPoint: first)))
-        // TODO: implement!
+        for dataPoint in data {
+            let newPoint = CGPoint(x: x, y: yLocation(in: rect, dataPoint: dataPoint))
+            path.addLine(to: newPoint)
+            x += step
+        }
+        
+        let finalPoint = CGPoint(x: rect.maxX, y: yLocation(in: rect, dataPoint: last))
+        path.addLine(to: finalPoint)
         
         return path
     }
