@@ -18,22 +18,9 @@ struct DataSource {
     var chartType: ChartType?
 }
 
+extension DataSource: Codable { }
+
 extension DataSource: MutablePersistableRecord {
-    func encode(to container: inout PersistenceContainer) {
-        container["id"] = id
-        let JSONencoder = JSONEncoder()
-        if let encoded = try? JSONencoder.encode(sourceType) {
-            container["sourceType"] = encoded
-        }
-        container["title"] = title
-        if let encColor = try? JSONencoder.encode(color) {
-            container["color"] = encColor
-        }
-        if let chartType = chartType, let encType = try? JSONencoder.encode(chartType) {
-            container["chartType"] = encType
-        }
-    }
-    
     mutating func didInsert(with rowID: Int64, for column: String?) {
         id = rowID
     }
