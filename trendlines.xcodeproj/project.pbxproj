@@ -25,6 +25,8 @@
 		2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */; };
 		2D33C78525E0904700E3C6C3 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C78425E0904700E3C6C3 /* LineChartView.swift */; };
 		2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C78425E0904700E3C6C3 /* LineChartView.swift */; };
+		2D4B4D3925E1909A00A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3825E1909A00A34278 /* GRDB */; };
+		2D4B4D3E25E190A800A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3D25E190A800A34278 /* GRDB */; };
 		2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 		2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 		2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53B625E18B3000BBA89B /* ChartType.swift */; };
@@ -35,7 +37,6 @@
 		2DCD53C325E18BE500BBA89B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */; };
 		2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C825E18D0600BBA89B /* Chart.swift */; };
 		2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C825E18D0600BBA89B /* Chart.swift */; };
-		2DCD53CF25E18F6F00BBA89B /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2DCD53CE25E18F6F00BBA89B /* GRDB */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD53CF25E18F6F00BBA89B /* GRDB in Frameworks */,
+				2D4B4D3925E1909A00A34278 /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D4B4D3E25E190A800A34278 /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +88,7 @@
 				2D33C74825E0556300E3C6C3 /* iOS */,
 				2D33C74F25E0556300E3C6C3 /* macOS */,
 				2D33C74725E0556300E3C6C3 /* Products */,
+				2D4B4D3C25E190A800A34278 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +129,13 @@
 				2D33C75125E0556300E3C6C3 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		2D4B4D3C25E190A800A34278 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2DCB046725E1817200CD58F8 /* Views */ = {
@@ -177,7 +187,7 @@
 			);
 			name = "trendlines (iOS)";
 			packageProductDependencies = (
-				2DCD53CE25E18F6F00BBA89B /* GRDB */,
+				2D4B4D3825E1909A00A34278 /* GRDB */,
 			);
 			productName = "trendlines (iOS)";
 			productReference = 2D33C74625E0556300E3C6C3 /* trendlines.app */;
@@ -196,6 +206,9 @@
 			dependencies = (
 			);
 			name = "trendlines (macOS)";
+			packageProductDependencies = (
+				2D4B4D3D25E190A800A34278 /* GRDB */,
+			);
 			productName = "trendlines (macOS)";
 			productReference = 2D33C74E25E0556300E3C6C3 /* trendlines.app */;
 			productType = "com.apple.product-type.application";
@@ -227,7 +240,7 @@
 			);
 			mainGroup = 2D33C73925E0556300E3C6C3;
 			packageReferences = (
-				2DCD53CD25E18F6F00BBA89B /* XCRemoteSwiftPackageReference "GRDB" */,
+				2D4B4D3725E1909A00A34278 /* XCRemoteSwiftPackageReference "GRDB" */,
 			);
 			productRefGroup = 2D33C74725E0556300E3C6C3 /* Products */;
 			projectDirPath = "";
@@ -539,7 +552,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2DCD53CD25E18F6F00BBA89B /* XCRemoteSwiftPackageReference "GRDB" */ = {
+		2D4B4D3725E1909A00A34278 /* XCRemoteSwiftPackageReference "GRDB" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRDB.swift";
 			requirement = {
@@ -550,9 +563,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2DCD53CE25E18F6F00BBA89B /* GRDB */ = {
+		2D4B4D3825E1909A00A34278 /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2DCD53CD25E18F6F00BBA89B /* XCRemoteSwiftPackageReference "GRDB" */;
+			package = 2D4B4D3725E1909A00A34278 /* XCRemoteSwiftPackageReference "GRDB" */;
+			productName = GRDB;
+		};
+		2D4B4D3D25E190A800A34278 /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D4B4D3725E1909A00A34278 /* XCRemoteSwiftPackageReference "GRDB" */;
 			productName = GRDB;
 		};
 /* End XCSwiftPackageProductDependency section */
