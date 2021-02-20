@@ -18,10 +18,17 @@ class Database: ObservableObject {
     
     init?() {
         logger = Logger(subsystem: "net.twoeighty.trendlines", category: "Database")
-        guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard var url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             logger.critical("Could not get document directory URL")
             return nil
         }
+        do {
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        } catch {
+            logger.critical("Could not create database directory: \(error.localizedDescription, privacy: .public)")
+            return nil
+        }
+        url.appendPathComponent("database.sqlite")
         do {
             dbQueue = try DatabaseQueue(path: url.absoluteString)
         } catch {
