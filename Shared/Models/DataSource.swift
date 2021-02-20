@@ -77,10 +77,16 @@ extension DataSource {
                 }
             case .body(let bodySubtype):
                 switch bodySubtype {
-                case .restingHeartRate, .heartRateVariability, .bodyWeight, .leanBodyMass, .bodyFatPercentage:
-                    return .line
-                case .heartRate, .bloodPressure:
-                    return .floatingBar
+                case .restingHeartRate, .heartRate:
+                    return "bpm"
+                case .bloodPressure:
+                    return "mmHg"
+                case .bodyFatPercentage:
+                    return "%"
+                case .bodyWeight, .leanBodyMass:
+                    return "lbs" // TODO: Replace with unit lookup
+                case .heartRateVariability:
+                    return "ms"
                 }
             }
         }
