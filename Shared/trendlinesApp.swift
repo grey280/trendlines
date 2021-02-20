@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct trendlinesApp: App {
+    @StateObject var database = Database()! // listen we can't recover from this failing to launch
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(r: false).padding()
+            ContentView(r: false).environmentObject(database)
         }
     }
 }
