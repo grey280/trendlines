@@ -22,7 +22,7 @@ struct LineChart<X: XPoint>: Shape {
     func xStep(in width: CGFloat) -> CGFloat {
         // need to have one step for each data point (technically we'll have .5 leading and .5 trailing, but that adds up to 1!)
         // leave space for a radius-1 circle at each location
-        (width / CGFloat(data.count)) - CGFloat(2 * data.count)
+        (width / CGFloat(data.count)) - (CGFloat(2 * data.count) * circleRadius)
     }
     
     // y coordinates for the given point
