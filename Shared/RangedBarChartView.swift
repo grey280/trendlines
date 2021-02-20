@@ -14,15 +14,26 @@ struct RangedBarChartView<X: XPoint>: View {
         let yMax: Double
     }
     
-    public init(data: [DataPoint], unit: String, color: Color = .gray, axisAlignment: YAxisView.AxisAlignment = .leading, hasOverlay: Bool = false) {
+    public init(
+        data: [DataPoint],
+        unit: String,
+        color: Color = .gray,
+        axisAlignment: YAxisView.AxisAlignment = .leading,
+        hasOverlay: Bool = false,
+        yRange: (min: Double, max: Double)? = nil
+    ) {
         self.data = data.sorted(by: { (a, b) -> Bool in
             a.x < b.x
         })
         self.unit = unit
         self.color = color
         self.axisAlignment = axisAlignment
-        let ySorted = data.flatMap { [$0.yMin, $0.yMax] }.sorted()
-        yRange = (ySorted.first ?? 0.0, ySorted.last ?? 0.0)
+        if let overrideY = yRange {
+            self.yRange = overrideY
+        } else {
+            let ySorted = data.flatMap { [$0.yMin, $0.yMax] }.sorted()
+            self.yRange = (ySorted.first ?? 0.0, ySorted.last ?? 0.0)
+        }
         self.hasOverlay = hasOverlay
     }
     
