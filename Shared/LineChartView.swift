@@ -20,7 +20,10 @@ struct LineChart<X: XPoint>: Shape {
     
     // y coordinates for the given point
     func yLocation(in rect: CGRect, dataPoint: LineChartView<X>.DataPoint) -> CGFloat {
-        <#code#>
+        // rect.minY:yRange.min::rect.maxY:yRange.max :: dataPoint.y:result
+        let percentile = (dataPoint.y - yRange.min) / (yRange.max - yRange.min)
+        let delta = rect.maxY - rect.minY
+        return CGFloat(percentile) * delta
     }
     
     func path(in rect: CGRect) -> Path {
@@ -29,6 +32,9 @@ struct LineChart<X: XPoint>: Shape {
             return path
         }
         path.move(to: CGPoint(x: rect.minX, y: yLocation(in: rect, dataPoint: first)))
+        // TODO: implement!
+        
+        return path
     }
 }
 
