@@ -38,7 +38,7 @@ class Database: ObservableObject {
         do {
             try initializeDatabase()
         } catch {
-            logger.critical("Could not confiugre database: \(error.localizedDescription, privacy: .public)")
+            logger.critical("Could not configure database: \(error.localizedDescription, privacy: .public)")
             return nil
         }
         loadCharts()
