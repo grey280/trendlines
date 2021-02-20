@@ -95,7 +95,7 @@ struct LineChartView<X: XPoint>: View {
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }
-                // TODO: Render line!!!
+                LineChart<X>(data: data, yRange: yRange).stroke(color)
                 if axisAlignment == .trailing {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
                 } else if hasOverlay {
