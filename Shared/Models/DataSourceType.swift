@@ -109,6 +109,49 @@ extension DataSourceType: Codable {
     }
     
     func encode(to encoder: Encoder) throws {
-        <#code#>
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+        case .custom:
+            try container.encode(Primary.custom, forKey: .primary)
+        case .health(let healthSource):
+            try container.encode(Primary.health, forKey: .primary)
+            switch healthSource {
+            case .activity(let activity):
+                try container.encode(HealthTypes.activity, forKey: .secondary)
+                try container.encode(activity, forKey: .tertiary)
+            case .body(let body):
+                try container.encode(HealthTypes.body, forKey: .secondary)
+                try container.encode(body, forKey: .tertiary)
+            case .nutrition(let nutrition):
+                try container.encode(HealthTypes.nutrition, forKey: .secondary)
+                switch nutrition {
+                case .micronutrient(let micro):
+                    try container.encode(HealthTypes.NutritionTypes.micronutrient, forKey: .tertiary)
+                    try container.encode(micro, forKey: .quaternary)
+                case .mineral(let mineral):
+                    try container.encode(HealthTypes.NutritionTypes.mineral, forKey: .tertiary)
+                    try container.encode(mineral, forKey: .quaternary)
+                case .vitamin(let vitamin):
+                    try container.encode(HealthTypes.NutritionTypes.vitamin, forKey: .tertiary)
+                    try container.encode(vitamin, forKey: .quaternary)
+                case .macronutrients:
+                    try container.encode(HealthTypes.NutritionTypes.macronutrients, forKey: .tertiary)
+                case .calories:
+                    try container.encode(HealthTypes.NutritionTypes.calories, forKey: .tertiary)
+                case .carbohydrates:
+                    try container.encode(HealthTypes.NutritionTypes.carbohydrates, forKey: .tertiary)
+                case .fat:
+                    try container.encode(HealthTypes.NutritionTypes.fat, forKey: .tertiary)
+                case .protein:
+                    try container.encode(HealthTypes.NutritionTypes.protein, forKey: .tertiary)
+                case .water:
+                    try container.encode(HealthTypes.NutritionTypes.water, forKey: .tertiary)
+                case .caffeine:
+                    try container.encode(HealthTypes.NutritionTypes.caffeine, forKey: .tertiary)
+                case .sugar:
+                    try container.encode(HealthTypes.NutritionTypes.sugar, forKey: .tertiary)
+                }
+            }
+        }
     }
 }
