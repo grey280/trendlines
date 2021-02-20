@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct DataSource {
-    let sourceType: DataSourceType
-    let title: String?
-    let color: Color
-    let chartType: ChartType?
+    typealias ID = Int64
+    var id: ID?
+    
+    var sourceType: DataSourceType
+    var title: String?
+    var color: Color
+    var chartType: ChartType?
 }
