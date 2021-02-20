@@ -18,9 +18,12 @@ fileprivate struct _ChartView: View {
     var body: some View {
         switch source.effectiveChartType {
         case .bar:
-            BarChartView(data: <#T##[BarChartView<_>.DataPoint]#>, unit: <#T##String#>)
+            BarChartView(data: <#T##[BarChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: <#T##YAxisView.AxisAlignment#>, hasOverlay: <#T##Bool#>)
+        case .floatingBar:
+            RangedBarChartView(data: <#T##[RangedBarChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: <#T##YAxisView.AxisAlignment#>, hasOverlay: <#T##Bool#>)
+        case .line:
+            LineChartView(data: <#T##[LineChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: <#T##YAxisView.AxisAlignment#>, hasOverlay: <#T##Bool#>)
         }
-        EmptyView() // TODO: Implement
     }
 }
 
