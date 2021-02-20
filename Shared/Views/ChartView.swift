@@ -15,14 +15,31 @@ fileprivate struct _ChartView: View {
     let source: DataSource
     let overlay: Overlay
     
+    var axisAlignment: YAxisView.AxisAlignment {
+        switch overlay {
+        case .none, .has:
+            return .leading
+        case .is:
+            return .trailing
+        }
+    }
+    var hasOverlay: Bool {
+        switch overlay {
+        case .none:
+            return false
+        case .has, .is:
+            return true
+        }
+    }
+    
     var body: some View {
         switch source.effectiveChartType {
         case .bar:
-            BarChartView(data: <#T##[BarChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: <#T##YAxisView.AxisAlignment#>, hasOverlay: <#T##Bool#>)
+            BarChartView(data: <#T##[BarChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
         case .floatingBar:
-            RangedBarChartView(data: <#T##[RangedBarChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: <#T##YAxisView.AxisAlignment#>, hasOverlay: <#T##Bool#>)
+            RangedBarChartView(data: <#T##[RangedBarChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
         case .line:
-            LineChartView(data: <#T##[LineChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: <#T##YAxisView.AxisAlignment#>, hasOverlay: <#T##Bool#>)
+            LineChartView(data: <#T##[LineChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
         }
     }
 }
