@@ -46,7 +46,7 @@ class Database: ObservableObject {
     
     private func initializeDatabase() throws {
         try dbQueue.write { db in
-            try db.create(table: "charts", ifNotExists: true, body: { t in
+            try db.create(table: "chart", ifNotExists: true, body: { t in
                 t.autoIncrementedPrimaryKey("id")
                 t.column("sortNo", .integer).notNull().unique()
                 t.column("source1", .text).notNull()
