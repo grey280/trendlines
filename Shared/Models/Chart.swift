@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GRDB
 
 struct Chart {
     typealias ID = Int64
@@ -15,3 +16,12 @@ struct Chart {
     var source1: DataSource
     var source2: DataSource?
 }
+
+extension Chart: Codable { }
+extension Chart: MutablePersistableRecord {
+    mutating func didInsert(with rowID: Int64, for column: String?) {
+        id = rowID
+    }
+}
+extension Chart: FetchableRecord { }
+extension Chart: TableRecord { }
