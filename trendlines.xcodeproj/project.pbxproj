@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -35,6 +35,7 @@
 		2DCD53C325E18BE500BBA89B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */; };
 		2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C825E18D0600BBA89B /* Chart.swift */; };
 		2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C825E18D0600BBA89B /* Chart.swift */; };
+		2DCD53CF25E18F6F00BBA89B /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2DCD53CE25E18F6F00BBA89B /* GRDB */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DCD53CF25E18F6F00BBA89B /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +177,7 @@
 			);
 			name = "trendlines (iOS)";
 			packageProductDependencies = (
+				2DCD53CE25E18F6F00BBA89B /* GRDB */,
 			);
 			productName = "trendlines (iOS)";
 			productReference = 2D33C74625E0556300E3C6C3 /* trendlines.app */;
@@ -224,6 +227,7 @@
 			);
 			mainGroup = 2D33C73925E0556300E3C6C3;
 			packageReferences = (
+				2DCD53CD25E18F6F00BBA89B /* XCRemoteSwiftPackageReference "GRDB" */,
 			);
 			productRefGroup = 2D33C74725E0556300E3C6C3 /* Products */;
 			projectDirPath = "";
@@ -533,6 +537,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2DCD53CD25E18F6F00BBA89B /* XCRemoteSwiftPackageReference "GRDB" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2DCD53CE25E18F6F00BBA89B /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DCD53CD25E18F6F00BBA89B /* XCRemoteSwiftPackageReference "GRDB" */;
+			productName = GRDB;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2D33C73A25E0556300E3C6C3 /* Project object */;
 }
