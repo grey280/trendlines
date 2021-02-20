@@ -29,6 +29,8 @@
 		2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 		2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53B625E18B3000BBA89B /* ChartType.swift */; };
 		2DCD53B825E18B3000BBA89B /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53B625E18B3000BBA89B /* ChartType.swift */; };
+		2DCD53BC25E18B5000BBA89B /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53BB25E18B5000BBA89B /* DataSource.swift */; };
+		2DCD53BD25E18B5000BBA89B /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53BB25E18B5000BBA89B /* DataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,7 @@
 		2D33C78425E0904700E3C6C3 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
+		2DCD53BB25E18B5000BBA89B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,7 @@
 				2D33C77825E06F5700E3C6C3 /* XPoint.swift */,
 				2DCB046925E1820500CD58F8 /* DataSourceType.swift */,
 				2DCD53B625E18B3000BBA89B /* ChartType.swift */,
+				2DCD53BB25E18B5000BBA89B /* DataSource.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -248,6 +252,7 @@
 				2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */,
 				2D33C75225E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76325E055ED00E3C6C3 /* BarChartView.swift in Sources */,
+				2DCD53BC25E18B5000BBA89B /* DataSource.swift in Sources */,
 				2D33C76F25E06D9F00E3C6C3 /* YAxisView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +270,7 @@
 				2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */,
 				2D33C75325E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76425E055ED00E3C6C3 /* BarChartView.swift in Sources */,
+				2DCD53BD25E18B5000BBA89B /* DataSource.swift in Sources */,
 				2D33C77025E06D9F00E3C6C3 /* YAxisView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
