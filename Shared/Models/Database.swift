@@ -66,4 +66,10 @@ class Database: ObservableObject {
         }
         return chart
     }
+    
+    func remove(chart: Chart) throws -> Bool {
+        return try dbQueue.write { db in
+            try chart.delete(db)
+        }
+    }
 }
