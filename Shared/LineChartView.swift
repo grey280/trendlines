@@ -155,8 +155,8 @@ struct LineChartView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            LineChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
-            LineChartView<Int>(data: (0...30).map { LineChartView<Int>.DataPoint(x: $0, y: Double($0) )}, unit: "Things")
+            LineChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing).padding()
+            LineChartView<Int>(data: (0...30).map { LineChartView<Int>.DataPoint(x: $0, y: Double($0) )}, unit: "Things").padding()
         }
     }
 }
