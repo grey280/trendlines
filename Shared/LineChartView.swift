@@ -24,7 +24,11 @@ struct LineChart<X: XPoint>: Shape {
     }
     
     func path(in rect: CGRect) -> Path {
-        <#code#>
+        var path = Path()
+        guard let first = data.first else {
+            return path
+        }
+        path.move(to: CGPoint(x: rect.minX, y: yLocation(in: rect, dataPoint: first)))
     }
 }
 
