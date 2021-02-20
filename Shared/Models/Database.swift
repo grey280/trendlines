@@ -11,27 +11,30 @@ import OSLog
 import GRDB
 
 class Database: ObservableObject {
-    let logger: Logger
-    let dbQueue: DatabaseQueue
+    @Published var charts: [Chart] = []
+    
+    private let logger: Logger
+    private let dbQueue: DatabaseQueue
     
     init?() {
         logger = Logger(subsystem: "net.twoeighty.trendlines", category: "Database")
         guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            logger.error("Could not get document directory URL")
+            logger.critical("Could not get document directory URL")
             return nil
         }
         do {
             dbQueue = try DatabaseQueue(path: url.absoluteString)
         } catch {
-            logger.error("Could not create database: \(error.localizedDescription, privacy: .public)")
+            logger.critical("Could not create database: \(error.localizedDescription, privacy: .public)")
             return nil
         }
         do {
             try initializeDatabase()
         } catch {
-            logger.error("Could not confiugre database: \(error.localizedDescription, privacy: .public)")
+            logger.critical("Could not confiugre database: \(error.localizedDescription, privacy: .public)")
             return nil
         }
+        loadCharts()
     }
     
     private func initializeDatabase() throws {
@@ -42,6 +45,17 @@ class Database: ObservableObject {
                 t.column("source1", .text).notNull()
                 t.column("source2", .text)
             })
+        }
+    }
+    
+    func loadCharts() {
+        do {
+            try dbQueue.read { db in
+                let charts = try Chart.fetchAll(db)
+                self.charts = charts
+            }
+        } catch {
+            logger.error("Could not load charts. \(error.localizedDescription, privacy: .public)")
         }
     }
 }
