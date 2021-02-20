@@ -8,7 +8,7 @@
 import Foundation
 
 enum DataSourceType {
-    case custom
+    case entries
     case health(HealthSource)
     
     enum HealthSource {
@@ -49,7 +49,7 @@ extension DataSourceType: Codable {
     }
     
     fileprivate enum Primary: String, Codable {
-        case custom, health
+        case entries, health
     }
     fileprivate enum HealthTypes: String, Codable {
         case body, nutrition, activity
@@ -64,8 +64,8 @@ extension DataSourceType: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let primary = try container.decode(Primary.self, forKey: .primary)
         switch primary {
-        case .custom:
-            self = .custom
+        case .entries:
+            self = .entries
         case .health:
             let secondary = try container.decode(HealthTypes.self, forKey: .secondary)
             switch secondary {
@@ -111,8 +111,8 @@ extension DataSourceType: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
-        case .custom:
-            try container.encode(Primary.custom, forKey: .primary)
+        case .entries:
+            try container.encode(Primary.entries, forKey: .primary)
         case .health(let healthSource):
             try container.encode(Primary.health, forKey: .primary)
             switch healthSource {
