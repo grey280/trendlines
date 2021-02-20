@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,7 @@
 		2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */; };
 		2D33C78525E0904700E3C6C3 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C78425E0904700E3C6C3 /* LineChartView.swift */; };
 		2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C78425E0904700E3C6C3 /* LineChartView.swift */; };
+		2DCB046425E1815F00CD58F8 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 2DCB046325E1815F00CD58F8 /* SQLite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DCB046425E1815F00CD58F8 /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +132,9 @@
 			dependencies = (
 			);
 			name = "trendlines (iOS)";
+			packageProductDependencies = (
+				2DCB046325E1815F00CD58F8 /* SQLite */,
+			);
 			productName = "trendlines (iOS)";
 			productReference = 2D33C74625E0556300E3C6C3 /* trendlines.app */;
 			productType = "com.apple.product-type.application";
@@ -177,6 +182,9 @@
 				Base,
 			);
 			mainGroup = 2D33C73925E0556300E3C6C3;
+			packageReferences = (
+				2DCB046225E1815F00CD58F8 /* XCRemoteSwiftPackageReference "SQLite" */,
+			);
 			productRefGroup = 2D33C74725E0556300E3C6C3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -475,6 +483,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2DCB046225E1815F00CD58F8 /* XCRemoteSwiftPackageReference "SQLite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.12.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2DCB046325E1815F00CD58F8 /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DCB046225E1815F00CD58F8 /* XCRemoteSwiftPackageReference "SQLite" */;
+			productName = SQLite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2D33C73A25E0556300E3C6C3 /* Project object */;
 }
