@@ -27,6 +27,8 @@
 		2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C78425E0904700E3C6C3 /* LineChartView.swift */; };
 		2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 		2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
+		2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53B625E18B3000BBA89B /* ChartType.swift */; };
+		2DCD53B825E18B3000BBA89B /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53B625E18B3000BBA89B /* ChartType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,7 @@
 		2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangedBarChartView.swift; sourceTree = "<group>"; };
 		2D33C78425E0904700E3C6C3 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
+		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,7 @@
 			children = (
 				2D33C77825E06F5700E3C6C3 /* XPoint.swift */,
 				2DCB046925E1820500CD58F8 /* DataSourceType.swift */,
+				2DCD53B625E18B3000BBA89B /* ChartType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -235,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */,
 				2D33C75425E0556300E3C6C3 /* ContentView.swift in Sources */,
 				2D33C77925E06F5700E3C6C3 /* XPoint.swift in Sources */,
 				2D33C77E25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
@@ -251,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DCD53B825E18B3000BBA89B /* ChartType.swift in Sources */,
 				2D33C75525E0556300E3C6C3 /* ContentView.swift in Sources */,
 				2D33C77A25E06F5700E3C6C3 /* XPoint.swift in Sources */,
 				2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
