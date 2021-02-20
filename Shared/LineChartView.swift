@@ -123,7 +123,8 @@ struct LineChartView<X: XPoint>: View {
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }
-                LineChart<X>(data: data, yRange: yRange, circleRadius: 5).stroke(color)
+                LineChart<X>(data: data, yRange: yRange, circleRadius: 5)
+                    .stroke(color, style: StrokeStyle(lineWidth: 3.0))
                 if axisAlignment == .trailing {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
                 } else if hasOverlay {
