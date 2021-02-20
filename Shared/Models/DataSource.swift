@@ -60,8 +60,21 @@ extension DataSource {
                 case .swimDistance:
                     return "yards" // TODO: Replace with unit lookup
                 }
-            case .nutrition:
-                return .bar
+            case .nutrition(let nutrition):
+                switch nutrition {
+                case .vitamin, .mineral, .carbohydrates, .fat, .protein, .sugar:
+                    return "g" // TODO: Replace with unit lookup
+                case .micronutrient:
+                    return "mcg" // TODO: Replace with unit lookup
+                case .macronutrients:
+                    return "macros"
+                case .calories:
+                    return "Calories" // TODO: Replace with unit lookup
+                case .caffeine:
+                    return "mg" // TODO: Replace with unit lookup
+                case .water:
+                    return "L" // TODO: Replace with unit lookup
+                }
             case .body(let bodySubtype):
                 switch bodySubtype {
                 case .restingHeartRate, .heartRateVariability, .bodyWeight, .leanBodyMass, .bodyFatPercentage:
