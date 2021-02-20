@@ -25,20 +25,6 @@ struct LineChart<X: XPoint>: Shape {
         (width / CGFloat(data.count))// - (CGFloat(2 * data.count) * circleRadius)
     }
     
-    func mid(first: CGPoint, second: CGPoint) -> CGPoint {
-        CGPoint(x: (first.x + second.x) / 2, y: (first.y + second.y) / 2)
-    }
-    func control(first: CGPoint, second: CGPoint) -> CGPoint {
-        var result = mid(first: first, second: second)
-        let deltaY = abs(second.y - result.y)
-//        if (first.y < second.y) {
-//            result.y += deltaY
-//        } else if (first.y > second.y) {
-            result.y -= deltaY
-//        }
-        return result
-    }
-    
     // y coordinates for the given point
     func yLocation(in rect: CGRect, dataPoint: LineChartView<X>.DataPoint) -> CGFloat {
         // rect.minY:yRange.min::rect.maxY:yRange.max :: dataPoint.y:result
@@ -75,39 +61,6 @@ struct LineChart<X: XPoint>: Shape {
                 path.addCurve(to: point, control1: segment.controlPoint1, control2: segment.controlPoint2)
             }
         }
-        /*
-        
-        
-        
-        var x = rect.minX + (step / 2)
-        var point = CGPoint(x: rect.minX, y: yLocation(in: rect, dataPoint: first))
-        path.move(to: point)
-        for dataPoint in data {
-            let y = yLocation(in: rect, dataPoint: dataPoint)
-            let new = CGPoint(x:x , y: y)
-            let midPoint = mid(first: point, second: new)
-            path.addQuadCurve(to: new, control: control(first: point, second: new))
-//            path.addQuadCurve(to: new, control: control(first: midPoint, second: new))
-            point = new
-            x += step
-//            let start = CGPoint(x: x, y: y)
-//            path.addLine(to: start)
-//            let high = CGPoint(x: x + circleRadius, y: y + circleRadius)
-//            let low = CGPoint(x: x + circleRadius, y: y - circleRadius)
-//            let end = CGPoint(x: x + circleRadius + circleRadius, y: y)
-//            let tl = CGPoint(x : x, y: y + circleRadius)
-//            let tr = CGPoint(x : x + circleRadius + circleRadius, y: y + circleRadius)
-//            let bl = CGPoint(x : x, y: y - circleRadius)
-//            let br = CGPoint(x : x + circleRadius + circleRadius, y: y - circleRadius)
-//            path.addCurve(to: high, control1: tl, control2: tl)
-//            path.addCurve(to: end, control1: tr, control2: tr)
-//            path.addCurve(to: low, control1: br, control2: br)
-//            path.addCurve(to: start, control1: bl, control2: bl)
-//            path.move(to: end)
-//            x += 2 * circleRadius // for the space we took
-//            x += step
-        }
-        */
         let finalPoint = CGPoint(x: rect.maxX, y: yLocation(in: rect, dataPoint: last))
         path.addLine(to: finalPoint)
         
