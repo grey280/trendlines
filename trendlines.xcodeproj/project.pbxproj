@@ -77,15 +77,11 @@
 		2D33C73E25E0556300E3C6C3 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */,
+				2DCB046825E1818200CD58F8 /* Models */,
+				2DCB046725E1817200CD58F8 /* Views */,
 				2D33C73F25E0556300E3C6C3 /* trendlinesApp.swift */,
 				2D33C74025E0556300E3C6C3 /* ContentView.swift */,
 				2D33C74125E0556300E3C6C3 /* Assets.xcassets */,
-				2D33C76225E055ED00E3C6C3 /* BarChartView.swift */,
-				2D33C78425E0904700E3C6C3 /* LineChartView.swift */,
-				2D33C77825E06F5700E3C6C3 /* XPoint.swift */,
-				2D33C77325E06DD800E3C6C3 /* PartialRoundedRectangle.swift */,
-				2D33C76E25E06D9F00E3C6C3 /* YAxisView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -114,6 +110,26 @@
 				2D33C75125E0556300E3C6C3 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		2DCB046725E1817200CD58F8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */,
+				2D33C76225E055ED00E3C6C3 /* BarChartView.swift */,
+				2D33C78425E0904700E3C6C3 /* LineChartView.swift */,
+				2D33C77325E06DD800E3C6C3 /* PartialRoundedRectangle.swift */,
+				2D33C76E25E06D9F00E3C6C3 /* YAxisView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2DCB046825E1818200CD58F8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2D33C77825E06F5700E3C6C3 /* XPoint.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
