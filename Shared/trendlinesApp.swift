@@ -11,7 +11,7 @@ import SwiftUI
 struct trendlinesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(r: false)
         }
     }
 }
