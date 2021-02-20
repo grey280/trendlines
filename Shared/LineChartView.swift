@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct LineChart<X: XPoint>: Shape {
+    public init(data: [LineChartView<X>.DataPoint], yRange: (min: Double, max: Double), circleRadius: CGFloat = 1) {
+        self.data = data
+        self.yRange = yRange
+        self.circleRadius = circleRadius
+    }
+    
     let data: [LineChartView<X>.DataPoint]
     let yRange: (min: Double, max: Double)
+    let circleRadius: CGFloat
     
     // step size to go from an x point to the next x point
     func xStep(in width: CGFloat) -> CGFloat {
@@ -35,8 +42,22 @@ struct LineChart<X: XPoint>: Shape {
         var x = rect.minX + (step / 0.5)
         path.move(to: CGPoint(x: rect.minX, y: yLocation(in: rect, dataPoint: first)))
         for dataPoint in data {
-            let newPoint = CGPoint(x: x, y: yLocation(in: rect, dataPoint: dataPoint))
-            path.addLine(to: newPoint)
+            let y = yLocation(in: rect, dataPoint: dataPoint)
+            let start = CGPoint(x: x, y: y)
+            path.addLine(to: start)
+            let high = CGPoint(x: x + circleRadius, y: y + circleRadius)
+            let low = CGPoint(x: x + circleRadius, y: y - circleRadius)
+            let end = CGPoint(x: x + circleRadius + circleRadius, y: y)
+            let tl = CGPoint(x : x, y: y + circleRadius)
+            let tr = CGPoint(x : x + circleRadius + circleRadius, y: y + circleRadius)
+            let bl = CGPoint(x : x, y: y - circleRadius)
+            let br = CGPoint(x : x + circleRadius + circleRadius, y: y - circleRadius)
+            path.addCurve(to: high, control1: tl, control2: tl)
+            path.addCurve(to: end, control1: tr, control2: tr)
+            path.addCurve(to: low, control1: br, control2: br)
+            path.addCurve(to: start, control1: bl, control2: bl)
+            path.move(to: end)
+            x += 2 * circleRadius // for the space we took
             x += step
         }
         
@@ -114,7 +135,7 @@ struct LineChartView<X: XPoint>: View {
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }
-                LineChart<X>(data: data, yRange: yRange).stroke(color)
+                LineChart<X>(data: data, yRange: yRange, circleRadius: 5).stroke(color)
                 if axisAlignment == .trailing {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
                 } else if hasOverlay {
