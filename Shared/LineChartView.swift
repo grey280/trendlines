@@ -7,6 +7,25 @@
 
 import SwiftUI
 
+struct LineChart<X: XPoint>: Shape {
+    let data: [LineChartView<X>.DataPoint]
+    let yRange: (min: Double, max: Double)
+    
+    // step size to go from an x point to the next x point
+    func xStep(in width: CGFloat) -> CGFloat {
+        
+    }
+    
+    // y coordinates for the given point
+    func yLocation(in rect: CGRect, dataPoint: LineChartView<X>.DataPoint) -> CGFloat {
+        <#code#>
+    }
+    
+    func path(in rect: CGRect) -> Path {
+        <#code#>
+    }
+}
+
 struct LineChartView<X: XPoint>: View {
     struct DataPoint {
         let x: X
