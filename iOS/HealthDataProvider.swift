@@ -30,7 +30,7 @@ class HealthDataProvider<X: XPoint>: DataProvider {
         
     }
     
-    private var objectType: HKObjectType {
+    private var objectType: HKQuantityType {
         switch self.dataType {
         case .body(let body):
             switch body {
