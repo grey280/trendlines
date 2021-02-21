@@ -12,16 +12,20 @@ fileprivate struct _ChartView: View {
         self.source = source
         self.overlay = overlay
         
-//        switch source.sourceType {
-//        case .entries:
-////            self._provider = StateObject(wrappedValue: NoopDataProvider<Date>() as! Provider)
-//        case .health(let healthType):
-//            #if !os(macOS)
-////            self._provider = StateObject(wrappedValue: (HealthDataProvider<Date>(healthType) as? Provider) ?? NoopDataProvider<Date>() as! Provider)
-//            #else
-////            self._provider = StateObject(wrappedValue: NoopDataProvider<Date>() as! Provider)
-//            #endif
-//        }
+        switch source.sourceType {
+        case .entries:
+            self._provider = StateObject(wrappedValue: NoopDataProvider())
+        case .health(let healthType):
+            #if !os(macOS)
+            if let health = HealthDataProvider(healthType) {
+                self._provider = StateObject(wrappedValue: health)
+            } else {
+                self._provider = StateObject(wrappedValue: NoopDataProvider())
+            }
+            #else
+            self._provider = StateObject(wrappedValue: NoopDataProvider())
+            #endif
+        }
     }
     
     @StateObject var provider: DataProvider
