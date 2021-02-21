@@ -39,15 +39,13 @@ enum DataSourceType {
         case activity(ActivitySource)
         enum ActivitySource: String, Codable, Hashable {
             case activeEnergy, walkRunDistance, swimDistance, cyclingDistance, flightsClimbed, steps, standHours,
-//                 mindfulMinutes, sleep,
+                 //                 mindfulMinutes, sleep,
                  workoutTime
         }
     }
 }
 
-extension DataSourceType.HealthSource.NutritionSource: Hashable {
-    
-}
+extension DataSourceType.HealthSource.NutritionSource: Hashable {}
 
 extension DataSourceType.HealthSource: Hashable {
     static func == (lhs: DataSourceType.HealthSource, rhs: DataSourceType.HealthSource) -> Bool {
@@ -71,41 +69,9 @@ extension DataSourceType.HealthSource: Hashable {
             }
         default:
             return false
+        }
     }
 }
-
-//extension DataSourceType: Hashable {
-//    static func == (lhs: DataSourceType, rhs: DataSourceType) -> Bool {
-//        switch (lhs, rhs) {
-//            case (.entries, .entries):
-//            return true
-//        case (.entries, .health), (.health, .entries):
-//            return false
-//        case (.health(let lHealth), .health(let rHealth)):
-//            switch (lHealth, rHealth){
-//            case (.body(let l), .body(let r)):
-//                return l.rawValue == r.rawValue
-//            case (.activity(let l), .activity(let r)):
-//                return l.rawValue == r.rawValue
-//            case (.nutrition(let lNutrition), .nutrition(let rNutrition)):
-//                switch (lNutrition, rNutrition) {
-//                case (.calories, .calories), (.carbohydrates, .carbohydrates), (.fat, .fat), (.protein, .protein), (.water, .water), (.caffeine, .caffeine), (.sugar, .sugar):
-//                    return true
-//                case (.vitamin(let l), .vitamin(let r)):
-//                    return l.rawValue == r.rawValue
-//                case (.mineral(let l), .mineral(let r)):
-//                    return l.rawValue == r.rawValue
-//                case (.micronutrient(let l), .micronutrient(let r)):
-//                    return l.rawValue == r.rawValue
-//                default:
-//                    return false
-//                }
-//            default:
-//                return false
-//            }
-//        }
-//    }
-//}
 
 extension DataSourceType: Codable {
     fileprivate enum CodingKeys: String, CodingKey {
@@ -142,8 +108,8 @@ extension DataSourceType: Codable {
             case .nutrition:
                 let tertiary = try container.decode(HealthTypes.NutritionTypes.self, forKey: .tertiary)
                 switch tertiary {
-//                case .macronutrients:
-//                    self = .health(.nutrition(.macronutrients))
+                //                case .macronutrients:
+                //                    self = .health(.nutrition(.macronutrients))
                 case .calories:
                     self = .health(.nutrition(.calories))
                 case .carbohydrates:
@@ -198,8 +164,8 @@ extension DataSourceType: Codable {
                 case .vitamin(let vitamin):
                     try container.encode(HealthTypes.NutritionTypes.vitamin, forKey: .tertiary)
                     try container.encode(vitamin, forKey: .quaternary)
-//                case .macronutrients:
-//                    try container.encode(HealthTypes.NutritionTypes.macronutrients, forKey: .tertiary)
+                //                case .macronutrients:
+                //                    try container.encode(HealthTypes.NutritionTypes.macronutrients, forKey: .tertiary)
                 case .calories:
                     try container.encode(HealthTypes.NutritionTypes.calories, forKey: .tertiary)
                 case .carbohydrates:
