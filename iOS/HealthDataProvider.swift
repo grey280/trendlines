@@ -41,7 +41,22 @@ class HealthDataProvider<X: XPoint>: DataProvider {
             loadData()
         }
     }
+    
+    func loadData() {
+        guard let monthAgo = Calendar.current.date(byAdding: .day, value: -30, to: Date()) else {
+            HealthHelper.logger.error("Could not create '30 days ago' date.")
+            return
+        }
+        guard let halfTime = Calendar.current.date(byAdding: .day, value: -15, to: Date()) else {
+            HealthHelper.logger.error("Could not create '15 days ago' date.")
+            return
+        }
+        let startDate = Calendar.current.startOfDay(for: monthAgo)
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
+        let interval = DateComponents(day: 1)
+        let query = HKStatisticsCollectionQuery(quantityType: objectType, quantitySamplePredicate: predicate, options: queryOptions, anchorDate: Calendar.current.startOfDay(for: halfTime), intervalComponents: interval)
         
+    }
     
     private var queryOptions: HKStatisticsOptions {
         switch self.dataType {
