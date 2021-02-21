@@ -56,6 +56,13 @@ class HealthDataProvider<X: XPoint>: DataProvider {
         let interval = DateComponents(day: 1)
         let query = HKStatisticsCollectionQuery(quantityType: objectType, quantitySamplePredicate: predicate, options: queryOptions, anchorDate: Calendar.current.startOfDay(for: halfTime), intervalComponents: interval)
         
+    private var querySum: Bool {
+        switch self.dataType {
+        case .activity, .nutrition:
+            return true
+        case .body:
+            return false
+        }
     }
     
     private var queryOptions: HKStatisticsOptions {
