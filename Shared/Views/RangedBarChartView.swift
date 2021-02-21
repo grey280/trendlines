@@ -7,15 +7,9 @@
 
 import SwiftUI
 
-struct RangedBarChartView<X: XPoint>: View {
-    struct DataPoint: RangedDataProviderPoint {
-        let x: X
-        let yMin: Double
-        let yMax: Double
-    }
-    
+struct RangedBarChartView: View {
     public init(
-        data: [DataPoint],
+        data: [DatePoint],
         unit: String,
         color: Color = .gray,
         axisAlignment: YAxisView.AxisAlignment = .leading,
@@ -31,13 +25,13 @@ struct RangedBarChartView<X: XPoint>: View {
         if let overrideY = yRange {
             self.yRange = overrideY
         } else {
-            let ySorted = data.flatMap { [$0.yMin, $0.yMax] }.sorted()
+            let ySorted = data.flatMap { [$0.yMin, $0.yMax] }.compactMap { $0 }.sorted()
             self.yRange = (ySorted.first ?? 0.0, ySorted.last ?? 0.0)
         }
         self.hasOverlay = hasOverlay
     }
     
-    let data: [DataPoint]
+    let data: [DatePoint]
     let color: Color
     let unit: String
     let axisAlignment: YAxisView.AxisAlignment
@@ -85,7 +79,6 @@ struct RangedBarChartView<X: XPoint>: View {
                         RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
                             .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                     }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.yMax - dataPoint.yMin)).padding(.bottom, barOffset(geo.size, y: dataPoint.yMin))
-                    
                 }
                 if axisAlignment == .trailing {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
@@ -97,19 +90,19 @@ struct RangedBarChartView<X: XPoint>: View {
     }
 }
 
-struct RangedBarChartView_Previews: PreviewProvider {
-    static let testData: [RangedBarChartView<Int>.DataPoint] = [
-        .init(x: 1, yMin: 1, yMax: 2),
-        .init(x: 2, yMin: 2, yMax: 4),
-        .init(x: 3, yMin: 3, yMax: 6),
-        .init(x: 4, yMin: 1, yMax: 1)
-    ]
-    
-    static var previews: some View {
-        Group {
-            RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
-            RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing, hasOverlay: true)
-            RangedBarChartView<Int>(data: (0...30).map { RangedBarChartView<Int>.DataPoint(x: $0, yMin: Double($0), yMax: Double($0 + 2) )}, unit: "Things")
-        }
-    }
-}
+//struct RangedBarChartView_Previews: PreviewProvider {
+//    static let testData: [RangedBarChartView<Int>.DataPoint] = [
+//        .init(x: 1, yMin: 1, yMax: 2),
+//        .init(x: 2, yMin: 2, yMax: 4),
+//        .init(x: 3, yMin: 3, yMax: 6),
+//        .init(x: 4, yMin: 1, yMax: 1)
+//    ]
+//
+//    static var previews: some View {
+//        Group {
+//            RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
+//            RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing, hasOverlay: true)
+//            RangedBarChartView<Int>(data: (0...30).map { RangedBarChartView<Int>.DataPoint(x: $0, yMin: Double($0), yMax: Double($0 + 2) )}, unit: "Things")
+//        }
+//    }
+//}

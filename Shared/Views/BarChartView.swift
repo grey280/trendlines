@@ -7,14 +7,9 @@
 
 import SwiftUI
 
-struct BarChartView<X: XPoint>: View {
-    struct DataPoint: DataProviderPoint {
-        let x: X
-        let y: Double
-    }
-    
+struct BarChartView: View {
     public init(
-        data: [DataPoint],
+        data: [DatePoint],
         unit: String,
         color: Color = .gray,
         axisAlignment: YAxisView.AxisAlignment = .leading,
@@ -36,7 +31,7 @@ struct BarChartView<X: XPoint>: View {
         self.hasOverlay = hasOverlay
     }
     
-    let data: [DataPoint]
+    let data: [DatePoint]
     let color: Color
     let unit: String
     let axisAlignment: YAxisView.AxisAlignment
@@ -93,17 +88,17 @@ struct BarChartView<X: XPoint>: View {
     }
 }
 
-struct BarChartView_Previews: PreviewProvider {
-    static let testData: [BarChartView<Int>.DataPoint] = [
-        .init(x: 1, y: 1),
-        .init(x: 2, y: 2),
-        .init(x: 3, y: 3)
-    ]
-    
-    static var previews: some View {
-        Group {
-            BarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
-            BarChartView<Int>(data: (0...30).map { BarChartView<Int>.DataPoint(x: $0, y: Double($0) )}, unit: "Things")
-        }
-    }
-}
+//struct BarChartView_Previews: PreviewProvider {
+//    static let testData: [DatePoint] = [
+//        .init(1, y: 1),
+//        .init(2, y: 2),
+//        .init(3, y: 3)
+//    ]
+//    
+//    static var previews: some View {
+//        Group {
+//            BarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
+//            BarChartView<Int>(data: (0...30).map { DatePoint($0, y: Double($0) )}, unit: "Things")
+//        }
+//    }
+//}

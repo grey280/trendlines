@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct LineChart<X: XPoint>: Shape {
-    public init(data: [LineChartView<X>.DataPoint], yRange: (min: Double, max: Double), circleRadius: CGFloat = 1) {
+struct LineChart: Shape {
+    public init(data: [DatePoint], yRange: (min: Double, max: Double), circleRadius: CGFloat = 1) {
         self.data = data
         self.yRange = yRange
         self.circleRadius = circleRadius
     }
     
-    let data: [LineChartView<X>.DataPoint]
+    let data: [DatePoint]
     let yRange: (min: Double, max: Double)
     let circleRadius: CGFloat
     
@@ -26,7 +26,7 @@ struct LineChart<X: XPoint>: Shape {
     }
     
     // y coordinates for the given point
-    func yLocation(in rect: CGRect, dataPoint: LineChartView<X>.DataPoint) -> CGFloat {
+    func yLocation(in rect: CGRect, dataPoint: DatePoint) -> CGFloat {
         // rect.minY:yRange.min::rect.maxY:yRange.max :: dataPoint.y:result
         let percentile = (dataPoint.y - yRange.min) / (yRange.max - yRange.min)
         let delta = rect.maxY - rect.minY
@@ -68,14 +68,9 @@ struct LineChart<X: XPoint>: Shape {
     }
 }
 
-struct LineChartView<X: XPoint>: View {
-    struct DataPoint: DataProviderPoint {
-        let x: X
-        let y: Double
-    }
-    
+struct LineChartView: View {
     public init(
-        data: [DataPoint],
+        data: [DatePoint],
         unit: String,
         color: Color = .gray,
         axisAlignment: YAxisView.AxisAlignment = .leading,
@@ -97,7 +92,7 @@ struct LineChartView<X: XPoint>: View {
         self.hasOverlay = hasOverlay
     }
     
-    let data: [DataPoint]
+    let data: [DatePoint]
     let color: Color
     let unit: String
     let axisAlignment: YAxisView.AxisAlignment
@@ -123,7 +118,7 @@ struct LineChartView<X: XPoint>: View {
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }
-                LineChart<X>(data: data, yRange: yRange, circleRadius: 5)
+                LineChart(data: data, yRange: yRange, circleRadius: 5)
                     .stroke(color, style: StrokeStyle(lineWidth: 3.0))
                 if axisAlignment == .trailing {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
@@ -305,17 +300,17 @@ class CubicCurveAlgorithm
     }
 }
 
-struct LineChartView_Previews: PreviewProvider {
-    static let testData: [LineChartView<Int>.DataPoint] = [
-        .init(x: 1, y: 3),
-        .init(x: 2, y: 2),
-        .init(x: 3, y: 3)
-    ]
-    
-    static var previews: some View {
-        Group {
-            LineChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing).padding()
-            LineChartView<Int>(data: (0...30).map { LineChartView<Int>.DataPoint(x: $0, y: Double($0) )}, unit: "Things").padding()
-        }
-    }
-}
+//struct LineChartView_Previews: PreviewProvider {
+//    static let testData: [LineChartView<Int>.DataPoint] = [
+//        .init(x: 1, y: 3),
+//        .init(x: 2, y: 2),
+//        .init(x: 3, y: 3)
+//    ]
+//    
+//    static var previews: some View {
+//        Group {
+//            LineChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing).padding()
+//            LineChartView<Int>(data: (0...30).map { LineChartView<Int>.DataPoint(x: $0, y: Double($0) )}, unit: "Things").padding()
+//        }
+//    }
+//}
