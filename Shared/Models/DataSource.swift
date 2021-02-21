@@ -51,9 +51,9 @@ extension DataSource {
                     return "miles" // TODO: Replace with unit lookup
                 case .flightsClimbed:
                     return "flights"
-                case .mindfulMinutes, .workoutTime:
+                case .workoutTime: // .mindfulMinutes,
                     return "minutes"
-                case .sleep, .standHours:
+                case .standHours: // sleep, 
                     return "hours"
                 case .steps:
                     return "steps"

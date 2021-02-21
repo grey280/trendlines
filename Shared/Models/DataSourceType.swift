@@ -38,7 +38,9 @@ enum DataSourceType {
         
         case activity(ActivitySource)
         enum ActivitySource: String, Codable {
-            case activeEnergy, walkRunDistance, swimDistance, cyclingDistance, flightsClimbed, steps, standHours, mindfulMinutes, sleep, workoutTime
+            case activeEnergy, walkRunDistance, swimDistance, cyclingDistance, flightsClimbed, steps, standHours,
+//                 mindfulMinutes, sleep,
+                 workoutTime
         }
     }
 }
