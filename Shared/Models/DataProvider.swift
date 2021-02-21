@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+#if !os(macOS)
+import HealthKit
+#endif
+
 protocol DataProviderPoint {
     associatedtype X: XPoint
     var x: X { get }
@@ -55,4 +59,21 @@ protocol RangedDataProvider: ObservableObject {
     associatedtype Point: RangedDataProviderPoint
     
     var data: [Point] { get }
+}
+
+class HealthDataProvider<X: XPoint>: DataProvider {
+    @Published public private(set) var points: [HealthPoint] = []
+    
+    struct HealthPoint: DataProviderPoint {
+        let x: X
+        let y: Double
+    }
+    typealias Point = HealthPoint
+    
+    let dataType: DataSourceType.HealthSource
+    
+    init(_ type: DataSourceType.HealthSource) {
+        self.dataType = type
+        
+    }
 }

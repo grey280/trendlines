@@ -31,6 +31,7 @@
 		2D43463525E1AB7D0018D541 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43463325E1AB7D0018D541 /* ChartView.swift */; };
 		2D43463925E1DF870018D541 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43463825E1DF870018D541 /* DataProvider.swift */; };
 		2D43463A25E1DF870018D541 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43463825E1DF870018D541 /* DataProvider.swift */; };
+		2D43463F25E1E15D0018D541 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D43463E25E1E15D0018D541 /* HealthKit.framework */; };
 		2D4B4D3925E1909A00A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3825E1909A00A34278 /* GRDB */; };
 		2D4B4D3E25E190A800A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3D25E190A800A34278 /* GRDB */; };
 		2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
@@ -63,6 +64,8 @@
 		2D43462E25E1A2D60018D541 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		2D43463325E1AB7D0018D541 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		2D43463825E1DF870018D541 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		2D43463D25E1E15D0018D541 /* trendlines.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = trendlines.entitlements; sourceTree = "<group>"; };
+		2D43463E25E1E15D0018D541 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		2DCD53BB25E18B5000BBA89B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D4B4D3925E1909A00A34278 /* GRDB in Frameworks */,
+				2D43463F25E1E15D0018D541 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +97,7 @@
 		2D33C73925E0556300E3C6C3 = {
 			isa = PBXGroup;
 			children = (
+				2D43463D25E1E15D0018D541 /* trendlines.entitlements */,
 				2D33C73E25E0556300E3C6C3 /* Shared */,
 				2D33C74825E0556300E3C6C3 /* iOS */,
 				2D33C74F25E0556300E3C6C3 /* macOS */,
@@ -143,6 +148,7 @@
 		2D4B4D3C25E190A800A34278 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D43463E25E1E15D0018D541 /* HealthKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -449,6 +455,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = trendlines.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6KVFT267T;
 				ENABLE_PREVIEWS = YES;
@@ -471,6 +478,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = trendlines.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6KVFT267T;
 				ENABLE_PREVIEWS = YES;
