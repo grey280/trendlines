@@ -7,24 +7,24 @@
 
 import SwiftUI
 
-fileprivate struct _ChartView<Provider: DataProvider>: View where Provider.X == Date {
+fileprivate struct _ChartView: View {
     public init(source: DataSource, overlay: Overlay = .none) {
         self.source = source
         self.overlay = overlay
         
-        switch source.sourceType {
-        case .entries:
-            self._provider = StateObject(wrappedValue: NoopDataProvider<Date>() as! Provider)
-        case .health(let healthType):
-            #if !os(macOS)
-            self._provider = StateObject(wrappedValue: (HealthDataProvider<Date>(healthType) as? Provider) ?? NoopDataProvider<Date>() as! Provider)
-            #else
-            self._provider = StateObject(wrappedValue: NoopDataProvider<Date>() as! Provider)
-            #endif
-        }
+//        switch source.sourceType {
+//        case .entries:
+////            self._provider = StateObject(wrappedValue: NoopDataProvider<Date>() as! Provider)
+//        case .health(let healthType):
+//            #if !os(macOS)
+////            self._provider = StateObject(wrappedValue: (HealthDataProvider<Date>(healthType) as? Provider) ?? NoopDataProvider<Date>() as! Provider)
+//            #else
+////            self._provider = StateObject(wrappedValue: NoopDataProvider<Date>() as! Provider)
+//            #endif
+//        }
     }
     
-    @StateObject var provider: Provider
+    @StateObject var provider: DataProvider
     
     enum Overlay {
         case none, has, `is`
