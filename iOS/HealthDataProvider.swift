@@ -55,10 +55,10 @@ class HealthDataProvider<X: XPoint>: DataProvider {
                 return HKQuantityType.quantityType(forIdentifier: .distanceCycling)!
             case .flightsClimbed:
                 return HKQuantityType.quantityType(forIdentifier: .flightsClimbed)!
-            case .mindfulMinutes:
-                return HKObjectType.categoryType(forIdentifier: .mindfulSession)!
-            case .sleep:
-                return HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
+//            case .mindfulMinutes:
+//                return HKObjectType.categoryType(forIdentifier: .mindfulSession)!
+//            case .sleep:
+//                return HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
             case .standHours:
                 return HKQuantityType.quantityType(forIdentifier: .appleStandTime)!
             case .steps:
