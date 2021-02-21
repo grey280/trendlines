@@ -27,7 +27,7 @@ enum DataSourceType {
             
             case mineral(MineralSource)
             enum MineralSource: String, Codable, Hashable {
-                case calcium, chloride, iron, magnesium, phosophorus, potassium, sodium, zinc
+                case calcium, chloride, iron, magnesium, phosphorus, potassium, sodium, zinc
             }
             
             case micronutrient(MicronutrientSource)

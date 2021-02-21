@@ -234,7 +234,7 @@ class HealthDataProvider: DataProvider {
                     return HKQuantityType.quantityType(forIdentifier: .dietaryIron)!
                 case .magnesium:
                     return HKQuantityType.quantityType(forIdentifier: .dietaryMagnesium)!
-                case .phosophorus:
+                case .phosphorus:
                     return HKQuantityType.quantityType(forIdentifier: .dietaryPhosphorus)!
                 case .potassium:
                     return HKQuantityType.quantityType(forIdentifier: .dietaryPotassium)!
