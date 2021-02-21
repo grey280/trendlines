@@ -14,14 +14,8 @@ fileprivate class HealthHelper {
     static let logger = Logger(subsystem: "net.twoeighty.trendlines", category: "Health")
 }
 
-class HealthDataProvider<X: XPoint>: DataProvider {
-    @Published public private(set) var points: [HealthPoint] = []
-    struct HealthPoint: DataProviderPoint {
-        let x: X
-        let y: Double
-    }
-    
-    typealias Point = HealthPoint
+class HealthDataProvider: DataProvider {
+    @Published public private(set) override var points: [DatePoint] = []
     
     let dataType: DataSourceType.HealthSource
     
@@ -64,17 +58,13 @@ class HealthDataProvider<X: XPoint>: DataProvider {
                 HealthHelper.logger.error("Collection not set.")
                 return
             }
-            let mapped: [HealthPoint] = results.statistics().compactMap {
+            let mapped: [DatePoint] = results.statistics().compactMap {
                 guard let quantity = self.querySum ? $0.sumQuantity() : $0.averageQuantity() else {
                     HealthHelper.logger.warning("Could not get statistics from query.")
                     return nil
                 }
                 let y = quantity.doubleValue(for: self.unit)
-                guard let x = X(date: $0.startDate) else {
-                    HealthHelper.logger.error("Used with type that doesn't support date initializer for XPoint.")
-                    return nil
-                }
-                return HealthPoint(x: x, y: y)
+                return DatePoint($0.startDate, y: y)
             }
             DispatchQueue.main.async {
                 self.points = mapped
