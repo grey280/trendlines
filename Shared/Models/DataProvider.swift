@@ -35,8 +35,24 @@ protocol DataProvider: ObservableObject {
     var points: [Point] { get }
 }
 
+protocol RangedDataProviderPoint {
+    associatedtype X: XPoint
+    var x: X { get }
+    var yMin: Double { get }
+    var yMax: Double { get }
+}
+
+extension RangedDataProviderPoint {
+    var rangedBarChart: RangedBarChartView<X>.DataPoint {
+        get {
+            .init(x: x, yMin: yMin, yMax: yMax)
+        }
+    }
+}
+
 protocol RangedDataProvider: ObservableObject {
     associatedtype X: XPoint
+    associatedtype Point: RangedDataProviderPoint
     
-    var data: [RangedBarChartView<X>.DataPoint] { get }
+    var data: [Point] { get }
 }

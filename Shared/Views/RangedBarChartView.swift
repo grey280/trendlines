@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RangedBarChartView<X: XPoint>: View {
-    struct DataPoint {
+    struct DataPoint: RangedDataProviderPoint {
         let x: X
         let yMin: Double
         let yMax: Double
