@@ -13,7 +13,7 @@ struct SourceBuilderView: View {
     var body: some View {
         TextField("Title", text: $source.title)
         ColorPicker("Color", selection: $source.color)
-        SourceTypePicker(sourceType: $source.sourceType)
+        SourceTypePickerView(sourceType: $source.sourceType)
     }
 }
 
