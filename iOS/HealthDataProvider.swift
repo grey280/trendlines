@@ -55,6 +55,53 @@ class HealthDataProvider<X: XPoint>: DataProvider {
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
         let interval = DateComponents(day: 1)
         let query = HKStatisticsCollectionQuery(quantityType: objectType, quantitySamplePredicate: predicate, options: queryOptions, anchorDate: Calendar.current.startOfDay(for: halfTime), intervalComponents: interval)
+    private var unit: HKUnit {
+        switch dataType {
+        case .activity(let activityType):
+            switch activityType {
+            case .activeEnergy:
+                return HKUnit.largeCalorie()
+            case .cyclingDistance, .walkRunDistance:
+                return HKUnit.mile() // TODO: Replace with unit lookup
+            case .flightsClimbed, .steps:
+                return HKUnit.count()
+            case .workoutTime: // .mindfulMinutes,
+                return HKUnit.minute()
+            case .standHours: // sleep,
+                return HKUnit.hour()
+            case .swimDistance:
+                return HKUnit.yard() // TODO: Replace with unit lookup
+            }
+        case .nutrition(let nutrition):
+            switch nutrition {
+            case .vitamin, .mineral, .carbohydrates, .fat, .protein, .sugar:
+                return HKUnit.gram()// TODO: Replace with unit lookup
+            case .micronutrient:
+                return HKUnit.gramUnit(with: .micro) // TODO: Replace with unit lookup
+//                case .macronutrients:
+//                    return "macros"
+            case .calories:
+                return HKUnit.largeCalorie() // TODO: Replace with unit lookup
+            case .caffeine:
+                return HKUnit.gramUnit(with: .milli) // TODO: Replace with unit lookup
+            case .water:
+                return HKUnit.liter() // TODO: Replace with unit lookup
+            }
+        case .body(let bodySubtype):
+            switch bodySubtype {
+            case .restingHeartRate, .heartRate:
+                return HKUnit.count() // TODO: bpm???
+//                case .bloodPressure:
+//                    return "mmHg"
+            case .bodyFatPercentage:
+                return HKUnit.percent()
+            case .bodyWeight, .leanBodyMass:
+                return HKUnit.pound() // TODO: Replace with unit lookup
+            case .heartRateVariability:
+                return HKUnit.secondUnit(with: .milli)
+            }
+        }
+    }
         
     private var querySum: Bool {
         switch self.dataType {
