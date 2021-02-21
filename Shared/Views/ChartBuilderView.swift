@@ -11,7 +11,7 @@ struct ChartBuilderView: View {
     
     init(_ onSave: @escaping (Chart) -> Void) {
         self.onSave = onSave
-        self._chart = State(initialValue: Chart(id: nil, sortNo: 1, source1: DataSource(sourceType: .entries, title: nil, color: .gray, chartType: nil), source2: nil))
+        self._chart = State(initialValue: Chart(id: nil, sortNo: 1, source1: DataSource(sourceType: .entries, title: "", color: .gray, chartType: nil), source2: nil))
     }
     init(chart: Chart, _ onSave: @escaping (Chart) -> Void) {
         self.onSave = onSave
@@ -31,7 +31,7 @@ struct ChartBuilderView: View {
                 chart.source2 != nil
             }, set: { (val) in
                 if (val) {
-                    chart.source2 = DataSource(sourceType: .entries, title: nil, color: .gray, chartType: nil)
+                    chart.source2 = DataSource(sourceType: .entries, title: "", color: .gray, chartType: nil)
                 } else {
                     chart.source2 = nil
                 }
