@@ -29,6 +29,8 @@
 		2D43463025E1A2D60018D541 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43462E25E1A2D60018D541 /* Database.swift */; };
 		2D43463425E1AB7D0018D541 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43463325E1AB7D0018D541 /* ChartView.swift */; };
 		2D43463525E1AB7D0018D541 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43463325E1AB7D0018D541 /* ChartView.swift */; };
+		2D43463925E1DF870018D541 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43463825E1DF870018D541 /* DataProvider.swift */; };
+		2D43463A25E1DF870018D541 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43463825E1DF870018D541 /* DataProvider.swift */; };
 		2D4B4D3925E1909A00A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3825E1909A00A34278 /* GRDB */; };
 		2D4B4D3E25E190A800A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3D25E190A800A34278 /* GRDB */; };
 		2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
@@ -60,6 +62,7 @@
 		2D33C78425E0904700E3C6C3 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		2D43462E25E1A2D60018D541 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		2D43463325E1AB7D0018D541 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		2D43463825E1DF870018D541 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		2DCD53BB25E18B5000BBA89B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 				2DCD53BB25E18B5000BBA89B /* DataSource.swift */,
 				2DCD53C825E18D0600BBA89B /* Chart.swift */,
 				2D43462E25E1A2D60018D541 /* Database.swift */,
+				2D43463825E1DF870018D541 /* DataProvider.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -286,6 +290,7 @@
 			files = (
 				2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */,
 				2D33C75425E0556300E3C6C3 /* ContentView.swift in Sources */,
+				2D43463925E1DF870018D541 /* DataProvider.swift in Sources */,
 				2D33C77925E06F5700E3C6C3 /* XPoint.swift in Sources */,
 				2D33C77E25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
 				2D33C78525E0904700E3C6C3 /* LineChartView.swift in Sources */,
@@ -308,6 +313,7 @@
 			files = (
 				2DCD53B825E18B3000BBA89B /* ChartType.swift in Sources */,
 				2D33C75525E0556300E3C6C3 /* ContentView.swift in Sources */,
+				2D43463A25E1DF870018D541 /* DataProvider.swift in Sources */,
 				2D33C77A25E06F5700E3C6C3 /* XPoint.swift in Sources */,
 				2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
 				2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */,

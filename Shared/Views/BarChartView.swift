@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BarChartView<X: XPoint>: View {
-    struct DataPoint {
+    struct DataPoint: DataProviderPoint {
         let x: X
         let y: Double
     }

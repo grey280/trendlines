@@ -69,7 +69,7 @@ struct LineChart<X: XPoint>: Shape {
 }
 
 struct LineChartView<X: XPoint>: View {
-    struct DataPoint {
+    struct DataPoint: DataProviderPoint {
         let x: X
         let y: Double
     }
