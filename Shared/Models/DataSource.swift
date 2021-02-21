@@ -30,7 +30,7 @@ extension DataSource {
                 switch bodySubtype {
                 case .restingHeartRate, .heartRateVariability, .bodyWeight, .leanBodyMass, .bodyFatPercentage:
                     return .line
-                case .heartRate, .bloodPressure:
+                case .heartRate:// , .bloodPressure:
                     return .floatingBar
                 }
             }
@@ -66,8 +66,8 @@ extension DataSource {
                     return "g" // TODO: Replace with unit lookup
                 case .micronutrient:
                     return "mcg" // TODO: Replace with unit lookup
-                case .macronutrients:
-                    return "macros"
+//                case .macronutrients:
+//                    return "macros"
                 case .calories:
                     return "Calories" // TODO: Replace with unit lookup
                 case .caffeine:
@@ -79,8 +79,8 @@ extension DataSource {
                 switch bodySubtype {
                 case .restingHeartRate, .heartRate:
                     return "bpm"
-                case .bloodPressure:
-                    return "mmHg"
+//                case .bloodPressure:
+//                    return "mmHg"
                 case .bodyFatPercentage:
                     return "%"
                 case .bodyWeight, .leanBodyMass:

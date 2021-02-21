@@ -14,12 +14,12 @@ enum DataSourceType {
     enum HealthSource {
         case body(BodySource)
         enum BodySource: String, Codable {
-            case restingHeartRate, heartRateVariability, heartRate, bloodPressure, bodyWeight, leanBodyMass, bodyFatPercentage
+            case restingHeartRate, heartRateVariability, heartRate, /*bloodPressure, */ bodyWeight, leanBodyMass, bodyFatPercentage
         }
         
         case nutrition(NutritionSource)
         enum NutritionSource {
-            case macronutrients, calories, carbohydrates, fat, protein, water, caffeine, sugar
+            case /* macronutrients, */ calories, carbohydrates, fat, protein, water, caffeine, sugar
             case vitamin(VitaminSource)
             enum VitaminSource: String, Codable {
                 case vitaminA, thiamin, riboflavin, niacin, pantothenicAcid, vitaminB6, biotin, vitaminB12, vitaminC, vitaminD, vitaminE, vitaminK, folate
@@ -55,7 +55,7 @@ extension DataSourceType: Codable {
         case body, nutrition, activity
         
         fileprivate enum NutritionTypes: String, Codable {
-            case macronutrients, calories, carbohydrates, fat, protein, water, caffeine, sugar
+            case /* macronutrients, */ calories, carbohydrates, fat, protein, water, caffeine, sugar
             case vitamin, mineral, micronutrient
         }
     }
@@ -78,8 +78,8 @@ extension DataSourceType: Codable {
             case .nutrition:
                 let tertiary = try container.decode(HealthTypes.NutritionTypes.self, forKey: .tertiary)
                 switch tertiary {
-                case .macronutrients:
-                    self = .health(.nutrition(.macronutrients))
+//                case .macronutrients:
+//                    self = .health(.nutrition(.macronutrients))
                 case .calories:
                     self = .health(.nutrition(.calories))
                 case .carbohydrates:
@@ -134,8 +134,8 @@ extension DataSourceType: Codable {
                 case .vitamin(let vitamin):
                     try container.encode(HealthTypes.NutritionTypes.vitamin, forKey: .tertiary)
                     try container.encode(vitamin, forKey: .quaternary)
-                case .macronutrients:
-                    try container.encode(HealthTypes.NutritionTypes.macronutrients, forKey: .tertiary)
+//                case .macronutrients:
+//                    try container.encode(HealthTypes.NutritionTypes.macronutrients, forKey: .tertiary)
                 case .calories:
                     try container.encode(HealthTypes.NutritionTypes.calories, forKey: .tertiary)
                 case .carbohydrates:
