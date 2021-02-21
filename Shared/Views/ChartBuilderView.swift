@@ -73,8 +73,52 @@ struct SourceTypePicker: View {
                 Text("Stand Hours").tag(DataSourceType.health(.activity(.standHours)))
                 Text("Exercise Time").tag(DataSourceType.health(.activity(.workoutTime)))
             }
-            
-            #error("Missing nutrition types")
+            Section(header: Text("Nutrition")) {
+                Text("Calories").tag(DataSourceType.health(.nutrition(.calories)))
+                Text("Water").tag(DataSourceType.health(.nutrition(.water)))
+                Text("Carbohydrates").tag(DataSourceType.health(.nutrition(.carbohydrates)))
+                Text("Fat").tag(DataSourceType.health(.nutrition(.fat)))
+                Text("Protein").tag(DataSourceType.health(.nutrition(.protein)))
+                Text("Caffeine").tag(DataSourceType.health(.nutrition(.caffeine)))
+                Text("Sugar").tag(DataSourceType.health(.nutrition(.sugar)))
+            }
+            Section(header: Text("Vitamins")) {
+                Group {
+                    Text("Vitamin A").tag(DataSourceType.health(.nutrition(.vitamin(.vitaminA))))
+                    Text("Thiamin").tag(DataSourceType.health(.nutrition(.vitamin(.thiamin))))
+                    Text("Riboflavin").tag(DataSourceType.health(.nutrition(.vitamin(.riboflavin))))
+                    Text("Niacin").tag(DataSourceType.health(.nutrition(.vitamin(.niacin))))
+                    Text("Pantothenic Acid").tag(DataSourceType.health(.nutrition(.vitamin(.pantothenicAcid))))
+                    Text("Vitamin B6").tag(DataSourceType.health(.nutrition(.vitamin(.vitaminB6))))
+                    Text("Biotin").tag(DataSourceType.health(.nutrition(.vitamin(.biotin))))
+                }
+                Group {
+                    Text("Vitamin B12").tag(DataSourceType.health(.nutrition(.vitamin(.vitaminB12))))
+                    Text("Vitamin C").tag(DataSourceType.health(.nutrition(.vitamin(.vitaminC))))
+                    Text("Vitamin D").tag(DataSourceType.health(.nutrition(.vitamin(.vitaminD))))
+                    Text("Vitamin E").tag(DataSourceType.health(.nutrition(.vitamin(.vitaminE))))
+                    Text("Vitamin K").tag(DataSourceType.health(.nutrition(.vitamin(.vitaminK))))
+                    Text("Folate").tag(DataSourceType.health(.nutrition(.vitamin(.folate))))
+                }
+            }
+            Section(header: Text("Minerals")) {
+                Text("Calcium").tag(DataSourceType.health(.nutrition(.mineral(.calcium))))
+                Text("Chloride").tag(DataSourceType.health(.nutrition(.mineral(.chloride))))
+                Text("Iron").tag(DataSourceType.health(.nutrition(.mineral(.iron))))
+                Text("Magnesium").tag(DataSourceType.health(.nutrition(.mineral(.magnesium))))
+                Text("Phosphorus").tag(DataSourceType.health(.nutrition(.mineral(.phosphorus))))
+                Text("Potassium").tag(DataSourceType.health(.nutrition(.mineral(.potassium))))
+                Text("Sodium").tag(DataSourceType.health(.nutrition(.mineral(.sodium))))
+                Text("Zinc").tag(DataSourceType.health(.nutrition(.mineral(.zinc))))
+            }
+            Section(header: Text("Micronutrients")) {
+                Text("Calcium").tag(DataSourceType.health(.nutrition(.micronutrient(.chromium))))
+                Text("Copper").tag(DataSourceType.health(.nutrition(.micronutrient(.copper))))
+                Text("Iodine").tag(DataSourceType.health(.nutrition(.micronutrient(.iodine))))
+                Text("Manganese").tag(DataSourceType.health(.nutrition(.micronutrient(.manganese))))
+                Text("Molybdenum").tag(DataSourceType.health(.nutrition(.micronutrient(.molybdenum))))
+                Text("Selenium").tag(DataSourceType.health(.nutrition(.micronutrient(.selenium))))
+            }
         }
     }
 }
