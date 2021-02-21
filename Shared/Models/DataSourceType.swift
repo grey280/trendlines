@@ -46,33 +46,7 @@ enum DataSourceType {
 }
 
 extension DataSourceType.HealthSource.NutritionSource: Hashable {}
-
-extension DataSourceType.HealthSource: Hashable {
-    static func == (lhs: DataSourceType.HealthSource, rhs: DataSourceType.HealthSource) -> Bool {
-        switch (lhs, rhs){
-        case (.body(let l), .body(let r)):
-            return l.rawValue == r.rawValue
-        case (.activity(let l), .activity(let r)):
-            return l.rawValue == r.rawValue
-        case (.nutrition(let lNutrition), .nutrition(let rNutrition)):
-            switch (lNutrition, rNutrition) {
-            case (.calories, .calories), (.carbohydrates, .carbohydrates), (.fat, .fat), (.protein, .protein), (.water, .water), (.caffeine, .caffeine), (.sugar, .sugar):
-                return true
-            case (.vitamin(let l), .vitamin(let r)):
-                return l.rawValue == r.rawValue
-            case (.mineral(let l), .mineral(let r)):
-                return l.rawValue == r.rawValue
-            case (.micronutrient(let l), .micronutrient(let r)):
-                return l.rawValue == r.rawValue
-            default:
-                return false
-            }
-        default:
-            return false
-        }
-    }
-}
-
+extension DataSourceType.HealthSource: Hashable { }
 extension DataSourceType: Hashable { }
 
 extension DataSourceType: Codable {
