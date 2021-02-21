@@ -38,7 +38,7 @@ struct ChartBuilderView: View {
                     chart.source2 = nil
                 }
             }))
-            if (chart.source2 != nil) {
+            if let source2 = Binding($chart.source2) {
                 Section(header: Text("Right")) {
                     <#code#>
                 }
