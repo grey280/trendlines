@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DataSource {
     var sourceType: DataSourceType
-    var title: String?
+    var title: String
     var color: Color
     var chartType: ChartType?
 }
