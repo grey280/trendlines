@@ -48,7 +48,7 @@ class Database: ObservableObject {
         try dbQueue.write { db in
             try db.create(table: Chart.databaseTableName, ifNotExists: true, body: { t in
                 t.autoIncrementedPrimaryKey("id")
-                t.column("sortNo", .integer).notNull().unique()
+                t.column("sortNo", .integer).notNull()//.unique() // UNIQUE constraint would make reordering Too Heckin Hard
                 t.column("source1", .text).notNull()
                 t.column("source2", .text)
             })
@@ -64,6 +64,43 @@ class Database: ObservableObject {
         } catch {
             logger.error("Could not load charts. \(error.localizedDescription, privacy: .public)")
         }
+    }
+    
+    func move(chart: Chart, sortNo: Int64) throws -> Chart {
+        var chart = chart
+        let originalSortNo = chart.sortNo
+        var impactedRange: [Chart]
+        if originalSortNo == chart.sortNo {
+            return chart
+        } else if originalSortNo > chart.sortNo {
+            impactedRange = try dbQueue.read { db in
+                try Chart.filter(Column("sortNo") >= sortNo)
+                    .filter(Column("sortNo") < originalSortNo)
+                    .fetchAll(db)
+            }
+            for i in 0..<impactedRange.count {
+                impactedRange[i].sortNo += 1
+            }
+        } else {
+            // moving down; find all the ones in between, sortNo--
+            impactedRange = try dbQueue.read { db in
+                try Chart.filter(Column("sortNo") <= sortNo)
+                    .filter(Column("sortNo") > originalSortNo)
+                    .fetchAll(db)
+            }
+            for i in 0..<impactedRange.count {
+                impactedRange[i].sortNo -= 1
+            }
+        }
+        chart.sortNo = sortNo
+        try dbQueue.write { db in
+            try chart.update(db, columns: ["sortNo"])
+            for item in impactedRange {
+                try item.update(db, columns: ["sortNo"])
+            }
+        }
+        loadCharts()
+        return chart
     }
     
     func save(chart: Chart) throws -> Chart {
