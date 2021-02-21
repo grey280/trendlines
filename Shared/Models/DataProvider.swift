@@ -12,73 +12,43 @@ import Combine
 import HealthKit
 #endif
 
-protocol DataProviderPoint {
-    associatedtype X: XPoint
-    var x: X { get }
-    var y: Double { get }
-}
-
-extension DataProviderPoint {
-    var lineChart: LineChartView<X>.DataPoint {
-        get {
-            .init(x: x, y: y)
+struct DatePoint {
+    let x: Date
+    let _y: Double
+    var y: Double {
+        if let min = yMin, let max = yMax {
+            return (min + max) / 2
         }
-        
+        return _y
     }
-    var barChart: BarChartView<X>.DataPoint {
+    let yMin: Double?
+    let yMax: Double?
+    
+    public init(_ x: Date, y: Double) {
+        self.x = x
+        self._y = y
+        self.yMax = nil
+        self.yMin = nil
+    }
+    public init(_ x:Date, yMin: Double, yMax: Double) {
+        self.x = x
+        self.yMin = yMin
+        self.yMax = yMax
+        self._y = (yMin + yMax) / 2
+    }
+}
+
+class DataProvider: ObservableObject {
+    var points: [DatePoint] = []
+}
+
+class NoopDataProvider: DataProvider {
+    override var points: [DatePoint] {
         get {
-            .init(x: x, y: y)
+            []
+        }
+        set {
+            // do nothing
         }
     }
-}
-
-protocol DataProvider: ObservableObject {
-    associatedtype X: XPoint
-    associatedtype Point: DataProviderPoint
-    
-    var points: [Point] { get }
-}
-
-protocol RangedDataProviderPoint {
-    associatedtype X: XPoint
-    var x: X { get }
-    var yMin: Double { get }
-    var yMax: Double { get }
-}
-
-extension RangedDataProviderPoint {
-    var rangedBarChart: RangedBarChartView<X>.DataPoint {
-        get {
-            .init(x: x, yMin: yMin, yMax: yMax)
-        }
-    }
-}
-
-protocol RangedDataProvider: ObservableObject {
-    associatedtype X: XPoint
-    associatedtype Point: RangedDataProviderPoint
-    
-    var data: [Point] { get }
-}
-
-class NoopDataProvider<X: XPoint>: DataProvider {
-    var points: [DataPoint] { [] }
-    
-    typealias Point = DataPoint
-    
-    struct DataPoint: DataProviderPoint {
-        let x: X
-        let y: Double
-    }
-}
-
-class NoopRangedDataProvider<X: XPoint>: RangedDataProvider {
-    typealias Point = DataPoint
-    struct DataPoint: RangedDataProviderPoint {
-        let x: X
-        let yMin: Double
-        let yMax: Double
-    }
-    
-    var data: [DataPoint] { [] }
 }
