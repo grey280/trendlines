@@ -70,7 +70,14 @@ class HealthDataProvider<X: XPoint>: DataProvider {
                     return nil
                 }
                 let y = quantity.doubleValue(for: self.unit)
-                HealthPoint(x: <#T##XPoint#>, y: y)
+                guard let x = X(date: $0.startDate) else {
+                    HealthHelper.logger.error("Used with type that doesn't support date initializer for XPoint.")
+                    return nil
+                }
+                return HealthPoint(x: x, y: y)
+            }
+            DispatchQueue.main.async {
+                self.points = mapped
             }
         }
     }

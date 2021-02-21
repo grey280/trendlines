@@ -9,7 +9,13 @@ import Foundation
 
 protocol XPoint: Hashable, Comparable {
     var displayName: String { get }
+    
+    init?(date: Date)
 }
 extension Int: XPoint {
     var displayName: String { "\(self)" }
+    
+    init?(date: Date) {
+        return nil
+    }
 }
