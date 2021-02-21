@@ -7,9 +7,11 @@
 
 import Foundation
 import HealthKit
+import OSLog
 
 fileprivate class HealthHelper {
     static let healthStore = HKHealthStore()
+    static let logger = Logger(subsystem: "net.twoeighty.trendlines", category: "Health")
 }
 
 class HealthDataProvider<X: XPoint>: DataProvider {
