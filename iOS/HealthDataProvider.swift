@@ -25,8 +25,22 @@ class HealthDataProvider<X: XPoint>: DataProvider {
     
     let dataType: DataSourceType.HealthSource
     
-    init(_ type: DataSourceType.HealthSource) {
+    init?(_ type: DataSourceType.HealthSource) {
         self.dataType = type
+        guard HKHealthStore.isHealthDataAvailable() else {
+            return nil
+        }
+        if HealthHelper.healthStore.authorizationStatus(for: objectType) == .notDetermined {
+            let readType: Set<HKObjectType> = [objectType]
+            HealthHelper.healthStore.requestAuthorization(toShare: nil, read: readType) { (success, error) in
+                if let err = error {
+                    HealthHelper.logger.error("Error while requesting authorization: \(err.localizedDescription, privacy: .public)")
+                }
+            }
+        } else {
+            loadData()
+        }
+    }
         
     }
     
