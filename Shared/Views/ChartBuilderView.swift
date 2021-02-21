@@ -45,16 +45,6 @@ struct ChartBuilderView: View {
     }
 }
 
-struct SourceBuilderView: View {
-    @Binding var source: DataSource
-    
-    var body: some View {
-        TextField("Title", text: $source.title)
-        ColorPicker("Color", selection: $source.color)
-        SourceTypePicker(sourceType: $source.sourceType)
-    }
-}
-
 struct SourceTypePicker: View {
     @Binding var sourceType: DataSourceType
     
