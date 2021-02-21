@@ -73,6 +73,8 @@ extension DataSourceType.HealthSource: Hashable {
     }
 }
 
+extension DataSourceType: Hashable { }
+
 extension DataSourceType: Codable {
     fileprivate enum CodingKeys: String, CodingKey {
         case primary, secondary, tertiary, quaternary
