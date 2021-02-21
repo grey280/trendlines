@@ -32,6 +32,8 @@
 		2D43463F25E1E15D0018D541 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D43463E25E1E15D0018D541 /* HealthKit.framework */; };
 		2D43464325E1E5BE0018D541 /* HealthDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43464225E1E5BE0018D541 /* HealthDataProvider.swift */; };
 		2D43464425E1E5BE0018D541 /* HealthDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43464225E1E5BE0018D541 /* HealthDataProvider.swift */; };
+		2D43465825E2CF0C0018D541 /* ChartBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43465725E2CF0C0018D541 /* ChartBuilderView.swift */; };
+		2D43465925E2CF0C0018D541 /* ChartBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43465725E2CF0C0018D541 /* ChartBuilderView.swift */; };
 		2D4B4D3925E1909A00A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3825E1909A00A34278 /* GRDB */; };
 		2D4B4D3E25E190A800A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3D25E190A800A34278 /* GRDB */; };
 		2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
@@ -66,6 +68,7 @@
 		2D43463D25E1E15D0018D541 /* trendlines.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = trendlines.entitlements; sourceTree = "<group>"; };
 		2D43463E25E1E15D0018D541 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		2D43464225E1E5BE0018D541 /* HealthDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataProvider.swift; sourceTree = "<group>"; };
+		2D43465725E2CF0C0018D541 /* ChartBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBuilderView.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		2DCD53BB25E18B5000BBA89B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
@@ -163,6 +166,7 @@
 				2D33C77325E06DD800E3C6C3 /* PartialRoundedRectangle.swift */,
 				2D33C76E25E06D9F00E3C6C3 /* YAxisView.swift */,
 				2D43463325E1AB7D0018D541 /* ChartView.swift */,
+				2D43465725E2CF0C0018D541 /* ChartBuilderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -301,6 +305,7 @@
 				2D33C78525E0904700E3C6C3 /* LineChartView.swift in Sources */,
 				2D33C77425E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
 				2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */,
+				2D43465825E2CF0C0018D541 /* ChartBuilderView.swift in Sources */,
 				2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */,
 				2D43463425E1AB7D0018D541 /* ChartView.swift in Sources */,
 				2D33C75225E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
@@ -324,6 +329,7 @@
 				2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */,
 				2D33C77525E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
 				2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */,
+				2D43465925E2CF0C0018D541 /* ChartBuilderView.swift in Sources */,
 				2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */,
 				2D43463525E1AB7D0018D541 /* ChartView.swift in Sources */,
 				2D33C75325E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
