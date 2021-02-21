@@ -66,6 +66,7 @@ class Database: ObservableObject {
         }
     }
     
+    @discardableResult
     func move(chart: Chart, sortNo: Int64) throws -> Chart {
         var chart = chart
         let originalSortNo = chart.sortNo
@@ -103,6 +104,7 @@ class Database: ObservableObject {
         return chart
     }
     
+    @discardableResult
     func save(chart: Chart) throws -> Chart {
         var chart = chart
         try dbQueue.write { db in
@@ -112,6 +114,7 @@ class Database: ObservableObject {
         return chart
     }
     
+    @discardableResult
     func remove(chart: Chart) throws -> Bool {
         let result = try dbQueue.write { db in
             try chart.delete(db)
