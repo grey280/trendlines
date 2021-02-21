@@ -25,6 +25,8 @@ struct ContentView: View {
             }), trailing: NavigationLink(destination: Text("Settings!"), label: {
                 Image(systemName: "gear")
             }))
+        }.sheet(isPresented: $showingAdd) { 
+            Text("Creator")
         }
     }
 }
