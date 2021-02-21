@@ -7,6 +7,25 @@
 
 import SwiftUI
 
+class DataProvider<X: XPoint>: ObservableObject {
+    struct DataPoint {
+        let x: X
+        let y: Double
+        
+        var lineChart: LineChartView<X>.DataPoint {
+            .init(x: x, y: y)
+        }
+        var barChart: BarChartView<X>.DataPoint {
+            .init(x: x, y: y)
+        }
+    }
+    @Published public private(set) var points: [DataPoint] = []
+}
+
+class RangedDataProvider<X: XPoint>: ObservableObject {
+    @Published public private(set) var data: [RangedBarChartView<X>.DataPoint] = []
+}
+
 fileprivate struct _ChartView: View {
     enum Overlay {
         case none, has, `is`
