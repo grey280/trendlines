@@ -76,4 +76,25 @@ class HealthDataProvider<X: XPoint>: DataProvider {
         self.dataType = type
         
     }
+    #if !os(macOS)
+    static let healthStore = HKHealthStore()
+    
+    private func hkType() -> HKObjectType {
+        switch dataType {
+        case .body(let body):
+            switch body {
+            case .restingHeartRate:
+                return HKQuantityType
+            }
+        }
+    }
+    
+    func requestHealthAccess() {
+        
+    }
+    #else
+    func requestHealthAccess() {
+        // do nothing, no HK on macOS
+    }
+    #endif
 }
