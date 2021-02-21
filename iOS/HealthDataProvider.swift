@@ -32,8 +32,9 @@ class HealthDataProvider: DataProvider {
             HealthHelper.healthStore.requestAuthorization(toShare: nil, read: readType) { (success, error) in
                 if let err = error {
                     HealthHelper.logger.error("Error while requesting authorization: \(err.localizedDescription, privacy: .public)")
+                } else {
+                    self.loadData()
                 }
-                self.loadData()
             }
         } else {
             loadData()
