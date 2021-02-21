@@ -71,6 +71,8 @@ struct SourceTypePicker: View {
                 Text("Stand Hours").tag(DataSourceType.health(.activity(.standHours)))
                 Text("Exercise Time").tag(DataSourceType.health(.activity(.workoutTime)))
             }
+            
+            #error("Missing nutrition types")
         }
     }
 }
