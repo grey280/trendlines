@@ -13,7 +13,7 @@ struct trendlinesApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(r: false).environmentObject(database)
+            ContentView().environmentObject(database)
         }
     }
 }
