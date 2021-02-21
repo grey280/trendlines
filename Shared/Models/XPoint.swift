@@ -19,3 +19,10 @@ extension Int: XPoint {
         return nil
     }
 }
+
+extension Date: XPoint {
+    var displayName: String { "\(self)" } // TODO: Better date display
+    init?(date: Date) {
+        self = date
+    }
+}
