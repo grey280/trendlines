@@ -39,13 +39,13 @@ struct DatePoint {
 }
 
 class DataProvider: ObservableObject {
-    var points: [DatePoint] = []
+    @Published var points: [DatePoint] = []
 }
 
 class NoopDataProvider: DataProvider {
     override var points: [DatePoint] {
         get {
-            []
+            [.init(Date(), y: 0.0)]
         }
         set {
             // do nothing
