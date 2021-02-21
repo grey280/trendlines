@@ -61,40 +61,24 @@ protocol RangedDataProvider: ObservableObject {
     var data: [Point] { get }
 }
 
-class HealthDataProvider<X: XPoint>: DataProvider {
-    @Published public private(set) var points: [HealthPoint] = []
+class NoopDataProvider<X: XPoint>: DataProvider {
+    var points: [DataPoint] { [] }
     
-    struct HealthPoint: DataProviderPoint {
+    typealias Point = DataPoint
+    
+    struct DataPoint: DataProviderPoint {
         let x: X
         let y: Double
     }
-    typealias Point = HealthPoint
-    
-    let dataType: DataSourceType.HealthSource
-    
-    init(_ type: DataSourceType.HealthSource) {
-        self.dataType = type
-        
-    }
-    #if !os(macOS)
-    static let healthStore = HKHealthStore()
-    
-    private func hkType() -> HKObjectType {
-        switch dataType {
-        case .body(let body):
-            switch body {
-            case .restingHeartRate:
-                return HKQuantityType
-            }
-        }
+}
+
+class NoopRangedDataProvider<X: XPoint>: RangedDataProvider {
+    typealias Point = DataPoint
+    struct DataPoint: RangedDataProviderPoint {
+        let x: X
+        let yMin: Double
+        let yMax: Double
     }
     
-    func requestHealthAccess() {
-        
-    }
-    #else
-    func requestHealthAccess() {
-        // do nothing, no HK on macOS
-    }
-    #endif
+    var data: [DataPoint] { [] }
 }
