@@ -78,7 +78,7 @@ struct RangedBarChartView: View {
                             .fill(self.color.opacity(0.4))
                         RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
                             .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
-                    }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.yMax - dataPoint.yMin)).padding(.bottom, barOffset(geo.size, y: dataPoint.yMin))
+                    }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: (dataPoint.yMax ?? dataPoint.y) - (dataPoint.yMin ?? dataPoint.y))).padding(.bottom, barOffset(geo.size, y: dataPoint.yMin ?? dataPoint.y))
                 }
                 if axisAlignment == .trailing {
                     YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
