@@ -13,7 +13,7 @@ enum DataSourceType {
     
     enum HealthSource {
         case body(BodySource)
-        enum BodySource: String, Codable {
+        enum BodySource: String, Codable, Hashable {
             case restingHeartRate, heartRateVariability, heartRate, /*bloodPressure, */ bodyWeight, leanBodyMass, bodyFatPercentage
         }
         
@@ -21,29 +21,91 @@ enum DataSourceType {
         enum NutritionSource {
             case /* macronutrients, */ calories, carbohydrates, fat, protein, water, caffeine, sugar
             case vitamin(VitaminSource)
-            enum VitaminSource: String, Codable {
+            enum VitaminSource: String, Codable, Hashable {
                 case vitaminA, thiamin, riboflavin, niacin, pantothenicAcid, vitaminB6, biotin, vitaminB12, vitaminC, vitaminD, vitaminE, vitaminK, folate
             }
             
             case mineral(MineralSource)
-            enum MineralSource: String, Codable {
+            enum MineralSource: String, Codable, Hashable {
                 case calcium, chloride, iron, magnesium, phosophorus, potassium, sodium, zinc
             }
             
             case micronutrient(MicronutrientSource)
-            enum MicronutrientSource: String, Codable {
+            enum MicronutrientSource: String, Codable, Hashable {
                 case chromium, copper, iodine, manganese, molybdenum, selenium
             }
         }
         
         case activity(ActivitySource)
-        enum ActivitySource: String, Codable {
+        enum ActivitySource: String, Codable, Hashable {
             case activeEnergy, walkRunDistance, swimDistance, cyclingDistance, flightsClimbed, steps, standHours,
 //                 mindfulMinutes, sleep,
                  workoutTime
         }
     }
 }
+
+extension DataSourceType.HealthSource.NutritionSource: Hashable {
+    
+}
+
+extension DataSourceType.HealthSource: Hashable {
+    static func == (lhs: DataSourceType.HealthSource, rhs: DataSourceType.HealthSource) -> Bool {
+        switch (lhs, rhs){
+        case (.body(let l), .body(let r)):
+            return l.rawValue == r.rawValue
+        case (.activity(let l), .activity(let r)):
+            return l.rawValue == r.rawValue
+        case (.nutrition(let lNutrition), .nutrition(let rNutrition)):
+            switch (lNutrition, rNutrition) {
+            case (.calories, .calories), (.carbohydrates, .carbohydrates), (.fat, .fat), (.protein, .protein), (.water, .water), (.caffeine, .caffeine), (.sugar, .sugar):
+                return true
+            case (.vitamin(let l), .vitamin(let r)):
+                return l.rawValue == r.rawValue
+            case (.mineral(let l), .mineral(let r)):
+                return l.rawValue == r.rawValue
+            case (.micronutrient(let l), .micronutrient(let r)):
+                return l.rawValue == r.rawValue
+            default:
+                return false
+            }
+        default:
+            return false
+    }
+}
+
+//extension DataSourceType: Hashable {
+//    static func == (lhs: DataSourceType, rhs: DataSourceType) -> Bool {
+//        switch (lhs, rhs) {
+//            case (.entries, .entries):
+//            return true
+//        case (.entries, .health), (.health, .entries):
+//            return false
+//        case (.health(let lHealth), .health(let rHealth)):
+//            switch (lHealth, rHealth){
+//            case (.body(let l), .body(let r)):
+//                return l.rawValue == r.rawValue
+//            case (.activity(let l), .activity(let r)):
+//                return l.rawValue == r.rawValue
+//            case (.nutrition(let lNutrition), .nutrition(let rNutrition)):
+//                switch (lNutrition, rNutrition) {
+//                case (.calories, .calories), (.carbohydrates, .carbohydrates), (.fat, .fat), (.protein, .protein), (.water, .water), (.caffeine, .caffeine), (.sugar, .sugar):
+//                    return true
+//                case (.vitamin(let l), .vitamin(let r)):
+//                    return l.rawValue == r.rawValue
+//                case (.mineral(let l), .mineral(let r)):
+//                    return l.rawValue == r.rawValue
+//                case (.micronutrient(let l), .micronutrient(let r)):
+//                    return l.rawValue == r.rawValue
+//                default:
+//                    return false
+//                }
+//            default:
+//                return false
+//            }
+//        }
+//    }
+//}
 
 extension DataSourceType: Codable {
     fileprivate enum CodingKeys: String, CodingKey {
