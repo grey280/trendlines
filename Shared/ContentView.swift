@@ -25,8 +25,14 @@ struct ContentView: View {
             }), trailing: NavigationLink(destination: Text("Settings!"), label: {
                 Image(systemName: "gear")
             }))
-        }.sheet(isPresented: $showingAdd) { 
-            Text("Creator")
+        }.sheet(isPresented: $showingAdd) {
+            ChartBuilderView() { chart in
+                do {
+                    try database.save(chart: chart)
+                } catch {
+                    trendlinesApp.logger.error("Failed to save to database: \(error.localizedDescription, privacy: .public)")
+                }
+            }
         }
     }
 }
