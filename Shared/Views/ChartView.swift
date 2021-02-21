@@ -7,23 +7,37 @@
 
 import SwiftUI
 
-class DataProvider<X: XPoint>: ObservableObject {
-    struct DataPoint {
-        let x: X
-        let y: Double
-        
-        var lineChart: LineChartView<X>.DataPoint {
+protocol DataProviderPoint {
+    associatedtype X: XPoint
+    var x: X { get }
+    var y: Double { get }
+}
+
+extension DataProviderPoint {
+    var lineChart: LineChartView<X>.DataPoint {
+        get {
             .init(x: x, y: y)
         }
-        var barChart: BarChartView<X>.DataPoint {
+        
+    }
+    var barChart: BarChartView<X>.DataPoint {
+        get {
             .init(x: x, y: y)
         }
     }
-    @Published public private(set) var points: [DataPoint] = []
 }
 
-class RangedDataProvider<X: XPoint>: ObservableObject {
-    @Published public private(set) var data: [RangedBarChartView<X>.DataPoint] = []
+protocol DataProvider: ObservableObject {
+    associatedtype X: XPoint
+    associatedtype Point: DataProviderPoint
+    
+    var points: [Point] { get }
+}
+
+protocol RangedDataProvider: ObservableObject {
+    associatedtype X: XPoint
+    
+    var data: [RangedBarChartView<X>.DataPoint] { get }
 }
 
 fileprivate struct _ChartView: View {
