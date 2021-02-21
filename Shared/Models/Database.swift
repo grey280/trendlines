@@ -113,8 +113,13 @@ class Database: ObservableObject {
     }
     
     func remove(chart: Chart) throws -> Bool {
-        return try dbQueue.write { db in
+        let result = try dbQueue.write { db in
             try chart.delete(db)
         }
+        if (result) {
+            loadCharts()
+            return true
+        }
+        return false
     }
 }
