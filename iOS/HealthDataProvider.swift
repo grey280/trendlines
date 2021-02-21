@@ -14,9 +14,7 @@ fileprivate class HealthHelper {
     static let logger = Logger(subsystem: "net.twoeighty.trendlines", category: "Health")
 }
 
-class HealthDataProvider: DataProvider {
-    @Published public private(set) override var points: [DatePoint] = []
-    
+class HealthDataProvider: DataProvider {    
     let dataType: DataSourceType.HealthSource
     
     init?(_ type: DataSourceType.HealthSource) {
@@ -24,12 +22,18 @@ class HealthDataProvider: DataProvider {
         guard HKHealthStore.isHealthDataAvailable() else {
             return nil
         }
+        super.init()
+        checkAuthorization()
+    }
+    
+    private func checkAuthorization() {
         if HealthHelper.healthStore.authorizationStatus(for: objectType) == .notDetermined {
             let readType: Set<HKObjectType> = [objectType]
             HealthHelper.healthStore.requestAuthorization(toShare: nil, read: readType) { (success, error) in
                 if let err = error {
                     HealthHelper.logger.error("Error while requesting authorization: \(err.localizedDescription, privacy: .public)")
                 }
+                self.loadData()
             }
         } else {
             loadData()
