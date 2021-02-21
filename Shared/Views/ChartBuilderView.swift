@@ -25,7 +25,9 @@ struct ChartBuilderView: View {
     var body: some View {
         Form {
             Section(header: Text("Left")) {
-                <#code#>
+                TextField("Title", text: $chart.source1.title)
+                ColorPicker("Color", selection: $chart.source1.color)
+                SourceTypePicker(sourceType: $chart.source1.sourceType)
             }
             Toggle("Comparison?", isOn: Binding(get: {
                 chart.source2 != nil
