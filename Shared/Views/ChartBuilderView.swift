@@ -24,7 +24,23 @@ struct ChartBuilderView: View {
     
     var body: some View {
         Form {
-            
+            Section(header: Text("Left")) {
+                <#code#>
+            }
+            Toggle("Comparison?", isOn: Binding(get: {
+                chart.source2 != nil
+            }, set: { (val) in
+                if (val) {
+                    chart.source2 = DataSource(sourceType: .entries, title: nil, color: .gray, chartType: nil)
+                } else {
+                    chart.source2 = nil
+                }
+            }))
+            if (chart.source2 != nil) {
+                Section(header: Text("Right")) {
+                    <#code#>
+                }
+            }
         }
     }
 }
