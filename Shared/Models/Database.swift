@@ -71,6 +71,7 @@ class Database: ObservableObject {
         try dbQueue.write { db in
             try chart.save(db)
         }
+        loadCharts()
         return chart
     }
     
