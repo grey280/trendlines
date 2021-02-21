@@ -114,6 +114,7 @@ class HealthDataProvider: DataProvider {
         case .body(let bodySubtype):
             switch bodySubtype {
             case .restingHeartRate, .heartRate:
+                #warning("restingHeartRate fails, not a valid unit, but no frequency units other than Hertz???")
                 return HKUnit.count() // TODO: bpm???
 //                case .bloodPressure:
 //                    return "mmHg"
