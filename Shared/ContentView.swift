@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var database: Database
+    
     var body: some View {
-        Text("Hello, world")
+        NavigationView {
+            List(database.charts, id: \.id) {
+                ChartView(chart: $0)
+            }
+        }
     }
 }
 
