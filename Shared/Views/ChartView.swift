@@ -7,7 +7,25 @@
 
 import SwiftUI
 
-fileprivate struct _ChartView: View {
+fileprivate struct _ChartView<Provider: DataProvider>: View where Provider.X == Date {
+    public init(source: DataSource, overlay: Overlay = .none) {
+        self.source = source
+        self.overlay = overlay
+        
+        switch source.sourceType {
+        case .entries:
+            self._provider = StateObject(wrappedValue: NoopDataProvider<Date>() as! Provider)
+        case .health(let healthType):
+            #if !os(macOS)
+            self._provider = StateObject(wrappedValue: (HealthDataProvider<Date>(healthType) as? Provider) ?? NoopDataProvider<Date>() as! Provider)
+            #else
+            self._provider = StateObject(wrappedValue: NoopDataProvider<Date>() as! Provider)
+            #endif
+        }
+    }
+    
+    @StateObject var provider: Provider
+    
     enum Overlay {
         case none, has, `is`
     }
@@ -35,11 +53,12 @@ fileprivate struct _ChartView: View {
     var body: some View {
         switch source.effectiveChartType {
         case .bar:
-            BarChartView(data: <#T##[BarChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+            BarChartView(data: provider.points, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
         case .floatingBar:
-            RangedBarChartView(data: <#T##[RangedBarChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+            EmptyView()
+//            RangedBarChartView(data: <#T##[RangedBarChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
         case .line:
-            LineChartView(data: <#T##[LineChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+            LineChartView(data: provider.points, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
         }
     }
 }
