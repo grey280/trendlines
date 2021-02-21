@@ -55,6 +55,26 @@ class HealthDataProvider<X: XPoint>: DataProvider {
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
         let interval = DateComponents(day: 1)
         let query = HKStatisticsCollectionQuery(quantityType: objectType, quantitySamplePredicate: predicate, options: queryOptions, anchorDate: Calendar.current.startOfDay(for: halfTime), intervalComponents: interval)
+        query.initialResultsHandler = { query, collection, error in
+            guard error == nil else {
+                HealthHelper.logger.error("Error in statistics query. \(error!.localizedDescription)")
+                return
+            }
+            guard let results = collection else {
+                HealthHelper.logger.error("Collection not set.")
+                return
+            }
+            let mapped: [HealthPoint] = results.statistics().compactMap {
+                guard let quantity = self.querySum ? $0.sumQuantity() : $0.averageQuantity() else {
+                    HealthHelper.logger.warning("Could not get statistics from query.")
+                    return nil
+                }
+                let y = quantity.doubleValue(for: self.unit)
+                HealthPoint(x: <#T##XPoint#>, y: y)
+            }
+        }
+    }
+    
     private var unit: HKUnit {
         switch dataType {
         case .activity(let activityType):
@@ -102,7 +122,7 @@ class HealthDataProvider<X: XPoint>: DataProvider {
             }
         }
     }
-        
+    
     private var querySum: Bool {
         switch self.dataType {
         case .activity, .nutrition:
