@@ -74,6 +74,8 @@ class HealthDataProvider: DataProvider {
                 self.points = mapped
             }
         }
+        // TODO: add query.statisticsUpdateHandler
+        HealthHelper.healthStore.execute(query)
     }
     
     private var unit: HKUnit {
