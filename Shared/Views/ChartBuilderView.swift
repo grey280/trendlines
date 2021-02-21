@@ -25,9 +25,7 @@ struct ChartBuilderView: View {
     var body: some View {
         Form {
             Section(header: Text("Left")) {
-                TextField("Title", text: $chart.source1.title)
-                ColorPicker("Color", selection: $chart.source1.color)
-                SourceTypePicker(sourceType: $chart.source1.sourceType)
+                SourceBuilderView(source: $chart.source1)
             }
             Toggle("Comparison?", isOn: Binding(get: {
                 chart.source2 != nil
@@ -40,10 +38,20 @@ struct ChartBuilderView: View {
             }))
             if let source2 = Binding($chart.source2) {
                 Section(header: Text("Right")) {
-                    <#code#>
+                    SourceBuilderView(source: source2)
                 }
             }
         }
+    }
+}
+
+struct SourceBuilderView: View {
+    @Binding var source: DataSource
+    
+    var body: some View {
+        TextField("Title", text: $source.title)
+        ColorPicker("Color", selection: $source.color)
+        SourceTypePicker(sourceType: $source.sourceType)
     }
 }
 
