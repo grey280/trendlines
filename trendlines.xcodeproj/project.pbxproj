@@ -32,6 +32,8 @@
 		2D43463925E1DF870018D541 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43463825E1DF870018D541 /* DataProvider.swift */; };
 		2D43463A25E1DF870018D541 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43463825E1DF870018D541 /* DataProvider.swift */; };
 		2D43463F25E1E15D0018D541 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D43463E25E1E15D0018D541 /* HealthKit.framework */; };
+		2D43464325E1E5BE0018D541 /* HealthDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43464225E1E5BE0018D541 /* HealthDataProvider.swift */; };
+		2D43464425E1E5BE0018D541 /* HealthDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43464225E1E5BE0018D541 /* HealthDataProvider.swift */; };
 		2D4B4D3925E1909A00A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3825E1909A00A34278 /* GRDB */; };
 		2D4B4D3E25E190A800A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3D25E190A800A34278 /* GRDB */; };
 		2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
@@ -66,6 +68,7 @@
 		2D43463825E1DF870018D541 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		2D43463D25E1E15D0018D541 /* trendlines.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = trendlines.entitlements; sourceTree = "<group>"; };
 		2D43463E25E1E15D0018D541 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		2D43464225E1E5BE0018D541 /* HealthDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataProvider.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		2DCD53BB25E18B5000BBA89B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
@@ -132,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				2D33C74925E0556300E3C6C3 /* Info.plist */,
+				2D43464225E1E5BE0018D541 /* HealthDataProvider.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -310,6 +314,7 @@
 				2D33C76F25E06D9F00E3C6C3 /* YAxisView.swift in Sources */,
 				2D43462F25E1A2D60018D541 /* Database.swift in Sources */,
 				2DCD53C225E18BE500BBA89B /* Color+Extensions.swift in Sources */,
+				2D43464325E1E5BE0018D541 /* HealthDataProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +338,7 @@
 				2D33C77025E06D9F00E3C6C3 /* YAxisView.swift in Sources */,
 				2D43463025E1A2D60018D541 /* Database.swift in Sources */,
 				2DCD53C325E18BE500BBA89B /* Color+Extensions.swift in Sources */,
+				2D43464425E1E5BE0018D541 /* HealthDataProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
