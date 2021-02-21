@@ -42,6 +42,22 @@ class HealthDataProvider<X: XPoint>: DataProvider {
         }
     }
         
+    
+    private var queryOptions: HKStatisticsOptions {
+        switch self.dataType {
+        case .body(let body):
+            switch body {
+            case .bodyFatPercentage, .bodyWeight, .heartRate, .heartRateVariability, .leanBodyMass, .restingHeartRate:
+                return .discreteAverage
+            }
+        case .activity(let activity):
+            switch activity {
+            case .activeEnergy, .cyclingDistance, .flightsClimbed, .standHours, .steps, .swimDistance, .walkRunDistance, .workoutTime:
+                return .cumulativeSum
+            }
+        case .nutrition(_):
+            return .cumulativeSum
+        }
     }
     
     private var objectType: HKQuantityType {
