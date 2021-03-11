@@ -7,6 +7,24 @@
 
 import SwiftUI
 
+fileprivate struct SourceTypePickerItemView: View {
+    let title: Text
+    let type: DataSourceType
+    @Binding var selectedType: DataSourceType
+    
+    var body: some View {
+        HStack {
+            title
+            Spacer()
+            if (type == selectedType) {
+                Image(systemName: "checkmark")
+            }
+        }.onTapGesture {
+            selectedType = type
+        }
+    }
+}
+
 struct SourceTypePickerView: View {
     @Binding var sourceType: DataSourceType
     
