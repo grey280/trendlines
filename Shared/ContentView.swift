@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(database.charts, id: \.id) {
-                ChartView(chart: $0).frame(minHeight: 150).padding()
+                ChartView(chart: $0).frame(minHeight: 200).padding()
             }
                 .navigationTitle("Dashboard")
             .navigationBarItems(leading: Button(action: {
