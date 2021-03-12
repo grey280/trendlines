@@ -14,15 +14,15 @@ enum DataSourceType {
     enum HealthSource {
         case body(BodySource)
         enum BodySource: String, Codable, Hashable {
-            case restingHeartRate, heartRateVariability, heartRate, /*bloodPressure, */ bodyWeight, leanBodyMass, bodyFatPercentage
+            case /*bloodPressure, */ bodyFatPercentage, bodyWeight, heartRate, heartRateVariability, leanBodyMass, restingHeartRate
         }
         
         case nutrition(NutritionSource)
         enum NutritionSource {
-            case /* macronutrients, */ calories, carbohydrates, fat, protein, water, caffeine, sugar
+            case /* macronutrients, */ caffeine, calories, carbohydrates, fat, protein, sugar, water
             case vitamin(VitaminSource)
             enum VitaminSource: String, Codable, Hashable {
-                case vitaminA, thiamin, riboflavin, niacin, pantothenicAcid, vitaminB6, biotin, vitaminB12, vitaminC, vitaminD, vitaminE, vitaminK, folate
+                case biotin, folate, niacin, pantothenicAcid, riboflavin, thiamin, vitaminA, vitaminB12, vitaminB6, vitaminC, vitaminD, vitaminE, vitaminK
             }
             
             case mineral(MineralSource)
@@ -38,9 +38,7 @@ enum DataSourceType {
         
         case activity(ActivitySource)
         enum ActivitySource: String, Codable, Hashable {
-            case activeEnergy, walkRunDistance, swimDistance, cyclingDistance, flightsClimbed, steps, standHours,
-                 //                 mindfulMinutes, sleep,
-                 workoutTime
+            case /* mindfulMinutes, sleep, */ activeEnergy, cyclingDistance, flightsClimbed, standHours, steps, swimDistance, walkRunDistance, workoutTime
         }
     }
 }
