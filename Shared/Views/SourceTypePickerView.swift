@@ -28,9 +28,17 @@ fileprivate struct SourceTypePickerItemView: View {
     }
 }
 
-    
-
 struct SourceTypePickerView: View {
+    @Binding var sourceType: DataSourceType
+    
+    var body: some View {
+        NavigationLink(destination: SourceTypePickerListView(sourceType: $sourceType)) {
+            Text("Source")
+        }
+    }
+}
+
+fileprivate struct SourceTypePickerListView: View {
     @Binding var sourceType: DataSourceType
     
 //    @Environment(\.presentationMode) var presentationMode
