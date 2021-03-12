@@ -67,17 +67,37 @@ fileprivate struct _ChartView: View {
     }
 }
 
+struct ChartTitleView: View {
+    let source: DataSource
+    
+    var body: some View {
+        Text(source.title)
+            .padding(6)
+            .background(RoundedRectangle(cornerRadius: 8).fill(source.color.opacity(0.5)))
+    }
+}
+
 struct ChartView: View {
     let chart: Chart
     
     var body: some View {
-        if let source2 = chart.source2 {
-            ZStack {
-                _ChartView(source: chart.source1, overlay: .has)
-                _ChartView(source: source2, overlay: .is)
+        VStack(alignment: .leading) {
+            if let source2 = chart.source2 {
+                HStack(spacing: 2) {
+                    ChartTitleView(source: chart.source1)
+                    Text(" and ")
+                    ChartTitleView(source: source2)
+                }
+                ZStack {
+                    _ChartView(source: chart.source1, overlay: .has)
+                    _ChartView(source: source2, overlay: .is)
+                }
+            } else {
+                HStack {
+                    ChartTitleView(source: chart.source1)
+                }
+                _ChartView(source: chart.source1, overlay: .none)
             }
-        } else {
-            _ChartView(source: chart.source1, overlay: .none)
         }
     }
 }
