@@ -21,7 +21,9 @@ fileprivate struct SourceTypePickerItemView: View {
             if (type == selectedType) {
                 Image(systemName: "checkmark")
             }
-        }.onTapGesture {
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
             selectedType = type
             presentationMode.wrappedValue.dismiss()
         }
