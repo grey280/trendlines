@@ -33,7 +33,7 @@ struct SourceTypePickerView: View {
     
     var body: some View {
         NavigationLink(destination: SourceTypePickerListView(sourceType: $sourceType)) {
-            Text("Source")
+            Text(sourceType.title)
         }
     }
 }
