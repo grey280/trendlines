@@ -287,3 +287,9 @@ extension DataSourceType {
         }
     }
 }
+
+extension DataSourceType.HealthSource.BodySource: CaseIterable {}
+extension DataSourceType.HealthSource.ActivitySource: CaseIterable {}
+extension DataSourceType.HealthSource.NutritionSource.VitaminSource: CaseIterable {}
+extension DataSourceType.HealthSource.NutritionSource.MineralSource: CaseIterable {}
+extension DataSourceType.HealthSource.NutritionSource.MicronutrientSource: CaseIterable {}
