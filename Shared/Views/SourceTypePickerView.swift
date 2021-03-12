@@ -8,7 +8,6 @@
 import SwiftUI
 
 fileprivate struct SourceTypePickerItemView: View {
-    let title: Text
     let type: DataSourceType
     @Binding var selectedType: DataSourceType
     
@@ -17,7 +16,7 @@ fileprivate struct SourceTypePickerItemView: View {
     var body: some View {
         // TODO: Needs some accessibility hinting to indicate activate state
         HStack {
-            title
+            Text(type.title)
             Spacer()
             if (type == selectedType) {
                 Image(systemName: "checkmark")
@@ -29,7 +28,7 @@ fileprivate struct SourceTypePickerItemView: View {
     }
 }
 
-
+    
 
 struct SourceTypePickerView: View {
     @Binding var sourceType: DataSourceType
