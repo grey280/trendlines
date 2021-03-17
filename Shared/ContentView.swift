@@ -27,11 +27,8 @@ struct ContentView: View {
             }))
         }.sheet(isPresented: $showingAdd) {
             ChartBuilderView() { chart in
-                do {
-                    try database.save(chart: chart)
-                } catch {
-                    trendlinesApp.logger.error("Failed to save to database: \(error.localizedDescription, privacy: .public)")
-                }
+                database.charts.append(chart)
+                database.saveCharts()
             }
         }
     }
