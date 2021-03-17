@@ -42,15 +42,17 @@ struct SettingsView: View {
                 .onDelete(perform: onDelete)
                 .onMove(perform: onMove)
             }
-            Section(header: Text("Privacy")) {
-                NavigationLink("Privacy Policy", destination: Text("Coming soon."))
-                #warning("Missing privacy policy")
-            }
             Section(header: Text("Pro")) {
                 Text("The free version of Trendlines lets you have 3 charts on your dashboard. To have as many as you'd like, purchase the Pro subscription.")
                 #warning("Missing unlocks")
                 NavigationLink("Unlock Pro", destination: Text("Coming soon."))
                 NavigationLink("Restore Purchase", destination: Text("Coming soon."))
+            }
+            Section(header: Text("Legal")) {
+                NavigationLink("Privacy Policy", destination: Text("Coming soon."))
+                #warning("Missing privacy policy")
+                NavigationLink("Licenses", destination: Text("Coming soon."))
+                #warning("Missing licenses") // TODO: GRDB license presumably
             }
         }
         .listStyle(InsetGroupedListStyle())
