@@ -15,32 +15,45 @@ struct SettingsView: View {
     
     var body: some View {
         List {
-            ForEach(database.charts, id: \.id) { chart in
-                if let source2 = chart.source2 {
-                    HStack(spacing: 2) {
-                        ChartTitleView(source: chart.source1)
-                        Text(" and ")
-                        ChartTitleView(source: source2)
-                        Spacer()
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        editingChart = chart
-                    }
-                } else {
-                    HStack {
-                        ChartTitleView(source: chart.source1)
-                        Spacer()
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        editingChart = chart
+            Section(header: Text("Charts")) {
+                ForEach(database.charts, id: \.id) { chart in
+                    if let source2 = chart.source2 {
+                        HStack(spacing: 2) {
+                            ChartTitleView(source: chart.source1)
+                            Text(" and ")
+                            ChartTitleView(source: source2)
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            editingChart = chart
+                        }
+                    } else {
+                        HStack {
+                            ChartTitleView(source: chart.source1)
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            editingChart = chart
+                        }
                     }
                 }
+                .onDelete(perform: onDelete)
+                .onMove(perform: onMove)
             }
-            .onDelete(perform: onDelete)
-            .onMove(perform: onMove)
+            Section(header: Text("Privacy")) {
+                NavigationLink("Privacy Policy", destination: Text("Coming soon."))
+                #warning("Missing privacy policy")
+            }
+            Section(header: Text("Pro")) {
+                Text("The free version of Trendlines lets you have 3 charts on your dashboard. To have as many as you'd like, purchase the Pro subscription.")
+                #warning("Missing unlocks")
+                NavigationLink("Unlock Pro", destination: Text("Coming soon."))
+                NavigationLink("Restore Purchase", destination: Text("Coming soon."))
+            }
         }
+        .listStyle(InsetGroupedListStyle())
         .navigationTitle(Text("Settings"))
         .navigationBarItems(trailing: EditButton())
         .environment(\.editMode, $editMode)
@@ -56,7 +69,7 @@ struct SettingsView: View {
                 database.saveCharts()
             }
         })
-
+        
     }
     
     private func onDelete(offsets: IndexSet) {
