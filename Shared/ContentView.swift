@@ -22,7 +22,7 @@ struct ContentView: View {
                 showingAdd.toggle()
             }, label: {
                 Image(systemName: "plus")
-            }), trailing: NavigationLink(destination: Text("Settings!"), label: {
+            }), trailing: NavigationLink(destination: SettingsView(), label: {
                 Image(systemName: "gear")
             }))
         }.sheet(isPresented: $showingAdd) {

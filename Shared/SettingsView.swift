@@ -29,6 +29,7 @@ struct SettingsView: View {
                 .onDelete(perform: onDelete)
                 .onMove(perform: onMove)
             }
+            .navigationTitle(Text("Settings"))
         }
     }
     
