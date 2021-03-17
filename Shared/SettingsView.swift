@@ -47,7 +47,18 @@ struct SettingsView: View {
     }
     
     private func onMove(source: IndexSet, destination: Int) {
-        
+        let charts = source.map {
+            database.charts[$0]
+        }
+        var rollingDestination = Int64(destination)
+        for chart in charts {
+            do {
+                try database.move(chart: chart, sortNo: rollingDestination)
+                rollingDestination += 1
+            } catch {
+                #warning("Missing error handling")
+            }
+        }
     }
 }
 
