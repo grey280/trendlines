@@ -22,16 +22,13 @@ struct ContentView: View {
                 showingAdd.toggle()
             }, label: {
                 Image(systemName: "plus")
-            }), trailing: NavigationLink(destination: Text("Settings!"), label: {
+            }), trailing: NavigationLink(destination: SettingsView(), label: {
                 Image(systemName: "gear")
             }))
         }.sheet(isPresented: $showingAdd) {
             ChartBuilderView() { chart in
-                do {
-                    try database.save(chart: chart)
-                } catch {
-                    trendlinesApp.logger.error("Failed to save to database: \(error.localizedDescription, privacy: .public)")
-                }
+                database.charts.append(chart)
+                database.saveCharts()
             }
         }
     }

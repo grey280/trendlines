@@ -40,6 +40,8 @@
 		2D43466A25E325FB0018D541 /* SourceTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43466825E325FB0018D541 /* SourceTypePickerView.swift */; };
 		2D4B4D3925E1909A00A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3825E1909A00A34278 /* GRDB */; };
 		2D4B4D3E25E190A800A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3D25E190A800A34278 /* GRDB */; };
+		2D55673326019E7E00BC7821 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55673226019E7E00BC7821 /* SettingsView.swift */; };
+		2D55673426019E7E00BC7821 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55673226019E7E00BC7821 /* SettingsView.swift */; };
 		2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 		2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 		2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53B625E18B3000BBA89B /* ChartType.swift */; };
@@ -75,6 +77,7 @@
 		2D43465725E2CF0C0018D541 /* ChartBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBuilderView.swift; sourceTree = "<group>"; };
 		2D43465C25E325BB0018D541 /* SourceBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceBuilderView.swift; sourceTree = "<group>"; };
 		2D43466825E325FB0018D541 /* SourceTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTypePickerView.swift; sourceTree = "<group>"; };
+		2D55673226019E7E00BC7821 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		2DCD53BB25E18B5000BBA89B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
@@ -123,6 +126,7 @@
 				2DCB046725E1817200CD58F8 /* Views */,
 				2D33C73F25E0556300E3C6C3 /* trendlinesApp.swift */,
 				2D33C74025E0556300E3C6C3 /* ContentView.swift */,
+				2D55673226019E7E00BC7821 /* SettingsView.swift */,
 				2D33C74125E0556300E3C6C3 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -311,6 +315,7 @@
 				2D43463925E1DF870018D541 /* DataProvider.swift in Sources */,
 				2D33C77E25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
 				2D33C78525E0904700E3C6C3 /* LineChartView.swift in Sources */,
+				2D55673326019E7E00BC7821 /* SettingsView.swift in Sources */,
 				2D33C77425E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
 				2D43466925E325FB0018D541 /* SourceTypePickerView.swift in Sources */,
 				2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */,
@@ -337,6 +342,7 @@
 				2D43463A25E1DF870018D541 /* DataProvider.swift in Sources */,
 				2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
 				2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */,
+				2D55673426019E7E00BC7821 /* SettingsView.swift in Sources */,
 				2D33C77525E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
 				2D43466A25E325FB0018D541 /* SourceTypePickerView.swift in Sources */,
 				2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */,

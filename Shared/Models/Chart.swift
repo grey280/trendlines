@@ -9,8 +9,8 @@ import Foundation
 import GRDB
 
 struct Chart {
-    typealias ID = Int64
-    var id: ID?
+    typealias ID = Int64?
+    var id: ID
     
     var sortNo: Int64
     var source1: DataSource
@@ -25,3 +25,4 @@ extension Chart: MutablePersistableRecord {
 }
 extension Chart: FetchableRecord { }
 extension Chart: TableRecord { }
+extension Chart: Identifiable { }

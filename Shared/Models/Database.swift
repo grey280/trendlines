@@ -66,63 +66,27 @@ class Database: ObservableObject {
         }
     }
     
-    @discardableResult
-    func move(chart: Chart, sortNo: Int64) throws -> Chart {
-        var chart = chart
-        let originalSortNo = chart.sortNo
-        var impactedRange: [Chart]
-        if originalSortNo == chart.sortNo {
-            return chart
-        } else if originalSortNo > chart.sortNo {
-            impactedRange = try dbQueue.read { db in
-                try Chart.filter(Column("sortNo") >= sortNo)
-                    .filter(Column("sortNo") < originalSortNo)
-                    .fetchAll(db)
-            }
-            for i in 0..<impactedRange.count {
-                impactedRange[i].sortNo += 1
-            }
-        } else {
-            // moving down; find all the ones in between, sortNo--
-            impactedRange = try dbQueue.read { db in
-                try Chart.filter(Column("sortNo") <= sortNo)
-                    .filter(Column("sortNo") > originalSortNo)
-                    .fetchAll(db)
-            }
-            for i in 0..<impactedRange.count {
-                impactedRange[i].sortNo -= 1
-            }
+    func saveCharts() {
+        // make sure they're all in order
+        var sortNo: Int64 = 0
+        for i in 0..<charts.count {
+            charts[i].sortNo = sortNo
+            sortNo += 1
         }
-        chart.sortNo = sortNo
-        try dbQueue.write { db in
-            try chart.update(db, columns: ["sortNo"])
-            for item in impactedRange {
-                try item.update(db, columns: ["sortNo"])
+        // update the database
+        do {
+            try dbQueue.write { db in
+                // wipe them all out
+                for chart in charts {
+                    try chart.delete(db)
+                }
+                // and then put them back
+                for i in 0..<charts.count {
+                    try charts[i].insert(db)
+                }
             }
+        } catch {
+            logger.error("Could not save charts. \(error.localizedDescription, privacy: .public)")
         }
-        loadCharts()
-        return chart
-    }
-    
-    @discardableResult
-    func save(chart: Chart) throws -> Chart {
-        var chart = chart
-        try dbQueue.write { db in
-            try chart.save(db)
-        }
-        loadCharts()
-        return chart
-    }
-    
-    @discardableResult
-    func remove(chart: Chart) throws -> Bool {
-        let result = try dbQueue.write { db in
-            try chart.delete(db)
-        }
-        if (result) {
-            loadCharts()
-            return true
-        }
-        return false
     }
 }
