@@ -21,6 +21,7 @@ struct SettingsView: View {
                         ChartTitleView(source: chart.source1)
                         Text(" and ")
                         ChartTitleView(source: source2)
+                        Spacer()
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
@@ -29,6 +30,7 @@ struct SettingsView: View {
                 } else {
                     HStack {
                         ChartTitleView(source: chart.source1)
+                        Spacer()
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
