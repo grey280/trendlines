@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var database: Database
-    @State private var editMode = EditMode.inactive
+    @State var editMode = EditMode.inactive
+    
+    @State var editingChart: Chart? = nil
     
     var body: some View {
         List {
@@ -20,9 +22,17 @@ struct SettingsView: View {
                         Text(" and ")
                         ChartTitleView(source: source2)
                     }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        editingChart = chart
+                    }
                 } else {
                     HStack {
                         ChartTitleView(source: chart.source1)
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        editingChart = chart
                     }
                 }
             }
@@ -32,6 +42,19 @@ struct SettingsView: View {
         .navigationTitle(Text("Settings"))
         .navigationBarItems(trailing: EditButton())
         .environment(\.editMode, $editMode)
+        .sheet(item: $editingChart, content: { chart in
+            ChartBuilderView(chart: chart) { updatedChart in
+                guard let idx = database.charts.firstIndex(where: {
+                    $0.id == updatedChart.id
+                }) else {
+                    #warning("Missing error handling")
+                    return
+                }
+                database.charts[idx] = updatedChart
+                database.saveCharts()
+            }
+        })
+
     }
     
     private func onDelete(offsets: IndexSet) {
