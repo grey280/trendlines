@@ -15,6 +15,10 @@ struct DataSetEntry {
     let dateAdded: Date
     var value: Int
     var datasetID: DataSet.ID
+    
+    enum Columns: String, ColumnExpression {
+        case id, dateAdded, value, datasetID
+    }
 }
 
 extension DataSetEntry: Codable { }

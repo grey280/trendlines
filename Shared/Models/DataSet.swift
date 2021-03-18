@@ -13,6 +13,10 @@ struct DataSet {
     var id: ID?
     
     var name: String
+    
+    enum Columns: String, ColumnExpression {
+        case id, name
+    }
 }
 
 extension DataSet: Codable { }
