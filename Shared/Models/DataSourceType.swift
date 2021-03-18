@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import GRDB
 
 enum DataSourceType {
-    case entries
+    #warning("Replace with DataSet.ID type reference")
+    case entries(datasetID: Int64)
     case health(HealthSource)
     
     enum HealthSource {
@@ -69,7 +71,9 @@ extension DataSourceType: Codable {
         let primary = try container.decode(Primary.self, forKey: .primary)
         switch primary {
         case .entries:
-            self = .entries
+            #warning("Replace with DataSet.ID type reference")
+            let secondary = try container.decode(Int64.self, forKey: .secondary)
+            self = .entries(datasetID: secondary)
         case .health:
             let secondary = try container.decode(HealthTypes.self, forKey: .secondary)
             switch secondary {
@@ -115,8 +119,9 @@ extension DataSourceType: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
-        case .entries:
+        case .entries(let datasetID):
             try container.encode(Primary.entries, forKey: .primary)
+            try container.encode(datasetID, forKey: .secondary)
         case .health(let healthSource):
             try container.encode(Primary.health, forKey: .primary)
             switch healthSource {
@@ -291,3 +296,5 @@ extension DataSourceType.HealthSource.ActivitySource: CaseIterable {}
 extension DataSourceType.HealthSource.NutritionSource.VitaminSource: CaseIterable {}
 extension DataSourceType.HealthSource.NutritionSource.MineralSource: CaseIterable {}
 extension DataSourceType.HealthSource.NutritionSource.MicronutrientSource: CaseIterable {}
+
+extension DataSourceType: DatabaseValueConvertible {}
