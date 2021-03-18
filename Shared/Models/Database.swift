@@ -46,17 +46,33 @@ class Database: ObservableObject {
     
     private func initializeDatabase() throws {
         try dbQueue.write { db in
-            #warning("this schema is completely wrong")
-            // dataset: id, name
-            // datasetEntry: id, dateAdded, value(int), datasetId
-            // chart: see Chart.Columns
+            try db.create(table: DataSet.databaseTableName, ifNotExists: true, body: { t in
+                t.autoIncrementedPrimaryKey(DataSet.Columns.id.rawValue)
+                t.column(DataSet.Columns.name.rawValue, .text).notNull()
+            })
             
+            try db.create(table: DataSetEntry.databaseTableName, ifNotExists: true, body: { (t) in
+                t.autoIncrementedPrimaryKey(DataSetEntry.Columns.id.rawValue)
+                t.column(DataSetEntry.Columns.dateAdded.rawValue, .date).notNull() // TODO: default via database?
+                t.column(DataSetEntry.Columns.value.rawValue, .integer).notNull()
+                t.column(DataSetEntry.Columns.datasetID.rawValue, .integer).notNull().references(DataSet.databaseTableName, column: DataSet.Columns.id.rawValue, onDelete: .cascade, onUpdate: .cascade)
+            })
             
             try db.create(table: Chart.databaseTableName, ifNotExists: true, body: { t in
-                t.autoIncrementedPrimaryKey("id")
-                t.column("sortNo", .integer).notNull()//.unique() // UNIQUE constraint would make reordering Too Heckin Hard
-                t.column("source1", .text).notNull()
-                t.column("source2", .text)
+                t.autoIncrementedPrimaryKey(Chart.Columns.id.rawValue)
+                t.column(Chart.Columns.sortNo.rawValue, .integer).notNull().unique()
+                
+                t.column(Chart.Columns.dataSource1Type.rawValue, .text).notNull()
+                t.column(Chart.Columns.dataSource1DataSet.rawValue, .integer).references(DataSet.databaseTableName, column: DataSet.Columns.id.rawValue, onDelete: .cascade, onUpdate: .cascade)
+                t.column(Chart.Columns.dataSource1Title.rawValue, .text).notNull()
+                t.column(Chart.Columns.dataSource1Color.rawValue, .text).notNull()
+                t.column(Chart.Columns.dataSource1ChartType.rawValue, .text).notNull()
+                
+                t.column(Chart.Columns.dataSource2Type.rawValue, .text)
+                t.column(Chart.Columns.dataSource2DataSet.rawValue, .integer).references(DataSet.databaseTableName, column: DataSet.Columns.id.rawValue, onDelete: .cascade, onUpdate: .cascade)
+                t.column(Chart.Columns.dataSource2Title.rawValue, .text)
+                t.column(Chart.Columns.dataSource2Color.rawValue, .text)
+                t.column(Chart.Columns.dataSource2ChartType.rawValue, .text)
             })
         }
     }
