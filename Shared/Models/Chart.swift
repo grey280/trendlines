@@ -68,8 +68,7 @@ extension Chart: FetchableRecord {
         id = row[Columns.id]
         sortNo = row[Columns.sortNo]
         // unpack dataSource1
-        #warning("Replace with DataSet.ID type reference")
-        let source1Reference: Int64? = row[Columns.dataSource1DataSet]
+        let source1Reference: DataSet.ID? = row[Columns.dataSource1DataSet]
         var source1Type: DataSourceType = row[Columns.dataSource1Type]
         if let s1r = source1Reference {
             source1Type = .entries(datasetID: s1r) // because the source1Reference has a FK, we know from the db that it's present
@@ -79,8 +78,7 @@ extension Chart: FetchableRecord {
         let source1Chart: ChartType = row[Columns.dataSource1ChartType]
         source1 = DataSource(sourceType: source1Type, title: source1Title, color: source1Color, chartType: source1Chart)
         // unpack dataSource2
-        #warning("Replace with DataSet.ID type reference")
-        let source2Reference: Int64? = row[Columns.dataSource2DataSet]
+        let source2Reference: DataSet.ID? = row[Columns.dataSource2DataSet]
         let _source2Type: DataSourceType? = row[Columns.dataSource2Type]
         if var source2Type = _source2Type {
             let source2Title: String = row[Columns.dataSource2Title]
