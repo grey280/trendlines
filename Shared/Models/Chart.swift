@@ -42,10 +42,21 @@ extension Chart: FetchableRecord {
         }
         let source1Title: String = row[Columns.dataSource1Title]
         let source1Color: Color = row[Columns.dataSource1Color]
-        let source1Chart: ChartType = row[Columns.dataSource1ChartType]
+        let source1Chart: ChartType? = row[Columns.dataSource1ChartType]
         source1 = DataSource(sourceType: source1Type, title: source1Title, color: source1Color, chartType: source1Chart)
         // unpack dataSource2
-        
+        #warning("Replace with DataSet.ID type reference")
+        let source2Reference: Int64? = row[Columns.dataSource2DataSet]
+        let _source2Type: DataSourceType? = row[Columns.dataSource2Type]
+        if var source2Type = _source2Type {
+            let source2Title: String = row[Columns.dataSource2Title]
+            let source2Color: Color = row[Columns.dataSource2Color]
+            let source2Chart: ChartType? = row[Columns.dataSource2ChartType]
+            if let s2r = source2Reference {
+                source2Type = .entries(datasetID: s2r)
+            }
+            source2 = DataSource(sourceType: source2Type, title: source2Title, color: source2Color, chartType: source2Chart)
+        }
     }
 }
 extension Chart: TableRecord { }
