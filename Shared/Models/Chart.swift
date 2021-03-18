@@ -94,4 +94,14 @@ extension Chart: FetchableRecord {
 extension Chart: TableRecord { }
 extension Chart: Identifiable { }
 
-extension Color: DatabaseValueConvertible {}
+extension Color: DatabaseValueConvertible {
+    public var databaseValue: DatabaseValue { "".databaseValue }
+    
+    public static func fromDatabaseValue(_ dbValue: DatabaseValue) -> Color? {
+        guard let str = String.fromDatabaseValue(dbValue), let data = str.data(using: .utf8) else {
+            return nil
+        }
+        
+        return try? Database.jsonConverter.decode(Color.self, from: data)
+    }
+}

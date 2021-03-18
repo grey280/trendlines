@@ -302,4 +302,14 @@ extension DataSourceType.HealthSource.NutritionSource.VitaminSource: CaseIterabl
 extension DataSourceType.HealthSource.NutritionSource.MineralSource: CaseIterable {}
 extension DataSourceType.HealthSource.NutritionSource.MicronutrientSource: CaseIterable {}
 
-extension DataSourceType: DatabaseValueConvertible {}
+extension DataSourceType: DatabaseValueConvertible {
+    var databaseValue: DatabaseValue { "".databaseValue }
+    
+    static func fromDatabaseValue(_ dbValue: DatabaseValue) -> DataSourceType? {
+        guard let str = String.fromDatabaseValue(dbValue), let data = str.data(using: .utf8) else {
+            return nil
+        }
+        
+        return try? Database.jsonConverter.decode(DataSourceType.self, from: data)
+    }
+}
