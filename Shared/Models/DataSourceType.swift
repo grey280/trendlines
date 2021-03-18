@@ -10,8 +10,7 @@ import GRDB
 
 enum DataSourceType {
     case empty
-    #warning("Replace with DataSet.ID type reference")
-    case entries(datasetID: Int64)
+    case entries(datasetID: DataSet.ID)
     case health(HealthSource)
     
     enum HealthSource {
@@ -74,8 +73,7 @@ extension DataSourceType: Codable {
         case .empty:
             self = .empty
         case .entries:
-            #warning("Replace with DataSet.ID type reference")
-            let secondary = try container.decode(Int64.self, forKey: .secondary)
+            let secondary = try container.decode(DataSet.ID.self, forKey: .secondary)
             self = .entries(datasetID: secondary)
         case .health:
             let secondary = try container.decode(HealthTypes.self, forKey: .secondary)
