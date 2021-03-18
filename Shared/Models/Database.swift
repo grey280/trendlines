@@ -46,6 +46,12 @@ class Database: ObservableObject {
     
     private func initializeDatabase() throws {
         try dbQueue.write { db in
+            #warning("this schema is completely wrong")
+            // dataset: id, name
+            // datasetEntry: id, dateAdded, value(int), datasetId
+            // chart: see Chart.Columns
+            
+            
             try db.create(table: Chart.databaseTableName, ifNotExists: true, body: { t in
                 t.autoIncrementedPrimaryKey("id")
                 t.column("sortNo", .integer).notNull()//.unique() // UNIQUE constraint would make reordering Too Heckin Hard
