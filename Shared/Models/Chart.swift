@@ -25,6 +25,40 @@ struct Chart {
 
 //extension Chart: Codable { }
 extension Chart: MutablePersistableRecord {
+    func encode(to container: inout PersistenceContainer) {
+        container[Columns.id] = id
+        container[Columns.sortNo] = sortNo
+        switch source1.sourceType {
+        case .entries(let datasetID):
+            container[Columns.dataSource1DataSet] = datasetID
+        case .empty, .health:
+            container[Columns.dataSource1DataSet] = nil
+        }
+        container[Columns.dataSource1Type] = source1.sourceType
+        container[Columns.dataSource1Title] = source1.title
+        container[Columns.dataSource1Color] = source1.color
+        container[Columns.dataSource1ChartType] = source1.chartType
+        
+        if let source2 = source2 {
+            switch source2.sourceType {
+            case .entries(let datasetID):
+                container[Columns.dataSource2DataSet] = datasetID
+            case .empty, .health:
+                container[Columns.dataSource2DataSet] = nil
+            }
+            container[Columns.dataSource2Type] = source2.sourceType
+            container[Columns.dataSource2Title] = source2.title
+            container[Columns.dataSource2Color] = source2.color
+            container[Columns.dataSource2ChartType] = source2.chartType
+        } else {
+            container[Columns.dataSource2Type] = nil
+            container[Columns.dataSource2DataSet] = nil
+            container[Columns.dataSource2Title] = nil
+            container[Columns.dataSource2Color] = nil
+            container[Columns.dataSource2ChartType] = nil
+        }
+    }
+    
     mutating func didInsert(with rowID: Int64, for column: String?) {
         id = rowID
     }
