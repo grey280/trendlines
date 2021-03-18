@@ -19,6 +19,6 @@ struct SourceBuilderView: View {
 
 struct SourceBuilderView_Previews: PreviewProvider {
     static var previews: some View {
-        SourceBuilderView(source: .constant(DataSource(sourceType: .entries, title: "", color: .blue, chartType: nil)))
+        SourceBuilderView(source: .constant(DataSource(sourceType: .empty, title: "", color: .blue, chartType: .bar)))
     }
 }

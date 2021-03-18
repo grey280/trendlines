@@ -13,7 +13,10 @@ fileprivate struct _ChartView: View {
         self.overlay = overlay
         
         switch source.sourceType {
+        case .empty:
+            self._provider = StateObject(wrappedValue: NoopDataProvider())
         case .entries:
+            #warning("Not implemented")
             self._provider = StateObject(wrappedValue: NoopDataProvider())
         case .health(let healthType):
             #if !os(macOS)
@@ -55,7 +58,7 @@ fileprivate struct _ChartView: View {
     }
     
     var body: some View {
-        switch source.effectiveChartType {
+        switch source.chartType {
         case .bar:
             BarChartView(data: provider.points, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
         case .floatingBar:
