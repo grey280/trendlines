@@ -55,6 +55,8 @@ fileprivate struct ChartTypePickerListView: View {
             ChartTypePickerItemView(type: .floatingBar, selectedType: $chartType, provider: provider, color: color)
             ChartTypePickerItemView(type: .line, selectedType: $chartType, provider: provider, color: color)
         }
+        .listStyle(GroupedListStyle())
+        .navigationTitle(Text("Chart Type"))
     }
 }
 
