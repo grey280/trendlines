@@ -86,9 +86,7 @@ fileprivate struct SourceTypePickerListView: View {
                     SourceTypePickerItemView(type: .health(.nutrition(.micronutrient($0))), selectedType: $sourceType)
                 }
             }
-        }//.onChange(of: sourceType) {
-        //    presentationMode.wrappedValue.dismiss()
-        //}
+        }
         .listStyle(GroupedListStyle())
         .navigationTitle(Text("Data Source"))
     }
