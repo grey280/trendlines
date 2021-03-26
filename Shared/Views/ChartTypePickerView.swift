@@ -17,25 +17,23 @@ fileprivate struct ChartTypePickerItemView: View {
     
     var body: some View {
         // TODO: Needs some accessilbity hinting to indicate active state
-        VStack {
-            HStack {
-                Text(type.title)
-                Spacer()
-                if (type == selectedType) {
-                    Image(systemName: "checkmark")
-                }
-            }
-            Spacer()
+        HStack {
             switch type {
             case .bar:
-                BarChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false)
+                BarChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false).padding()
             case .floatingBar:
-                RangedBarChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false)
+                RangedBarChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false).padding()
             case .line:
-                LineChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false)
+                LineChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false).padding()
+            }
+            Spacer()
+            if (type == selectedType) {
+                Image(systemName: "checkmark.circle.fill")
+            } else {
+                Image(systemName: "checkmark.circle")
             }
         }
-        .frame(minHeight: 170)
+        .frame(minHeight: 200)
         .contentShape(Rectangle())
         .onTapGesture {
             selectedType = type
