@@ -14,22 +14,11 @@ fileprivate struct ChartTypePickerItemView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    var typeTitle: String {
-        switch type {
-        case .bar:
-            return "Bar"
-        case .floatingBar:
-            return "Floating Bar"
-        case .line:
-            return "Line"
-        }
-    }
-    
     var body: some View {
         // TODO: Needs some accessilbity hinting to indicate active state
         VStack {
             HStack {
-                Text(typeTitle)
+                Text(type.title)
                 Spacer()
                 if (type == selectedType) {
                     Image(systemName: "checkmark")
