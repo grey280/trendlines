@@ -14,7 +14,7 @@ fileprivate struct _ChartView: View {
         
         switch source.sourceType {
         case .empty:
-            self._provider = StateObject(wrappedValue: NoopDataProvider())
+            self._provider = StateObject(wrappedValue: DemoDataProvider())
         case .entries:
             #warning("Not implemented")
             self._provider = StateObject(wrappedValue: NoopDataProvider())
@@ -62,8 +62,7 @@ fileprivate struct _ChartView: View {
         case .bar:
             BarChartView(data: provider.points, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
         case .floatingBar:
-            EmptyView()
-//            RangedBarChartView(data: <#T##[RangedBarChartView<_>.DataPoint]#>, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+            RangedBarChartView(data: provider.points, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
         case .line:
             LineChartView(data: provider.points, unit: source.unitName, color: source.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
         }
