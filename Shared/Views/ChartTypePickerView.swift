@@ -24,6 +24,7 @@ fileprivate struct ChartTypePickerItemView: View {
                     Image(systemName: "checkmark")
                 }
             }
+            Spacer()
             switch type {
             case .bar:
                 BarChartView(data: provider.points, unit: "Data", color: .blue, axisAlignment: .leading, hasOverlay: false)
@@ -33,6 +34,7 @@ fileprivate struct ChartTypePickerItemView: View {
                 LineChartView(data: provider.points, unit: "Data", color: .blue, axisAlignment: .leading, hasOverlay: false)
             }
         }
+        .frame(minHeight: 170)
         .contentShape(Rectangle())
         .onTapGesture {
             selectedType = type
@@ -41,7 +43,7 @@ fileprivate struct ChartTypePickerItemView: View {
     }
 }
 
-struct ChartTypePickerView: View {
+fileprivate struct ChartTypePickerListView: View {
     @Binding var chartType: ChartType
     @StateObject var provider = DemoDataProvider()
     
@@ -54,8 +56,18 @@ struct ChartTypePickerView: View {
     }
 }
 
+struct ChartTypePickerView: View {
+    @Binding var chartType: ChartType
+    
+    var body: some View {
+        NavigationLink(destination: ChartTypePickerListView(chartType: $chartType)) {
+            Text(chartType.title)
+        }
+    }
+}
+
 struct ChartTypePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartTypePickerView(chartType: .constant(.bar))
+        ChartTypePickerListView(chartType: .constant(.bar))
     }
 }
