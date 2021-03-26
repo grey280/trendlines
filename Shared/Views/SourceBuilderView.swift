@@ -14,6 +14,7 @@ struct SourceBuilderView: View {
         TextField("Title", text: $source.title)
         ColorPicker("Color", selection: $source.color)
         SourceTypePickerView(sourceType: $source.sourceType)
+        ChartTypePickerView(chartType: $source.chartType)
     }
 }
 
