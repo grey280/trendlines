@@ -11,6 +11,7 @@ fileprivate struct ChartTypePickerItemView: View {
     let type: ChartType
     @Binding var selectedType: ChartType
     let provider: DataProvider
+    let color: Color
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -27,11 +28,11 @@ fileprivate struct ChartTypePickerItemView: View {
             Spacer()
             switch type {
             case .bar:
-                BarChartView(data: provider.points, unit: "Data", color: .blue, axisAlignment: .leading, hasOverlay: false)
+                BarChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false)
             case .floatingBar:
-                RangedBarChartView(data: provider.points, unit: "Data", color: .blue, axisAlignment: .leading, hasOverlay: false)
+                RangedBarChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false)
             case .line:
-                LineChartView(data: provider.points, unit: "Data", color: .blue, axisAlignment: .leading, hasOverlay: false)
+                LineChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false)
             }
         }
         .frame(minHeight: 170)
@@ -46,21 +47,23 @@ fileprivate struct ChartTypePickerItemView: View {
 fileprivate struct ChartTypePickerListView: View {
     @Binding var chartType: ChartType
     @StateObject var provider = DemoDataProvider()
+    let color: Color
     
     var body: some View {
         List {
-            ChartTypePickerItemView(type: .bar, selectedType: $chartType, provider: provider)
-            ChartTypePickerItemView(type: .floatingBar, selectedType: $chartType, provider: provider)
-            ChartTypePickerItemView(type: .line, selectedType: $chartType, provider: provider)
+            ChartTypePickerItemView(type: .bar, selectedType: $chartType, provider: provider, color: color)
+            ChartTypePickerItemView(type: .floatingBar, selectedType: $chartType, provider: provider, color: color)
+            ChartTypePickerItemView(type: .line, selectedType: $chartType, provider: provider, color: color)
         }
     }
 }
 
 struct ChartTypePickerView: View {
     @Binding var chartType: ChartType
+    let  color: Color
     
     var body: some View {
-        NavigationLink(destination: ChartTypePickerListView(chartType: $chartType)) {
+        NavigationLink(destination: ChartTypePickerListView(chartType: $chartType, color: color)) {
             Text(chartType.title)
         }
     }
@@ -68,6 +71,6 @@ struct ChartTypePickerView: View {
 
 struct ChartTypePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartTypePickerListView(chartType: .constant(.bar))
+        ChartTypePickerListView(chartType: .constant(.bar), color: .blue)
     }
 }
