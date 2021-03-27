@@ -198,7 +198,31 @@ class Database: ObservableObject {
     
     func queryDataSetEntries(dataSet: DataSet, mode: DataSourceDisplayMode, startDate: Date) -> [DatePoint]? {
         do {
-            DataSet
+            return try dbQueue.read { db in
+                let request: QueryInterfaceRequest<DataSetEntry>
+                switch mode {
+                case .average:
+                    request = DataSetEntry
+                        .filter(DataSetEntry.Columns.datasetID == dataSet.id)
+                        .filter(DataSetEntry.Columns.dateAdded >= startDate)
+                        .select(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue)), AVG(\(DataSetEntry.Columns.value.rawValue))")
+                        .group(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue))")
+                case .count:
+                    request = DataSetEntry
+                        .filter(DataSetEntry.Columns.datasetID == dataSet.id)
+                        .filter(DataSetEntry.Columns.dateAdded >= startDate)
+                        .select(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue)), COUNT(*)")
+                        .group(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue))")
+                case .sum:
+                    request = DataSetEntry
+                        .filter(DataSetEntry.Columns.datasetID == dataSet.id)
+                        .filter(DataSetEntry.Columns.dateAdded >= startDate)
+                        .select(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue)), SUM(\(DataSetEntry.Columns.value.rawValue))")
+                        .group(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue))")
+                }
+                
+            }
+            
         } catch {
             logger.error("Could not query entries. \(error.localizedDescription, privacy: .public)")
             return nil
