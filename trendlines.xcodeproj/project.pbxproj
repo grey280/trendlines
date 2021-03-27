@@ -66,6 +66,8 @@
 		2DCD53C325E18BE500BBA89B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */; };
 		2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C825E18D0600BBA89B /* Chart.swift */; };
 		2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C825E18D0600BBA89B /* Chart.swift */; };
+		2DDC97D9260FC7F8005635D4 /* DatabaseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDC97D8260FC7F8005635D4 /* DatabaseDataProvider.swift */; };
+		2DDC97DA260FC7F8005635D4 /* DatabaseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDC97D8260FC7F8005635D4 /* DatabaseDataProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +106,7 @@
 		2DCD53BB25E18B5000BBA89B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		2DCD53C825E18D0600BBA89B /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		2DDC97D8260FC7F8005635D4 /* DatabaseDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDataProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				2D43462E25E1A2D60018D541 /* Database.swift */,
+				2DDC97D8260FC7F8005635D4 /* DatabaseDataProvider.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -369,6 +373,7 @@
 				2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */,
 				2D43465D25E325BB0018D541 /* SourceBuilderView.swift in Sources */,
 				2D43465825E2CF0C0018D541 /* ChartBuilderView.swift in Sources */,
+				2DDC97D9260FC7F8005635D4 /* DatabaseDataProvider.swift in Sources */,
 				2D5B3C08260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */,
 				2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */,
 				2D1CAC502603093F0058F038 /* DataSet.swift in Sources */,
@@ -403,6 +408,7 @@
 				2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */,
 				2D43465E25E325BB0018D541 /* SourceBuilderView.swift in Sources */,
 				2D43465925E2CF0C0018D541 /* ChartBuilderView.swift in Sources */,
+				2DDC97DA260FC7F8005635D4 /* DatabaseDataProvider.swift in Sources */,
 				2D5B3C09260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */,
 				2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */,
 				2D1CAC512603093F0058F038 /* DataSet.swift in Sources */,
