@@ -193,4 +193,18 @@ class Database: ObservableObject {
             return false
         }
     }
+    
+    @discardableResult
+    func add(entry: DataSetEntry) -> Bool {
+        do {
+            var copy = entry
+            try dbQueue.write { db in
+                try copy.insert(db)
+            }
+            return true
+        } catch {
+            logger.error("Could not save entry. \(error.localizedDescription, privacy: .public)")
+            return false
+        }
+    }
 }
