@@ -33,7 +33,24 @@ fileprivate struct SourceTypeNewCustomItemView: View {
 }
 
 fileprivate struct SourceTypePickerItemView: View {
+    init(type: DataSourceType, selectedType: Binding<DataSourceType>, database: Database? = nil) {
+        self.type = type
+        self._selectedType = selectedType
+        if case .entries(let id,_) = type {
+            if let set = database?.customDataSets.first(where: {
+                $0.id == id
+            }) {
+                self.dataSet = set
+            } else {
+                self.dataSet = nil
+            }
+        } else {
+            self.dataSet = nil
+        }
+    }
+    
     let type: DataSourceType
+    let dataSet: DataSet?
     @Binding var selectedType: DataSourceType
     
     @Environment(\.presentationMode) var presentationMode
@@ -41,7 +58,11 @@ fileprivate struct SourceTypePickerItemView: View {
     var body: some View {
         // TODO: Needs some accessibility hinting to indicate activate state
         HStack {
+            if let set = dataSet {
+                Text(set.name)
+            } else {
             Text(type.title)
+            }
             Spacer()
             if (type == selectedType) {
                 Image(systemName: "checkmark")
