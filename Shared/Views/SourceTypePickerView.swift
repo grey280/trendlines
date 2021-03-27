@@ -21,14 +21,15 @@ fileprivate struct SourceTypeNewCustomItemView: View {
     var body: some View {
         Form {
             TextField("Name", text: $set.name)
-            Button("Save") {
-                if let saved = database.add(dataSet: set), let id = saved.id {
-                    selectedType = .entries(datasetID: id, mode: .average)
-                    onDismiss?()
-                    presentationMode.wrappedValue.dismiss()
-                }
+        }
+        .navigationTitle("New Data Set")
+        .navigationBarItems(trailing: Button("Save") {
+            if let saved = database.add(dataSet: set), let id = saved.id {
+                selectedType = .entries(datasetID: id, mode: .average)
+                onDismiss?()
+                presentationMode.wrappedValue.dismiss()
             }
-        }.navigationTitle("New...")
+        })
     }
 }
 
