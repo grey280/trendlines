@@ -15,32 +15,34 @@ struct SettingsView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Charts")) {
-                ForEach(database.charts, id: \.id) { chart in
-                    if let source2 = chart.source2 {
-                        HStack(spacing: 2) {
-                            ChartTitleView(source: chart.source1)
-                            Text(" and ")
-                            ChartTitleView(source: source2)
-                            Spacer()
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            editingChart = chart
-                        }
-                    } else {
-                        HStack {
-                            ChartTitleView(source: chart.source1)
-                            Spacer()
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            editingChart = chart
+            if (database.charts.count > 0) {
+                Section(header: Text("Charts")) {
+                    ForEach(database.charts, id: \.id) { chart in
+                        if let source2 = chart.source2 {
+                            HStack(spacing: 2) {
+                                ChartTitleView(source: chart.source1)
+                                Text(" and ")
+                                ChartTitleView(source: source2)
+                                Spacer()
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                editingChart = chart
+                            }
+                        } else {
+                            HStack {
+                                ChartTitleView(source: chart.source1)
+                                Spacer()
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                editingChart = chart
+                            }
                         }
                     }
+                    .onDelete(perform: onDelete)
+                    .onMove(perform: onMove)
                 }
-                .onDelete(perform: onDelete)
-                .onMove(perform: onMove)
             }
             Section(header: Text("Pro")) {
                 Text("The free version of Trendlines lets you have 3 charts on your dashboard. To have as many as you'd like, purchase the Pro subscription.")
@@ -57,7 +59,7 @@ struct SettingsView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(Text("Settings"))
-        .navigationBarItems(trailing: EditButton())
+        .navigationBarItems(trailing: database.charts.count > 0 ? EditButton() : nil)
         .environment(\.editMode, $editMode)
         .sheet(item: $editingChart, content: { chart in
             ChartBuilderView(chart: chart) { updatedChart in
