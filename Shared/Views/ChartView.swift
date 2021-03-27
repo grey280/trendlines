@@ -8,16 +8,21 @@
 import SwiftUI
 
 fileprivate struct _ChartView: View {
-    public init(source: DataSource, overlay: Overlay = .none) {
+    public init(source: DataSource, overlay: Overlay = .none, database: Database) {
         self.source = source
         self.overlay = overlay
         
         switch source.sourceType {
         case .empty:
             self._provider = StateObject(wrappedValue: DemoDataProvider())
-        case .entries:
-            #warning("Not implemented")
-            self._provider = StateObject(wrappedValue: NoopDataProvider())
+        case .entries(let sourceID, let mode):
+            if let set = database.customDataSets.first(where: {
+                $0.id == sourceID
+            }), let provider = DatabaseProvider(dataSet: set, database: database, mode: mode) {
+                self._provider = StateObject(wrappedValue: provider)
+            } else {
+                self._provider = StateObject(wrappedValue: NoopDataProvider())
+            }
         case .health(let healthType):
             #if !os(macOS)
             if let health = HealthDataProvider(healthType) {
@@ -80,6 +85,7 @@ struct ChartTitleView: View {
 }
 
 struct ChartView: View {
+    @EnvironmentObject var database: Database
     let chart: Chart
     
     var body: some View {
@@ -91,14 +97,14 @@ struct ChartView: View {
                     ChartTitleView(source: source2)
                 }
                 ZStack {
-                    _ChartView(source: chart.source1, overlay: .has)
-                    _ChartView(source: source2, overlay: .is)
+                    _ChartView(source: chart.source1, overlay: .has, database: database)
+                    _ChartView(source: source2, overlay: .is, database: database)
                 }
             } else {
                 HStack {
                     ChartTitleView(source: chart.source1)
                 }
-                _ChartView(source: chart.source1, overlay: .none)
+                _ChartView(source: chart.source1, overlay: .none, database: database)
             }
         }
     }
