@@ -162,4 +162,18 @@ class Database: ObservableObject {
             return false
         }
     }
+    
+    // MARK: Data Set Entries
+    func loadDataSetEntries(dataSet: DataSet) -> [DataSetEntry]? {
+        do {
+            return try dbQueue.read { db in
+                try DataSetEntry
+                    .filter(DataSetEntry.Columns.datasetID == dataSet.id)
+                    .fetchAll(db)
+            }
+        } catch {
+            logger.error("Could not load entries. \(error.localizedDescription, privacy: .public)")
+            return nil
+        }
+    }
 }
