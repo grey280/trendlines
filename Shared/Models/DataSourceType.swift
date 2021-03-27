@@ -8,9 +8,13 @@
 import Foundation
 import GRDB
 
+enum DataSourceDisplayMode: String, Codable, Hashable {
+    case count, sum
+}
+
 enum DataSourceType {
     case empty
-    case entries(datasetID: DataSet.ID)
+    case entries(datasetID: DataSet.ID, mode: DataSourceDisplayMode)
     case health(HealthSource)
     
     enum HealthSource {
@@ -74,7 +78,8 @@ extension DataSourceType: Codable {
             self = .empty
         case .entries:
             let secondary = try container.decode(DataSet.ID.self, forKey: .secondary)
-            self = .entries(datasetID: secondary)
+            let tertiary = try container.decode(DataSourceDisplayMode.self, forKey: .tertiary)
+            self = .entries(datasetID: secondary, mode: tertiary)
         case .health:
             let secondary = try container.decode(HealthTypes.self, forKey: .secondary)
             switch secondary {
@@ -122,9 +127,10 @@ extension DataSourceType: Codable {
         switch self {
         case .empty:
             try container.encode(Primary.empty, forKey: .primary)
-        case .entries(let datasetID):
+        case .entries(let datasetID, let mode):
             try container.encode(Primary.entries, forKey: .primary)
             try container.encode(datasetID, forKey: .secondary)
+            try container.encode(mode, forKey: .tertiary)
         case .health(let healthSource):
             try container.encode(Primary.health, forKey: .primary)
             switch healthSource {
@@ -311,5 +317,17 @@ extension DataSourceType: DatabaseValueConvertible {
         }
         
         return try? Database.jsonConverter.decode(DataSourceType.self, from: data)
+    }
+}
+
+extension DataSourceDisplayMode: DatabaseValueConvertible {
+    var databaseValue: DatabaseValue { "".databaseValue }
+    
+    static func fromDatabaseValue(_ dbValue: DatabaseValue) -> DataSourceDisplayMode? {
+        guard let str = String.fromDatabaseValue(dbValue), let data = str.data(using: .utf8) else {
+            return nil
+        }
+        
+        return try? Database.jsonConverter.decode(DataSourceDisplayMode.self, from: data)
     }
 }

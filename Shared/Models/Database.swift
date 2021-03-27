@@ -69,12 +69,14 @@ class Database: ObservableObject {
                 t.column(Chart.Columns.dataSource1Title.rawValue, .text).notNull()
                 t.column(Chart.Columns.dataSource1Color.rawValue, .text).notNull()
                 t.column(Chart.Columns.dataSource1ChartType.rawValue, .text).notNull()
+                t.column(Chart.Columns.dataSource1Mode.rawValue, .text)
                 
                 t.column(Chart.Columns.dataSource2Type.rawValue, .text)
                 t.column(Chart.Columns.dataSource2DataSet.rawValue, .integer).references(DataSet.databaseTableName, column: DataSet.Columns.id.rawValue, onDelete: .cascade, onUpdate: .cascade)
                 t.column(Chart.Columns.dataSource2Title.rawValue, .text)
                 t.column(Chart.Columns.dataSource2Color.rawValue, .text)
                 t.column(Chart.Columns.dataSource2ChartType.rawValue, .text)
+                t.column(Chart.Columns.dataSource2Mode.rawValue, .text)
             })
         }
     }
