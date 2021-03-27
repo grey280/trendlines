@@ -36,7 +36,14 @@ struct DataSetEntryCreatorView: View {
     var body: some View {
         Form {
             DatePicker("Date", selection: $entry.dateAdded)
-            TextField("Value", value: $entry.value, formatter: formatter)
+//            TextField("Value", value: $entry.value, formatter: formatter) // this doesn't work! Thanks, Apple.
+            TextField("Value", text: Binding(get: {
+                formatter.string(from: NSNumber(value: entry.value)) ?? "0"
+            }, set: { (newValue) in
+                if let asNumber = formatter.number(from: newValue) {
+                    entry.value = asNumber.doubleValue
+                }
+            }))
                 .keyboardType(.decimalPad)
             Button("Add") {
                 if (database.add(entry: entry)) {
