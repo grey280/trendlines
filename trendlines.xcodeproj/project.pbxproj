@@ -153,6 +153,7 @@
 		2D33C73E25E0556300E3C6C3 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2DDC97D7260FC7DF005635D4 /* Controllers */,
 				2DCD53C025E18BD600BBA89B /* Helpers */,
 				2DCB046825E1818200CD58F8 /* Models */,
 				2DCB046725E1817200CD58F8 /* Views */,
@@ -225,7 +226,6 @@
 				2DCD53B625E18B3000BBA89B /* ChartType.swift */,
 				2DCD53BB25E18B5000BBA89B /* DataSource.swift */,
 				2DCD53C825E18D0600BBA89B /* Chart.swift */,
-				2D43462E25E1A2D60018D541 /* Database.swift */,
 				2D1CAC54260309DB0058F038 /* DataSetEntry.swift */,
 				2D43463825E1DF870018D541 /* DataProvider.swift */,
 			);
@@ -238,6 +238,14 @@
 				2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2DDC97D7260FC7DF005635D4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2D43462E25E1A2D60018D541 /* Database.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
