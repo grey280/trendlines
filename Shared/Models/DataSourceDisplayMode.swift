@@ -9,7 +9,7 @@ import Foundation
 import GRDB
 
 enum DataSourceDisplayMode: String, Codable, Hashable {
-    case count, sum
+    case count, sum, average
 }
 
 extension DataSourceDisplayMode: DatabaseValueConvertible {
