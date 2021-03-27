@@ -177,7 +177,7 @@ class Database: ObservableObject {
             logger.warning("Attempted to delete \(dataSets.count, privacy: .public) data sets, but could only delete \(couldDelete, privacy: .public)")
             return false
         } catch {
-            logger.error("Could not delete dataset. \(error.localizedDescription, privacy: .public)")
+            logger.error("Could not delete datasets. \(error.localizedDescription, privacy: .public)")
             return false
         }
     }
@@ -209,6 +209,22 @@ class Database: ObservableObject {
             return false
         } catch {
             logger.error("Could not delete entry. \(error.localizedDescription, privacy: .public)")
+            return false
+        }
+    }
+    @discardableResult
+    func delete(entries: [DataSetEntry]) -> Bool {
+        do {
+            let couldDelete = try dbQueue.write { db in
+                try DataSetEntry.deleteAll(db, keys: entries.compactMap { $0.id })
+            }
+            if (couldDelete == entries.count) {
+                return true
+            }
+            logger.warning("Attempted to delete \(entries.count, privacy: .public) data entries, but could only delete \(couldDelete, privacy: .public)")
+            return false
+        } catch {
+            logger.error("Could not delete entries. \(error.localizedDescription, privacy: .public)")
             return false
         }
     }
