@@ -7,8 +7,51 @@
 
 import SwiftUI
 
+fileprivate struct SourceTypeNewCustomItemView: View {
+    @Binding var selectedType: DataSourceType
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State var set = DataSet(id: nil, name: "")
+    
+    let onDismiss: (() -> Void)?
+    
+    @EnvironmentObject var database: Database
+    
+    var body: some View {
+        Form {
+            TextField("Name", text: $set.name)
+        }
+        .navigationTitle("New Data Set")
+        .navigationBarItems(trailing: Button("Save") {
+            if let saved = database.add(dataSet: set), let id = saved.id {
+                selectedType = .entries(datasetID: id, mode: .average)
+                onDismiss?()
+                presentationMode.wrappedValue.dismiss()
+            }
+        })
+    }
+}
+
 fileprivate struct SourceTypePickerItemView: View {
+    init(type: DataSourceType, selectedType: Binding<DataSourceType>, database: Database? = nil) {
+        self.type = type
+        self._selectedType = selectedType
+        if case .entries(let id,_) = type {
+            if let set = database?.customDataSets.first(where: {
+                $0.id == id
+            }) {
+                self.dataSet = set
+            } else {
+                self.dataSet = nil
+            }
+        } else {
+            self.dataSet = nil
+        }
+    }
+    
     let type: DataSourceType
+    let dataSet: DataSet?
     @Binding var selectedType: DataSourceType
     
     @Environment(\.presentationMode) var presentationMode
@@ -16,7 +59,11 @@ fileprivate struct SourceTypePickerItemView: View {
     var body: some View {
         // TODO: Needs some accessibility hinting to indicate activate state
         HStack {
-            Text(type.title)
+            if let set = dataSet {
+                Text(set.name)
+            } else {
+                Text(type.title)
+            }
             Spacer()
             if (type == selectedType) {
                 Image(systemName: "checkmark")
@@ -32,23 +79,48 @@ fileprivate struct SourceTypePickerItemView: View {
 
 struct SourceTypePickerView: View {
     @Binding var sourceType: DataSourceType
+    @EnvironmentObject var database: Database
     
     var body: some View {
         NavigationLink(destination: SourceTypePickerListView(sourceType: $sourceType)) {
-            Text(sourceType.title)
+            if case .entries(let id,_) = sourceType {
+                if let set = database.customDataSets.first(where: {
+                    $0.id == id
+                }) {
+                    Text(set.name)
+                } else {
+                    Text(sourceType.title)
+                }
+            } else {
+                Text(sourceType.title)
+            }
         }
     }
 }
 
 fileprivate struct SourceTypePickerListView: View {
     @Binding var sourceType: DataSourceType
+    @EnvironmentObject var database: Database
     
 //    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         List {
             Section(header: Text("Custom")) {
-                SourceTypePickerItemView(type: .entries, selectedType: $sourceType)
+                ForEach(database.customDataSets, id: \.id) { dataSet in
+                    if let id = dataSet.id {
+                        if case .entries(_, let mode) = sourceType {
+                            SourceTypePickerItemView(type: .entries(datasetID: id, mode: mode), selectedType: $sourceType, database: database)
+                        } else {
+                            SourceTypePickerItemView(type: .entries(datasetID: id, mode: .average), selectedType: $sourceType, database: database)
+                        }
+                    }
+                }
+                NavigationLink(destination: SourceTypeNewCustomItemView(selectedType: $sourceType, onDismiss: {
+                    database.loadDatasets()
+                })) {
+                    Text("New...")
+                }
             }
             Section(header: Text("Body")) {
                 ForEach(DataSourceType.HealthSource.BodySource.allCases, id: \.rawValue) {
@@ -84,9 +156,7 @@ fileprivate struct SourceTypePickerListView: View {
                     SourceTypePickerItemView(type: .health(.nutrition(.micronutrient($0))), selectedType: $sourceType)
                 }
             }
-        }//.onChange(of: sourceType) {
-        //    presentationMode.wrappedValue.dismiss()
-        //}
+        }
         .listStyle(GroupedListStyle())
         .navigationTitle(Text("Data Source"))
     }
@@ -95,6 +165,11 @@ fileprivate struct SourceTypePickerListView: View {
 
 struct SourceTypePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        SourceTypePickerView(sourceType: .constant(DataSourceType.entries))
+        if let database = Database() {
+            SourceTypePickerView(sourceType: .constant(DataSourceType.empty))
+                .environmentObject(database)
+        } else {
+            EmptyView()
+        }
     }
 }

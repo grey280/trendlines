@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D1CAC502603093F0058F038 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1CAC4F2603093F0058F038 /* DataSet.swift */; };
+		2D1CAC512603093F0058F038 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1CAC4F2603093F0058F038 /* DataSet.swift */; };
+		2D1CAC55260309DB0058F038 /* DataSetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1CAC54260309DB0058F038 /* DataSetEntry.swift */; };
+		2D1CAC56260309DB0058F038 /* DataSetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1CAC54260309DB0058F038 /* DataSetEntry.swift */; };
+		2D22A44A260ED862001B3F62 /* CustomDataSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22A449260ED862001B3F62 /* CustomDataSetView.swift */; };
+		2D22A44B260ED862001B3F62 /* CustomDataSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22A449260ED862001B3F62 /* CustomDataSetView.swift */; };
 		2D33C75225E0556300E3C6C3 /* trendlinesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C73F25E0556300E3C6C3 /* trendlinesApp.swift */; };
 		2D33C75325E0556300E3C6C3 /* trendlinesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C73F25E0556300E3C6C3 /* trendlinesApp.swift */; };
 		2D33C75425E0556300E3C6C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33C74025E0556300E3C6C3 /* ContentView.swift */; };
@@ -42,6 +48,14 @@
 		2D4B4D3E25E190A800A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3D25E190A800A34278 /* GRDB */; };
 		2D55673326019E7E00BC7821 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55673226019E7E00BC7821 /* SettingsView.swift */; };
 		2D55673426019E7E00BC7821 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55673226019E7E00BC7821 /* SettingsView.swift */; };
+		2D5B3C08260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */; };
+		2D5B3C09260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */; };
+		2D5B3C0D260F8F48002F3D62 /* DataSourceType+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */; };
+		2D5B3C0E260F8F48002F3D62 /* DataSourceType+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */; };
+		2D6AA2B9260D745600CCAF9D /* ChartTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */; };
+		2D6AA2BC260D745600CCAF9D /* ChartTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */; };
+		2D727332260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */; };
+		2D727333260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */; };
 		2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 		2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 		2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53B625E18B3000BBA89B /* ChartType.swift */; };
@@ -52,9 +66,14 @@
 		2DCD53C325E18BE500BBA89B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */; };
 		2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C825E18D0600BBA89B /* Chart.swift */; };
 		2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53C825E18D0600BBA89B /* Chart.swift */; };
+		2DDC97D9260FC7F8005635D4 /* DatabaseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDC97D8260FC7F8005635D4 /* DatabaseDataProvider.swift */; };
+		2DDC97DA260FC7F8005635D4 /* DatabaseDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDC97D8260FC7F8005635D4 /* DatabaseDataProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D1CAC4F2603093F0058F038 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
+		2D1CAC54260309DB0058F038 /* DataSetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetEntry.swift; sourceTree = "<group>"; };
+		2D22A449260ED862001B3F62 /* CustomDataSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDataSetView.swift; sourceTree = "<group>"; };
 		2D33C73F25E0556300E3C6C3 /* trendlinesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trendlinesApp.swift; sourceTree = "<group>"; };
 		2D33C74025E0556300E3C6C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2D33C74125E0556300E3C6C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,11 +97,16 @@
 		2D43465C25E325BB0018D541 /* SourceBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceBuilderView.swift; sourceTree = "<group>"; };
 		2D43466825E325FB0018D541 /* SourceTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTypePickerView.swift; sourceTree = "<group>"; };
 		2D55673226019E7E00BC7821 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceDisplayMode.swift; sourceTree = "<group>"; };
+		2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataSourceType+Codable.swift"; sourceTree = "<group>"; };
+		2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChartTypePickerView.swift; path = Shared/Views/ChartTypePickerView.swift; sourceTree = "<group>"; };
+		2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetEntryCreatorView.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		2DCD53BB25E18B5000BBA89B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		2DCD53C825E18D0600BBA89B /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		2DDC97D8260FC7F8005635D4 /* DatabaseDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDataProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,9 +130,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D22A448260ED832001B3F62 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2D55673226019E7E00BC7821 /* SettingsView.swift */,
+				2D22A449260ED862001B3F62 /* CustomDataSetView.swift */,
+				2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		2D33C73925E0556300E3C6C3 = {
 			isa = PBXGroup;
 			children = (
+				2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */,
 				2D43463D25E1E15D0018D541 /* trendlines.entitlements */,
 				2D33C73E25E0556300E3C6C3 /* Shared */,
 				2D33C74825E0556300E3C6C3 /* iOS */,
@@ -121,12 +156,12 @@
 		2D33C73E25E0556300E3C6C3 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2DDC97D7260FC7DF005635D4 /* Controllers */,
 				2DCD53C025E18BD600BBA89B /* Helpers */,
 				2DCB046825E1818200CD58F8 /* Models */,
 				2DCB046725E1817200CD58F8 /* Views */,
 				2D33C73F25E0556300E3C6C3 /* trendlinesApp.swift */,
 				2D33C74025E0556300E3C6C3 /* ContentView.swift */,
-				2D55673226019E7E00BC7821 /* SettingsView.swift */,
 				2D33C74125E0556300E3C6C3 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -170,6 +205,7 @@
 		2DCB046725E1817200CD58F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D22A448260ED832001B3F62 /* Settings */,
 				2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */,
 				2D33C76225E055ED00E3C6C3 /* BarChartView.swift */,
 				2D33C78425E0904700E3C6C3 /* LineChartView.swift */,
@@ -187,10 +223,13 @@
 			isa = PBXGroup;
 			children = (
 				2DCB046925E1820500CD58F8 /* DataSourceType.swift */,
+				2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */,
+				2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */,
+				2D1CAC4F2603093F0058F038 /* DataSet.swift */,
 				2DCD53B625E18B3000BBA89B /* ChartType.swift */,
 				2DCD53BB25E18B5000BBA89B /* DataSource.swift */,
 				2DCD53C825E18D0600BBA89B /* Chart.swift */,
-				2D43462E25E1A2D60018D541 /* Database.swift */,
+				2D1CAC54260309DB0058F038 /* DataSetEntry.swift */,
 				2D43463825E1DF870018D541 /* DataProvider.swift */,
 			);
 			path = Models;
@@ -202,6 +241,15 @@
 				2DCD53C125E18BE500BBA89B /* Color+Extensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2DDC97D7260FC7DF005635D4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2D43462E25E1A2D60018D541 /* Database.swift */,
+				2DDC97D8260FC7F8005635D4 /* DatabaseDataProvider.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,18 +358,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D5B3C0D260F8F48002F3D62 /* DataSourceType+Codable.swift in Sources */,
 				2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */,
 				2D33C75425E0556300E3C6C3 /* ContentView.swift in Sources */,
 				2D43463925E1DF870018D541 /* DataProvider.swift in Sources */,
+				2D1CAC55260309DB0058F038 /* DataSetEntry.swift in Sources */,
 				2D33C77E25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
 				2D33C78525E0904700E3C6C3 /* LineChartView.swift in Sources */,
 				2D55673326019E7E00BC7821 /* SettingsView.swift in Sources */,
+				2D727332260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */,
 				2D33C77425E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
+				2D6AA2B9260D745600CCAF9D /* ChartTypePickerView.swift in Sources */,
 				2D43466925E325FB0018D541 /* SourceTypePickerView.swift in Sources */,
 				2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */,
 				2D43465D25E325BB0018D541 /* SourceBuilderView.swift in Sources */,
 				2D43465825E2CF0C0018D541 /* ChartBuilderView.swift in Sources */,
+				2DDC97D9260FC7F8005635D4 /* DatabaseDataProvider.swift in Sources */,
+				2D5B3C08260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */,
 				2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */,
+				2D1CAC502603093F0058F038 /* DataSet.swift in Sources */,
 				2D43463425E1AB7D0018D541 /* ChartView.swift in Sources */,
 				2D33C75225E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76325E055ED00E3C6C3 /* BarChartView.swift in Sources */,
@@ -329,6 +384,7 @@
 				2D33C76F25E06D9F00E3C6C3 /* YAxisView.swift in Sources */,
 				2D43462F25E1A2D60018D541 /* Database.swift in Sources */,
 				2DCD53C225E18BE500BBA89B /* Color+Extensions.swift in Sources */,
+				2D22A44A260ED862001B3F62 /* CustomDataSetView.swift in Sources */,
 				2D43464325E1E5BE0018D541 /* HealthDataProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,18 +393,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D5B3C0E260F8F48002F3D62 /* DataSourceType+Codable.swift in Sources */,
 				2DCD53B825E18B3000BBA89B /* ChartType.swift in Sources */,
 				2D33C75525E0556300E3C6C3 /* ContentView.swift in Sources */,
 				2D43463A25E1DF870018D541 /* DataProvider.swift in Sources */,
+				2D1CAC56260309DB0058F038 /* DataSetEntry.swift in Sources */,
 				2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
 				2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */,
 				2D55673426019E7E00BC7821 /* SettingsView.swift in Sources */,
+				2D727333260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */,
 				2D33C77525E06DD800E3C6C3 /* PartialRoundedRectangle.swift in Sources */,
+				2D6AA2BC260D745600CCAF9D /* ChartTypePickerView.swift in Sources */,
 				2D43466A25E325FB0018D541 /* SourceTypePickerView.swift in Sources */,
 				2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */,
 				2D43465E25E325BB0018D541 /* SourceBuilderView.swift in Sources */,
 				2D43465925E2CF0C0018D541 /* ChartBuilderView.swift in Sources */,
+				2DDC97DA260FC7F8005635D4 /* DatabaseDataProvider.swift in Sources */,
+				2D5B3C09260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */,
 				2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */,
+				2D1CAC512603093F0058F038 /* DataSet.swift in Sources */,
 				2D43463525E1AB7D0018D541 /* ChartView.swift in Sources */,
 				2D33C75325E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76425E055ED00E3C6C3 /* BarChartView.swift in Sources */,
@@ -356,6 +419,7 @@
 				2D33C77025E06D9F00E3C6C3 /* YAxisView.swift in Sources */,
 				2D43463025E1A2D60018D541 /* Database.swift in Sources */,
 				2DCD53C325E18BE500BBA89B /* Color+Extensions.swift in Sources */,
+				2D22A44B260ED862001B3F62 /* CustomDataSetView.swift in Sources */,
 				2D43464425E1E5BE0018D541 /* HealthDataProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

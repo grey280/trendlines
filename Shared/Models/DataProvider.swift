@@ -52,3 +52,26 @@ class NoopDataProvider: DataProvider {
         }
     }
 }
+
+class DemoDataProvider: DataProvider {
+    private let _points: [DatePoint] = {
+        var pointBuilder: [DatePoint] = []
+        var workingDate: Date = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
+        for i in 0..<30 {
+            let low: Double = Double(i) - (Double(i)/2)
+            let high: Double = Double(i) + (Double(i)/2)
+            pointBuilder.append(.init(workingDate, yMin: low, yMax: high))
+            workingDate = Calendar.current.date(byAdding: .day, value: 1, to: workingDate)!
+        }
+        return pointBuilder
+    }()
+
+    override var points: [DatePoint] {
+        get {
+            _points
+        }
+        set {
+            // do nothing
+        }
+    }
+}

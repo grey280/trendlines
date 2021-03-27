@@ -78,7 +78,7 @@ struct LineChartView: View {
         yRange: (min: Double, max: Double)? = nil
     ) {
         self.data = data.sorted(by: { (a, b) -> Bool in
-            a.x < b.x
+            a.x > b.x
         })
         self.unit = unit
         self.color = color
