@@ -19,14 +19,19 @@ class DatabaseProvider: DataProvider {
         self.dataSet = dataSet
         self.database = database
         self.mode = mode
+        loadData()
     }
     
     func loadData() {
-        guard let items = database.loadDataSetEntries(dataSet: dataSet) else {
+        guard let startDate = Calendar.current.date(byAdding: .day, value: -30, to: Date()) else {
+            logger.error("Could not create '30 days ago' date.")
+            return
+        }
+        guard let items = database.queryDataSetEntries(dataSet: dataSet, mode: mode, startDate: startDate) else {
             logger.error("Failed to load items; returning empty.")
             self.points = []
             return
         }
-        
+        self.points = items
     }
 }
