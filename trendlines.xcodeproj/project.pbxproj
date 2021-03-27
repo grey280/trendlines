@@ -48,6 +48,8 @@
 		2D4B4D3E25E190A800A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3D25E190A800A34278 /* GRDB */; };
 		2D55673326019E7E00BC7821 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55673226019E7E00BC7821 /* SettingsView.swift */; };
 		2D55673426019E7E00BC7821 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55673226019E7E00BC7821 /* SettingsView.swift */; };
+		2D5B3C08260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */; };
+		2D5B3C09260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */; };
 		2D6AA2B9260D745600CCAF9D /* ChartTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */; };
 		2D6AA2BC260D745600CCAF9D /* ChartTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */; };
 		2D727332260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */; };
@@ -91,6 +93,7 @@
 		2D43465C25E325BB0018D541 /* SourceBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceBuilderView.swift; sourceTree = "<group>"; };
 		2D43466825E325FB0018D541 /* SourceTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTypePickerView.swift; sourceTree = "<group>"; };
 		2D55673226019E7E00BC7821 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceDisplayMode.swift; sourceTree = "<group>"; };
 		2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChartTypePickerView.swift; path = Shared/Views/ChartTypePickerView.swift; sourceTree = "<group>"; };
 		2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetEntryCreatorView.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
@@ -213,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				2DCB046925E1820500CD58F8 /* DataSourceType.swift */,
+				2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */,
 				2D1CAC4F2603093F0058F038 /* DataSet.swift */,
 				2DCD53B625E18B3000BBA89B /* ChartType.swift */,
 				2DCD53BB25E18B5000BBA89B /* DataSource.swift */,
@@ -352,6 +356,7 @@
 				2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */,
 				2D43465D25E325BB0018D541 /* SourceBuilderView.swift in Sources */,
 				2D43465825E2CF0C0018D541 /* ChartBuilderView.swift in Sources */,
+				2D5B3C08260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */,
 				2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */,
 				2D1CAC502603093F0058F038 /* DataSet.swift in Sources */,
 				2D43463425E1AB7D0018D541 /* ChartView.swift in Sources */,
@@ -384,6 +389,7 @@
 				2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */,
 				2D43465E25E325BB0018D541 /* SourceBuilderView.swift in Sources */,
 				2D43465925E2CF0C0018D541 /* ChartBuilderView.swift in Sources */,
+				2D5B3C09260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */,
 				2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */,
 				2D1CAC512603093F0058F038 /* DataSet.swift in Sources */,
 				2D43463525E1AB7D0018D541 /* ChartView.swift in Sources */,
