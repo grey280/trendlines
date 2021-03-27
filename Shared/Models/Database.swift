@@ -133,17 +133,17 @@ class Database: ObservableObject {
     }
     
     @discardableResult
-    func add(dataSet: DataSet) -> Bool {
+    func add(dataSet: DataSet) -> DataSet? {
         do {
             var copySet = dataSet
             try dbQueue.write { db in
                 try copySet.insert(db)
             }
             loadDatasets()
-            return true
+            return copySet
         } catch {
             logger.error("Could not save dataset. \(error.localizedDescription, privacy: .public)")
-            return false
+            return nil
         }
     }
     
