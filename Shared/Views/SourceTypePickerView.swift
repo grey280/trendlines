@@ -42,15 +42,28 @@ struct SourceTypePickerView: View {
 
 fileprivate struct SourceTypePickerListView: View {
     @Binding var sourceType: DataSourceType
+    @EnvironmentObject var database: Database
     
 //    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         List {
             Section(header: Text("Custom")) {
-                #warning("Not implemented")
-                Text("Not implemented")
-//                SourceTypePickerItemView(type: .entries, selectedType: $sourceType)
+                ForEach(database.customDataSets, id: \.id) { dataSet in
+                    if let id = dataSet.id {
+                        SourceTypePickerItemView(type: .entries(datasetID: id, mode: .count), selectedType: $sourceType)
+                    }
+                }
+                HStack {
+                    Text("New...")
+                    Spacer()
+                    Image(systemName: "plus")
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    #warning("Incomplete")
+                    // TODO: Need implementation for 'add a new one'
+                }
             }
             Section(header: Text("Body")) {
                 ForEach(DataSourceType.HealthSource.BodySource.allCases, id: \.rawValue) {
@@ -95,6 +108,11 @@ fileprivate struct SourceTypePickerListView: View {
 
 struct SourceTypePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        SourceTypePickerView(sourceType: .constant(DataSourceType.empty))
+        if let database = Database() {
+            SourceTypePickerView(sourceType: .constant(DataSourceType.empty))
+                .environmentObject(database)
+        } else {
+            EmptyView()
+        }
     }
 }
