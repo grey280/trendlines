@@ -7,6 +7,31 @@
 
 import SwiftUI
 
+fileprivate struct SourceTypeNewCustomItemView: View {
+    @Binding var selectedType: DataSourceType
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State var set = DataSet(id: nil, name: "")
+    
+    let onDismiss: (() -> Void)?
+    
+    @EnvironmentObject var database: Database
+    
+    var body: some View {
+        Form {
+            TextField("Name", text: $set.name)
+            Button("Save") {
+                if let saved = database.add(dataSet: set), let id = saved.id {
+                    selectedType = .entries(datasetID: id, mode: .average)
+                    onDismiss?()
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        }.navigationTitle("New...")
+    }
+}
+
 fileprivate struct SourceTypePickerItemView: View {
     let type: DataSourceType
     @Binding var selectedType: DataSourceType
@@ -51,18 +76,22 @@ fileprivate struct SourceTypePickerListView: View {
             Section(header: Text("Custom")) {
                 ForEach(database.customDataSets, id: \.id) { dataSet in
                     if let id = dataSet.id {
-                        SourceTypePickerItemView(type: .entries(datasetID: id, mode: .count), selectedType: $sourceType)
+                        if case .entries(_, let mode) = sourceType {
+                            SourceTypePickerItemView(type: .entries(datasetID: id, mode: mode), selectedType: $sourceType)
+                        } else {
+                            SourceTypePickerItemView(type: .entries(datasetID: id, mode: .average), selectedType: $sourceType)
+                        }
                     }
                 }
-                HStack {
-                    Text("New...")
-                    Spacer()
-                    Image(systemName: "plus")
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    #warning("Incomplete")
-                    // TODO: Need implementation for 'add a new one'
+                NavigationLink(destination: SourceTypeNewCustomItemView(selectedType: $sourceType, onDismiss: {
+                    database.loadDatasets()
+                })) {
+                    HStack {
+                        Text("New...")
+                        Spacer()
+                        Image(systemName: "plus")
+                    }
+                    .contentShape(Rectangle())
                 }
             }
             Section(header: Text("Body")) {
