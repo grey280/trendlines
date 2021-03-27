@@ -13,23 +13,32 @@ struct CustomDataSetView: View {
     
     @State var entries: [DataSetEntry] = []
     
-    
-    
     var body: some View {
-        List(entries, id: \.id) { entry in
-            HStack {
-                Text("\(entry.dateAdded)")
-                Spacer()
-                Text("\(entry.value)")
+        List {
+            ForEach(entries, id: \.id) { entry in
+                HStack {
+                    Text("\(entry.dateAdded)")
+                    Spacer()
+                    Text("\(entry.value)")
+                }
             }
+            .onDelete(perform: delete)
         }
         .navigationTitle(dataSet.name)
+        .navigationBarItems(leading: EditButton())
         .onAppear(perform: loadEntries)
     }
     
     func loadEntries() {
         if let entries = database.loadDataSetEntries(dataSet: dataSet) {
             self.entries = entries
+        }
+    }
+    
+    func delete(indexSet: IndexSet) {
+        let entries = indexSet.map { self.entries[$0] }
+        if database.delete(entries: entries) {
+            loadEntries()
         }
     }
 }
