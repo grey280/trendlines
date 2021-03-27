@@ -196,6 +196,15 @@ class Database: ObservableObject {
         }
     }
     
+    func queryDataSetEntries(dataSet: DataSet, mode: DataSourceDisplayMode, startDate: Date) -> [DatePoint]? {
+        do {
+            DataSet
+        } catch {
+            logger.error("Could not query entries. \(error.localizedDescription, privacy: .public)")
+            return nil
+        }
+    }
+    
     @discardableResult
     func delete(entry: DataSetEntry) -> Bool {
         do {
