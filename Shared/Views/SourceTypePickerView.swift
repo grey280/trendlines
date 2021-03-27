@@ -61,7 +61,7 @@ fileprivate struct SourceTypePickerItemView: View {
             if let set = dataSet {
                 Text(set.name)
             } else {
-            Text(type.title)
+                Text(type.title)
             }
             Spacer()
             if (type == selectedType) {
@@ -88,8 +88,8 @@ struct SourceTypePickerView: View {
                 }) {
                     Text(set.name)
                 } else {
-            Text(sourceType.title)
-        }
+                    Text(sourceType.title)
+                }
             } else {
                 Text(sourceType.title)
             }
@@ -109,21 +109,16 @@ fileprivate struct SourceTypePickerListView: View {
                 ForEach(database.customDataSets, id: \.id) { dataSet in
                     if let id = dataSet.id {
                         if case .entries(_, let mode) = sourceType {
-                            SourceTypePickerItemView(type: .entries(datasetID: id, mode: mode), selectedType: $sourceType)
+                            SourceTypePickerItemView(type: .entries(datasetID: id, mode: mode), selectedType: $sourceType, database: database)
                         } else {
-                            SourceTypePickerItemView(type: .entries(datasetID: id, mode: .average), selectedType: $sourceType)
+                            SourceTypePickerItemView(type: .entries(datasetID: id, mode: .average), selectedType: $sourceType, database: database)
                         }
                     }
                 }
                 NavigationLink(destination: SourceTypeNewCustomItemView(selectedType: $sourceType, onDismiss: {
                     database.loadDatasets()
                 })) {
-                    HStack {
-                        Text("New...")
-                        Spacer()
-                        Image(systemName: "plus")
-                    }
-                    .contentShape(Rectangle())
+                    Text("New...")
                 }
             }
             Section(header: Text("Body")) {
