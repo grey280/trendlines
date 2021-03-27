@@ -12,7 +12,7 @@ struct DataSetEntry {
     typealias ID = Int64
     var id: ID?
     
-    let dateAdded: Date
+    var dateAdded: Date
     var value: Int
     var datasetID: DataSet.ID
     

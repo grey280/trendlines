@@ -12,6 +12,7 @@ struct CustomDataSetView: View {
     let dataSet: DataSet
     
     @State var entries: [DataSetEntry] = []
+    @State var addingEntry = false
     
     var body: some View {
         List {
@@ -25,8 +26,22 @@ struct CustomDataSetView: View {
             .onDelete(perform: delete)
         }
         .navigationTitle(dataSet.name)
-        .navigationBarItems(leading: EditButton())
         .onAppear(perform: loadEntries)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                    addingEntry.toggle()
+                } label: {
+                    Image(systemName: "plus").accessibility(hint: Text("Add an entry"))
+                }
+                EditButton()
+            }
+        }
+        .sheet(isPresented: $addingEntry) {
+            DataSetEntryCreatorView(database: database, dataSet: dataSet) {
+                loadEntries()
+            }
+        }
     }
     
     func loadEntries() {
@@ -50,6 +65,5 @@ struct CustomDataSetView_Previews: PreviewProvider {
         } else {
             EmptyView()
         }
-        
     }
 }
