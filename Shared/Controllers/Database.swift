@@ -205,20 +205,26 @@ class Database: ObservableObject {
                     request = DataSetEntry
                         .filter(DataSetEntry.Columns.datasetID == dataSet.id)
                         .filter(DataSetEntry.Columns.dateAdded >= startDate)
-                        .select(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue)), AVG(\(DataSetEntry.Columns.value.rawValue))")
-                        .group(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue))")
+                        .select(date(DataSetEntry.Columns.dateAdded), average(DataSetEntry.Columns.value))
+                        .group(date(DataSetEntry.Columns.dateAdded))
                 case .count:
                     request = DataSetEntry
                         .filter(DataSetEntry.Columns.datasetID == dataSet.id)
                         .filter(DataSetEntry.Columns.dateAdded >= startDate)
-                        .select(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue)), COUNT(*)")
-                        .group(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue))")
+                        .select(date(DataSetEntry.Columns.dateAdded), count(DataSetEntry.Columns.value))
+                        .group(date(DataSetEntry.Columns.dateAdded))
                 case .sum:
                     request = DataSetEntry
                         .filter(DataSetEntry.Columns.datasetID == dataSet.id)
                         .filter(DataSetEntry.Columns.dateAdded >= startDate)
-                        .select(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue)), SUM(\(DataSetEntry.Columns.value.rawValue))")
-                        .group(sql: "DATE(\(DataSetEntry.Columns.dateAdded.rawValue))")
+                        .select(date(DataSetEntry.Columns.dateAdded), sum(DataSetEntry.Columns.value))
+                        .group(date(DataSetEntry.Columns.dateAdded))
+                case .minMax:
+                    request = DataSetEntry
+                        .select(date(DataSetEntry.Columns.dateAdded), min(DataSetEntry.Columns.value), max(DataSetEntry.Columns.value))
+                        .filter(DataSetEntry.Columns.datasetID == dataSet.id)
+                        .filter(DataSetEntry.Columns.dateAdded >= startDate)
+                        .group(date(DataSetEntry.Columns.dateAdded))
                 }
                 
             }
@@ -274,5 +280,9 @@ class Database: ObservableObject {
             logger.error("Could not save entry. \(error.localizedDescription, privacy: .public)")
             return false
         }
+    }
+    
+    private func date(_ value: SQLExpressible) -> SQLExpression {
+        SQLLiteral("DATE(\(value))").sqlExpression
     }
 }
