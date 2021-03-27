@@ -13,6 +13,10 @@ struct SettingsView: View {
     
     @State var editingChart: Chart? = nil
     
+    var editable: Bool {
+        database.charts.count > 0 || database.customDataSets.count > 0
+    }
+    
     var body: some View {
         List {
             if (database.charts.count > 0) {
@@ -40,8 +44,17 @@ struct SettingsView: View {
                             }
                         }
                     }
-                    .onDelete(perform: onDelete)
+                    .onDelete(perform: onDeleteChart)
                     .onMove(perform: onMove)
+                }
+            }
+            if (database.customDataSets.count > 0) {
+                Section(header: Text("Data Sets")) {
+                    ForEach(database.customDataSets, id: \.id) { dataSet in
+                        NavigationLink(dataSet.name, destination: Text("Coming Soon"))
+                    }
+                    .onMove(perform: nil)
+                    .onDelete(perform: onDeleteDataSet(offsets:))
                 }
             }
             Section(header: Text("Pro")) {
@@ -59,7 +72,7 @@ struct SettingsView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(Text("Settings"))
-        .navigationBarItems(trailing: database.charts.count > 0 ? EditButton() : nil)
+        .navigationBarItems(trailing: editable ? EditButton() : nil)
         .environment(\.editMode, $editMode)
         .sheet(item: $editingChart, content: { chart in
             ChartBuilderView(chart: chart) { updatedChart in
@@ -76,9 +89,14 @@ struct SettingsView: View {
         
     }
     
-    private func onDelete(offsets: IndexSet) {
+    private func onDeleteChart(offsets: IndexSet) {
         database.charts.remove(atOffsets: offsets)
         database.saveCharts()
+    }
+    
+    private func onDeleteDataSet(offsets: IndexSet) {
+        let dataSets = offsets.map { database.customDataSets[$0] }
+        database.delete(dataSets: dataSets)
     }
     
     private func onMove(source: IndexSet, destination: Int) {
