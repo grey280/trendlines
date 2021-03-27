@@ -149,10 +149,10 @@ class Database: ObservableObject {
     @discardableResult
     func delete(dataSet: DataSet) -> Bool {
         do {
-            let couldAdd = try dbQueue.write { db in
+            let couldDelete = try dbQueue.write { db in
                 return try dataSet.delete(db)
             }
-            if (couldAdd) {
+            if (couldDelete) {
                 loadDatasets()
                 return true
             }
@@ -174,6 +174,23 @@ class Database: ObservableObject {
         } catch {
             logger.error("Could not load entries. \(error.localizedDescription, privacy: .public)")
             return nil
+        }
+    }
+    
+    @discardableResult
+    func delete(entry: DataSetEntry) -> Bool {
+        do {
+            let couldAdd = try dbQueue.write { db in
+                return try entry.delete(db)
+            }
+            if (couldAdd) {
+                loadDatasets()
+                return true
+            }
+            return false
+        } catch {
+            logger.error("Could not delete entry. \(error.localizedDescription, privacy: .public)")
+            return false
         }
     }
 }
