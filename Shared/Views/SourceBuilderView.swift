@@ -24,6 +24,7 @@ struct SourceBuilderView: View {
                 Text("Count").tag(DataSourceDisplayMode.count)
                 Text("Sum").tag(DataSourceDisplayMode.sum)
             }
+            .pickerStyle(SegmentedPickerStyle())
         }
         ChartTypePickerView(chartType: $source.chartType, color: source.color)
     }
