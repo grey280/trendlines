@@ -78,10 +78,21 @@ fileprivate struct SourceTypePickerItemView: View {
 
 struct SourceTypePickerView: View {
     @Binding var sourceType: DataSourceType
+    @EnvironmentObject var database: Database
     
     var body: some View {
         NavigationLink(destination: SourceTypePickerListView(sourceType: $sourceType)) {
+            if case .entries(let id,_) = sourceType {
+                if let set = database.customDataSets.first(where: {
+                    $0.id == id
+                }) {
+                    Text(set.name)
+                } else {
             Text(sourceType.title)
+        }
+            } else {
+                Text(sourceType.title)
+            }
         }
     }
 }
