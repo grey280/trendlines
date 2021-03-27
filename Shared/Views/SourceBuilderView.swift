@@ -23,6 +23,7 @@ struct SourceBuilderView: View {
                 Text("Average").tag(DataSourceDisplayMode.average)
                 Text("Count").tag(DataSourceDisplayMode.count)
                 Text("Sum").tag(DataSourceDisplayMode.sum)
+                Text("Min/Max").tag(DataSourceDisplayMode.minMax)
             }
             .pickerStyle(SegmentedPickerStyle())
         }
