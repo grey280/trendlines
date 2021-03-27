@@ -8,14 +8,12 @@
 import Foundation
 import OSLog
 
-fileprivate class DatabaseProviderHelpers {
-    static let logger = Logger(subsystem: "net.twoeighty.trendlines", category: "DatabaseProvider")
-}
-
 class DatabaseProvider: DataProvider {
     let dataSet: DataSet
     let database: Database
     let mode: DataSourceDisplayMode
+    
+    private let logger = Logger(subsystem: "net.twoeighty.trendlines", category: "DatabaseProvider")
     
     init?(dataSet: DataSet, database: Database, mode: DataSourceDisplayMode) {
         self.dataSet = dataSet
