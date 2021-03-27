@@ -11,7 +11,8 @@ import OSLog
 import GRDB
 
 class Database: ObservableObject {
-    static let jsonConverter = JSONDecoder()
+    static let jsonDecoder = JSONDecoder()
+    static let jsonEncoder = JSONEncoder()
     
     @Published var charts: [Chart] = []
     @Published var customDataSets: [DataSet] = []

@@ -99,13 +99,18 @@ extension Chart: TableRecord { }
 extension Chart: Identifiable { }
 
 extension Color: DatabaseValueConvertible {
-    public var databaseValue: DatabaseValue { "".databaseValue }
+    public var databaseValue: DatabaseValue {
+        guard let result = try? Database.jsonEncoder.encode(self) else {
+            return DatabaseValue.null
+        }
+        return result.databaseValue
+    }
     
     public static func fromDatabaseValue(_ dbValue: DatabaseValue) -> Color? {
         guard let str = String.fromDatabaseValue(dbValue), let data = str.data(using: .utf8) else {
             return nil
         }
         
-        return try? Database.jsonConverter.decode(Color.self, from: data)
+        return try? Database.jsonDecoder.decode(Color.self, from: data)
     }
 }

@@ -130,13 +130,18 @@ extension DataSourceType: Codable {
 }
 
 extension DataSourceType: DatabaseValueConvertible {
-    var databaseValue: DatabaseValue { "".databaseValue }
+    var databaseValue: DatabaseValue {
+        guard let result = try? Database.jsonEncoder.encode(self) else {
+            return DatabaseValue.null
+        }
+        return result.databaseValue        
+    }
     
     static func fromDatabaseValue(_ dbValue: DatabaseValue) -> DataSourceType? {
         guard let str = String.fromDatabaseValue(dbValue), let data = str.data(using: .utf8) else {
             return nil
         }
         
-        return try? Database.jsonConverter.decode(DataSourceType.self, from: data)
+        return try? Database.jsonDecoder.decode(DataSourceType.self, from: data)
     }
 }
