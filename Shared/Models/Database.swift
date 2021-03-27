@@ -14,6 +14,7 @@ class Database: ObservableObject {
     static let jsonConverter = JSONDecoder()
     
     @Published var charts: [Chart] = []
+    @Published var customDataSets: [DataSet] = []
     
     private let logger: Logger
     private let dbQueue: DatabaseQueue
@@ -81,6 +82,8 @@ class Database: ObservableObject {
         }
     }
     
+    // MARK: Charts
+    
     func loadCharts() {
         do {
             try dbQueue.read { db in
@@ -113,6 +116,50 @@ class Database: ObservableObject {
             }
         } catch {
             logger.error("Could not save charts. \(error.localizedDescription, privacy: .public)")
+        }
+    }
+    
+    // MARK: Data sets
+    func loadDatasets() {
+        do {
+            try dbQueue.read { db in
+                let sets = try DataSet.fetchAll(db)
+                self.customDataSets = sets
+            }
+        } catch {
+            logger.error("Could not load datasets. \(error.localizedDescription, privacy: .public)")
+        }
+    }
+    
+    @discardableResult
+    func add(dataSet: DataSet) -> Bool {
+        do {
+            var copySet = dataSet
+            try dbQueue.write { db in
+                try copySet.insert(db)
+            }
+            loadDatasets()
+            return true
+        } catch {
+            logger.error("Could not save dataset. \(error.localizedDescription, privacy: .public)")
+            return false
+        }
+    }
+    
+    @discardableResult
+    func delete(dataSet: DataSet) -> Bool {
+        do {
+            let couldAdd = try dbQueue.write { db in
+                return try dataSet.delete(db)
+            }
+            if (couldAdd) {
+                loadDatasets()
+                return true
+            }
+            return false
+        } catch {
+            logger.error("Could not delete dataset. \(error.localizedDescription, privacy: .public)")
+            return false
         }
     }
 }
