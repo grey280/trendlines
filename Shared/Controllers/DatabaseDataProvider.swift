@@ -21,5 +21,12 @@ class DatabaseProvider: DataProvider {
         self.mode = mode
     }
     
-    
+    func loadData() {
+        guard let items = database.loadDataSetEntries(dataSet: dataSet) else {
+            logger.error("Failed to load items; returning empty.")
+            self.points = []
+            return
+        }
+        
+    }
 }
