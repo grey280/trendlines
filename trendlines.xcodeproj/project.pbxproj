@@ -115,6 +115,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D22A448260ED832001B3F62 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2D55673226019E7E00BC7821 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		2D33C73925E0556300E3C6C3 = {
 			isa = PBXGroup;
 			children = (
@@ -136,7 +144,6 @@
 				2DCB046725E1817200CD58F8 /* Views */,
 				2D33C73F25E0556300E3C6C3 /* trendlinesApp.swift */,
 				2D33C74025E0556300E3C6C3 /* ContentView.swift */,
-				2D55673226019E7E00BC7821 /* SettingsView.swift */,
 				2D33C74125E0556300E3C6C3 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -180,6 +187,7 @@
 		2DCB046725E1817200CD58F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D22A448260ED832001B3F62 /* Settings */,
 				2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */,
 				2D33C76225E055ED00E3C6C3 /* BarChartView.swift */,
 				2D33C78425E0904700E3C6C3 /* LineChartView.swift */,
