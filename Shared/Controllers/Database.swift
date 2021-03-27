@@ -226,7 +226,25 @@ class Database: ObservableObject {
                         .filter(DataSetEntry.Columns.dateAdded >= startDate)
                         .group(date(DataSetEntry.Columns.dateAdded))
                 }
-                
+                let rows = try Row.fetchAll(db, request)
+                let results: [DatePoint]
+                switch mode {
+                case .average, .count, .sum:
+                    results = rows.compactMap {
+                        guard let date = $0[0] as Date?, let value = $0[1] as Double? else {
+                            return nil
+                        }
+                        return DatePoint(date, y: value)
+                    }
+                case .minMax:
+                    results = rows.compactMap {
+                        guard let date = $0[0] as Date?, let v1 = $0[1] as Double?, let v2 = $0[2] as Double? else {
+                            return nil
+                        }
+                        return DatePoint(date, yMin: v1, yMax: v2)
+                    }
+                }
+                return results
             }
             
         } catch {
