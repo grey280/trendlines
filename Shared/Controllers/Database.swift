@@ -59,7 +59,7 @@ class Database: ObservableObject {
             try db.create(table: DataSetEntry.databaseTableName, ifNotExists: true, body: { (t) in
                 t.autoIncrementedPrimaryKey(DataSetEntry.Columns.id.rawValue)
                 t.column(DataSetEntry.Columns.dateAdded.rawValue, .date).notNull() // TODO: default via database?
-                t.column(DataSetEntry.Columns.value.rawValue, .integer).notNull()
+                t.column(DataSetEntry.Columns.value.rawValue, .double).notNull()
                 t.column(DataSetEntry.Columns.datasetID.rawValue, .integer).notNull().references(DataSet.databaseTableName, column: DataSet.Columns.id.rawValue, onDelete: .cascade, onUpdate: .cascade)
             })
             

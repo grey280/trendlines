@@ -13,7 +13,7 @@ struct DataSetEntry {
     var id: ID?
     
     var dateAdded: Date
-    var value: Int
+    var value: Double
     var datasetID: DataSet.ID
     
     enum Columns: String, ColumnExpression {

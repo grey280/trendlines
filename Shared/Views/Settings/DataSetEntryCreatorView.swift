@@ -26,7 +26,6 @@ struct DataSetEntryCreatorView: View {
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 0
         return formatter
     }()
     
@@ -38,7 +37,7 @@ struct DataSetEntryCreatorView: View {
         Form {
             DatePicker("Date", selection: $entry.dateAdded)
             TextField("Value", value: $entry.value, formatter: formatter)
-                .keyboardType(.numberPad)
+                .keyboardType(.decimalPad)
             Button("Add") {
                 if (database.add(entry: entry)) {
                     onDismiss?()
