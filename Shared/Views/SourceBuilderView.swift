@@ -14,6 +14,17 @@ struct SourceBuilderView: View {
         TextField("Title", text: $source.title)
         ColorPicker("Color", selection: $source.color)
         SourceTypePickerView(sourceType: $source.sourceType)
+        if case .entries(let setID, let mode) = source.sourceType {
+            Picker("Data Mode", selection: Binding(get: {
+                mode
+            }, set: { (newMode) in
+                self.source.sourceType = .entries(datasetID: setID, mode: newMode)
+            })) {
+                Text("Average").tag(DataSourceDisplayMode.average)
+                Text("Count").tag(DataSourceDisplayMode.count)
+                Text("Sum").tag(DataSourceDisplayMode.sum)
+            }
+        }
         ChartTypePickerView(chartType: $source.chartType, color: source.color)
     }
 }
