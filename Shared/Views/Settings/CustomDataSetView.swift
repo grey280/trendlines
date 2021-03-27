@@ -18,7 +18,7 @@ struct CustomDataSetView: View {
         List {
             ForEach(entries, id: \.id) { entry in
                 HStack {
-                    Text("\(entry.dateAdded)")
+                    Text(entry.dateAdded, style: .date)
                     Spacer()
                     Text("\(entry.value)")
                 }
@@ -27,16 +27,11 @@ struct CustomDataSetView: View {
         }
         .navigationTitle(dataSet.name)
         .onAppear(perform: loadEntries)
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                    addingEntry.toggle()
-                } label: {
-                    Image(systemName: "plus").accessibility(hint: Text("Add an entry"))
-                }
-                EditButton()
-            }
-        }
+        .navigationBarItems(trailing: Button {
+            addingEntry.toggle()
+        } label: {
+            Image(systemName: "plus").accessibility(hint: Text("Add an entry"))
+        })
         .sheet(isPresented: $addingEntry) {
             DataSetEntryCreatorView(database: database, dataSet: dataSet) {
                 loadEntries()
