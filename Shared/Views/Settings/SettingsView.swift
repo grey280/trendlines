@@ -51,7 +51,7 @@ struct SettingsView: View {
             if (database.customDataSets.count > 0) {
                 Section(header: Text("Data Sets")) {
                     ForEach(database.customDataSets, id: \.id) { dataSet in
-                        NavigationLink(dataSet.name, destination: Text("Coming Soon"))
+                        NavigationLink(dataSet.name, destination: CustomDataSetView(database: database, dataSet: dataSet))
                     }
                     .onMove(perform: nil)
                     .onDelete(perform: onDeleteDataSet(offsets:))
