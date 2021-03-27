@@ -45,6 +45,7 @@ class Database: ObservableObject {
             return nil
         }
         loadCharts()
+        loadDatasets()
     }
     
     private func initializeDatabase() throws {
@@ -156,6 +157,24 @@ class Database: ObservableObject {
                 loadDatasets()
                 return true
             }
+            return false
+        } catch {
+            logger.error("Could not delete dataset. \(error.localizedDescription, privacy: .public)")
+            return false
+        }
+    }
+    
+    @discardableResult
+    func delete(dataSets: [DataSet]) -> Bool {
+        do {
+            let couldDelete = try dbQueue.write { db in
+                try DataSet.deleteAll(db, keys: dataSets.compactMap { $0.id })
+            }
+            loadDatasets()
+            if (couldDelete == dataSets.count) {
+                return true
+            }
+            logger.warning("Attempted to delete \(dataSets.count, privacy: .public) data sets, but could only delete \(couldDelete, privacy: .public)")
             return false
         } catch {
             logger.error("Could not delete dataset. \(error.localizedDescription, privacy: .public)")
