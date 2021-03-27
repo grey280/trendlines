@@ -19,6 +19,8 @@ class DatabaseProvider: DataProvider {
         self.dataSet = dataSet
         self.database = database
         self.mode = mode
+        
+        super.init()
         loadData()
     }
     
