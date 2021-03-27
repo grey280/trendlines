@@ -50,6 +50,8 @@
 		2D55673426019E7E00BC7821 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55673226019E7E00BC7821 /* SettingsView.swift */; };
 		2D5B3C08260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */; };
 		2D5B3C09260F8F0A002F3D62 /* DataSourceDisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */; };
+		2D5B3C0D260F8F48002F3D62 /* DataSourceType+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */; };
+		2D5B3C0E260F8F48002F3D62 /* DataSourceType+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */; };
 		2D6AA2B9260D745600CCAF9D /* ChartTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */; };
 		2D6AA2BC260D745600CCAF9D /* ChartTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */; };
 		2D727332260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */; };
@@ -94,6 +96,7 @@
 		2D43466825E325FB0018D541 /* SourceTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTypePickerView.swift; sourceTree = "<group>"; };
 		2D55673226019E7E00BC7821 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceDisplayMode.swift; sourceTree = "<group>"; };
+		2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataSourceType+Codable.swift"; sourceTree = "<group>"; };
 		2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChartTypePickerView.swift; path = Shared/Views/ChartTypePickerView.swift; sourceTree = "<group>"; };
 		2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetEntryCreatorView.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
@@ -216,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				2DCB046925E1820500CD58F8 /* DataSourceType.swift */,
+				2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */,
 				2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */,
 				2D1CAC4F2603093F0058F038 /* DataSet.swift */,
 				2DCD53B625E18B3000BBA89B /* ChartType.swift */,
@@ -342,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D5B3C0D260F8F48002F3D62 /* DataSourceType+Codable.swift in Sources */,
 				2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */,
 				2D33C75425E0556300E3C6C3 /* ContentView.swift in Sources */,
 				2D43463925E1DF870018D541 /* DataProvider.swift in Sources */,
@@ -375,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D5B3C0E260F8F48002F3D62 /* DataSourceType+Codable.swift in Sources */,
 				2DCD53B825E18B3000BBA89B /* ChartType.swift in Sources */,
 				2D33C75525E0556300E3C6C3 /* ContentView.swift in Sources */,
 				2D43463A25E1DF870018D541 /* DataProvider.swift in Sources */,
