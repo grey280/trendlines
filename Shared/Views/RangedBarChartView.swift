@@ -64,6 +64,8 @@ struct RangedBarChartView: View {
         return calculated
     }
     
+    @State private var padding: CGFloat = 0
+    
     var body: some View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
