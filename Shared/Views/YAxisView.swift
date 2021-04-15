@@ -40,6 +40,6 @@ struct YAxisView: View {
 
 struct YAxisView_Previews: PreviewProvider {
     static var previews: some View {
-        YAxisView(min: "0", max: "10", unit: "Things")
+        YAxisView(min: "0", max: "1000", unit: "Things")
     }
 }
