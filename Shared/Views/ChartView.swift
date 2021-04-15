@@ -122,19 +122,70 @@ struct ChartView_Double: View {
 }
 
 struct ChartView_Single: View {
-    public init(chart: Chart, database: Database) {
+    public init(source: DataSource, database: Database) {
         self.database = database
-        self.chart = chart
+        self.source = source
         
-        
+        switch source.sourceType {
+        case .empty:
+            self._provider = StateObject(wrappedValue: DemoDataProvider())
+        case .entries(let sourceID, let mode):
+            if let set = database.customDataSets.first(where: {
+                $0.id == sourceID
+            }), let provider = DatabaseProvider(dataSet: set, database: database, mode: mode) {
+                self._provider = StateObject(wrappedValue: provider)
+            } else {
+                self._provider = StateObject(wrappedValue: NoopDataProvider())
+            }
+        case .health(let healthType):
+            #if !os(macOS)
+            if let health = HealthDataProvider(healthType) {
+                self._provider = StateObject(wrappedValue: health)
+            } else {
+                self._provider = StateObject(wrappedValue: NoopDataProvider())
+            }
+            #else
+            self._provider = StateObject(wrappedValue: NoopDataProvider())
+            #endif
+        }
     }
     
     @ObservedObject var database: Database
-    let chart: Chart
+    let source: DataSource
     
-    @StateObject var provider1: DataProvider
-    @StateObject var provider2: DataProvider
+    @StateObject var provider: DataProvider
     
+    func yRange(points: [DatePoint]) -> (min: Double, max: Double) {
+        var result = (min: Double.infinity, max: -Double.infinity)
+        for point in points {
+            let min = point.yMin ?? point.y
+            let max = point.yMax ?? point.y
+            if (min < result.min) {
+                result.min = min
+            }
+            if (max > result.max) {
+                result.max = max
+            }
+        }
+        return result
+    }
+    
+    var body: some View {
+        let range = yRange(points: provider.points)
+        
+        HStack {
+            YAxisView(min: .init(format: "%.0f", range.min), max: .init(format: "%.0f", range.max), unit: source.unitName, color: source.color)
+            switch source.chartType {
+            case .bar:
+                BarChartView(data: provider.points, color: source.color, yRange: range)
+            case .floatingBar:
+                RangedBarChartView(data: provider.points, color: source.color, yRange: range)
+            case .line:
+                LineChartView(data: provider.points, color: source.color, yRange: range)
+            }
+            
+        }
+    }
 }
 
 struct OldChartView: View {
