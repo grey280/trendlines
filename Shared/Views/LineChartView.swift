@@ -71,32 +71,23 @@ struct LineChart: Shape {
 struct LineChartView: View {
     public init(
         data: [DatePoint],
-        unit: String,
         color: Color = .gray,
-        axisAlignment: YAxisView.AxisAlignment = .leading,
-        hasOverlay: Bool = false,
         yRange: (min: Double, max: Double)? = nil
     ) {
         self.data = data.sorted(by: { (a, b) -> Bool in
             a.x > b.x
         })
-        self.unit = unit
         self.color = color
-        self.axisAlignment = axisAlignment
         if let overrideY = yRange {
             self.yRange = overrideY
         } else {
             let ySorted = data.map { $0.y }.sorted()
             self.yRange = (ySorted.first ?? 0.0, ySorted.last ?? 0.0)
         }
-        self.hasOverlay = hasOverlay
     }
     
     let data: [DatePoint]
     let color: Color
-    let unit: String
-    let axisAlignment: YAxisView.AxisAlignment
-    let hasOverlay: Bool
     
     private let yRange: (min: Double, max: Double)
     
@@ -111,22 +102,8 @@ struct LineChartView: View {
         }
     }
     var body: some View {
-        GeometryReader { geo in
-            HStack(alignment: .bottom, spacing: spacing) {
-                if axisAlignment == .leading {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
-                } else if hasOverlay {
-                    Spacer().frame(width: YAxisView.width)
-                }
-                LineChart(data: data, yRange: yRange, circleRadius: 5)
-                    .stroke(color, style: StrokeStyle(lineWidth: 3.0))
-                if axisAlignment == .trailing {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
-                } else if hasOverlay {
-                    Spacer().frame(width: YAxisView.width)
-                }
-            }
-        }
+        LineChart(data: data, yRange: yRange, circleRadius: 5)
+            .stroke(color, style: StrokeStyle(lineWidth: 3.0))
     }
 }
 
