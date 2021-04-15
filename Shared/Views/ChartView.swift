@@ -17,7 +17,7 @@ struct ChartTitleView: View {
     }
 }
 
-struct ChartView_Double: View {
+fileprivate struct ChartView_Double: View {
     public init(source1: DataSource, source2: DataSource, database: Database) {
         self.database = database
         self.source1 = source1
@@ -121,7 +121,7 @@ struct ChartView_Double: View {
     }
 }
 
-struct ChartView_Single: View {
+fileprivate struct ChartView_Single: View {
     public init(source: DataSource, database: Database) {
         self.database = database
         self.source = source
@@ -188,7 +188,7 @@ struct ChartView_Single: View {
     }
 }
 
-struct OldChartView: View {
+struct ChartView: View {
     @EnvironmentObject var database: Database
     let chart: Chart
     
@@ -200,26 +200,12 @@ struct OldChartView: View {
                     Text(" and ")
                     ChartTitleView(source: source2)
                 }
-                HStack {
-                    #warning("incomplete")
-                    // y axis
-                    // zstack of charts
-                    // y axis
-                }
-                ZStack {
-                    _ChartView(source: chart.source1, overlay: .has, database: database)
-                    _ChartView(source: source2, overlay: .is, database: database)
-                }
+                ChartView_Double(source1: chart.source1, source2: source2, database: database)
             } else {
                 HStack {
                     ChartTitleView(source: chart.source1)
                 }
-                HStack {
-                    #warning("incomplete")
-                    // y axis
-                    // chart
-                }
-                _ChartView(source: chart.source1, overlay: .none, database: database)
+                ChartView_Single(source: chart.source1, database: database)
             }
         }
     }
