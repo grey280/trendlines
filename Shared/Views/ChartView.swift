@@ -144,32 +144,46 @@ struct ChartView_Double: View {
     @StateObject var provider1: DataProvider
     @StateObject var provider2: DataProvider
     
-    var s1Range: (min: Double, max: Double) {
+    func yRange(points: [DatePoint]) -> (min: Double, max: Double) {
         var result = (min: Double.infinity, max: -Double.infinity)
-        for point in provider1.points {
-            if (point.yMin < result.min) {
-                result.min = point.yMin
+        for point in points {
+            let min = point.yMin ?? point.y
+            let max = point.yMax ?? point.y
+            if (min < result.min) {
+                result.min = min
             }
-            if (point.yMax > result.max) {
-                result.max = point.yMax
+            if (max > result.max) {
+                result.max = max
             }
         }
         return result
     }
     
     var body: some View {
-        
-        
-        
-        let s1Data = provider1.points.sorted(by: { (a, b) -> Bool in
-            a.x < b.x
-        })
-        let s2Data = provider2.points.sorted(by: { (a, b) -> Bool in
-            a.x < b.x
-        })
+        let s1r = yRange(points: provider1.points)
+        let s2r = yRange(points: provider2.points)
         
         HStack {
-            YAxisView(min: , max: <#T##String#>, unit: <#T##String#>)
+            YAxisView(min: .init(format: "%.0f", s1r.min), max: .init(format: "%.0f", s1r.max), unit: source1.unitName, color: source1.color)
+            ZStack {
+                switch source1.chartType {
+                case .bar:
+                    BarChartView(data: provider1.points, unit: source1.unitName, color: source1.color, yRange: s1r)
+                case .floatingBar:
+                    RangedBarChartView(data: provider1.points, unit: source1.unitName, color: source1.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+                case .line:
+                    LineChartView(data: provider1.points, unit: source1.unitName, color: source1.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+                }
+                switch source2.chartType {
+                case .bar:
+                    BarChartView(data: provider2.points, unit: source2.unitName, color: source2.color, yRange: s2r)
+                case .floatingBar:
+                    RangedBarChartView(data: provider2.points, unit: source2.unitName, color: source2.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+                case .line:
+                    LineChartView(data: provider2.points, unit: source2.unitName, color: source2.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+                }
+            }
+            YAxisView(min: .init(format: "%.0f", s2r.min), max: .init(format: "%.0f", s2r.max), unit: source2.unitName, color: source2.color)
         }
     }
 }
