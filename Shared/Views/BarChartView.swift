@@ -10,14 +10,12 @@ import SwiftUI
 struct BarChartView: View {
     public init(
         data: [DatePoint],
-        unit: String,
         color: Color = .gray,
         yRange: (min: Double, max: Double)? = nil
     ) {
         self.data = data.sorted(by: { (a, b) -> Bool in
             a.x < b.x
         })
-        self.unit = unit
         self.color = color
         if let overrideY = yRange {
             self.yRange = overrideY
@@ -29,7 +27,6 @@ struct BarChartView: View {
     
     let data: [DatePoint]
     let color: Color
-    let unit: String
     
     private let yRange: (min: Double, max: Double)
     

@@ -168,19 +168,19 @@ struct ChartView_Double: View {
             ZStack {
                 switch source1.chartType {
                 case .bar:
-                    BarChartView(data: provider1.points, unit: source1.unitName, color: source1.color, yRange: s1r)
+                    BarChartView(data: provider1.points, color: source1.color, yRange: s1r)
                 case .floatingBar:
-                    RangedBarChartView(data: provider1.points, unit: source1.unitName, color: source1.color, yRange: s1r)
+                    RangedBarChartView(data: provider1.points, color: source1.color, yRange: s1r)
                 case .line:
-                    LineChartView(data: provider1.points, unit: source1.unitName, color: source1.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+                    LineChartView(data: provider1.points, color: source1.color, yRange: s1r)
                 }
                 switch source2.chartType {
                 case .bar:
-                    BarChartView(data: provider2.points, unit: source2.unitName, color: source2.color, yRange: s2r)
+                    BarChartView(data: provider2.points, color: source2.color, yRange: s2r)
                 case .floatingBar:
-                    RangedBarChartView(data: provider2.points, unit: source2.unitName, color: source2.color, yRange: s2r)
+                    RangedBarChartView(data: provider2.points, color: source2.color, yRange: s2r)
                 case .line:
-                    LineChartView(data: provider2.points, unit: source2.unitName, color: source2.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+                    LineChartView(data: provider2.points, color: source2.color, yRange: s2r)
                 }
             }
             YAxisView(min: .init(format: "%.0f", s2r.min), max: .init(format: "%.0f", s2r.max), unit: source2.unitName, color: source2.color)
