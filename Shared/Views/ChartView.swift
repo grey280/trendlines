@@ -77,24 +77,9 @@ fileprivate struct ChartView_Double: View {
     @StateObject var provider1: DataProvider
     @StateObject var provider2: DataProvider
     
-    func yRange(points: [DatePoint]) -> (min: Double, max: Double) {
-        var result = (min: Double.infinity, max: -Double.infinity)
-        for point in points {
-            let min = point.yMin ?? point.y
-            let max = point.yMax ?? point.y
-            if (min < result.min) {
-                result.min = min
-            }
-            if (max > result.max) {
-                result.max = max
-            }
-        }
-        return result
-    }
-    
     var body: some View {
-        let s1r = yRange(points: provider1.points)
-        let s2r = yRange(points: provider2.points)
+        let s1r = ChartView.yRange(points: provider1.points)
+        let s2r = ChartView.yRange(points: provider2.points)
         
         HStack {
             YAxisView(min: .init(format: "%.0f", s1r.min), max: .init(format: "%.0f", s1r.max), unit: source1.unitName, color: source1.color)
@@ -155,23 +140,8 @@ fileprivate struct ChartView_Single: View {
     
     @StateObject var provider: DataProvider
     
-    func yRange(points: [DatePoint]) -> (min: Double, max: Double) {
-        var result = (min: Double.infinity, max: -Double.infinity)
-        for point in points {
-            let min = point.yMin ?? point.y
-            let max = point.yMax ?? point.y
-            if (min < result.min) {
-                result.min = min
-            }
-            if (max > result.max) {
-                result.max = max
-            }
-        }
-        return result
-    }
-    
     var body: some View {
-        let range = yRange(points: provider.points)
+        let range = ChartView.yRange(points: provider.points)
         
         HStack {
             YAxisView(min: .init(format: "%.0f", range.min), max: .init(format: "%.0f", range.max), unit: source.unitName, color: source.color)
@@ -208,6 +178,24 @@ struct ChartView: View {
                 ChartView_Single(source: chart.source1, database: database)
             }
         }
+    }
+    
+    static func yRange(points: [DatePoint]) -> (min: Double, max: Double) {
+        var result = (min: Double.infinity, max: -Double.infinity)
+        for point in points {
+            let min = point.yMin ?? point.y
+            let max = point.yMax ?? point.y
+            if (min < result.min) {
+                result.min = min
+            }
+            if (max > result.max) {
+                result.max = max
+            }
+        }
+        if points.count == 0 {
+            return (min: 0, max: 0)
+        }
+        return result
     }
 }
 
