@@ -20,11 +20,11 @@ fileprivate struct ChartTypePickerItemView: View {
         HStack {
             switch type {
             case .bar:
-                BarChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false).padding()
+                BarChartView(data: provider.points, color: color).padding()
             case .floatingBar:
-                RangedBarChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false).padding()
+                RangedBarChartView(data: provider.points, color: color).padding()
             case .line:
-                LineChartView(data: provider.points, unit: "Data", color: color, axisAlignment: .leading, hasOverlay: false).padding()
+                LineChartView(data: provider.points, color: color).padding()
             }
             Spacer()
             if (type == selectedType) {

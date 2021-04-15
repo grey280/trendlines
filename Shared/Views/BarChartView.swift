@@ -10,32 +10,23 @@ import SwiftUI
 struct BarChartView: View {
     public init(
         data: [DatePoint],
-        unit: String,
         color: Color = .gray,
-        axisAlignment: YAxisView.AxisAlignment = .leading,
-        hasOverlay: Bool = false,
         yRange: (min: Double, max: Double)? = nil
     ) {
         self.data = data.sorted(by: { (a, b) -> Bool in
             a.x < b.x
         })
-        self.unit = unit
         self.color = color
-        self.axisAlignment = axisAlignment
         if let overrideY = yRange {
             self.yRange = overrideY
         } else {
             let ySorted = data.map { $0.y }.sorted()
             self.yRange = (ySorted.first ?? 0.0, ySorted.last ?? 0.0)
         }
-        self.hasOverlay = hasOverlay
     }
     
     let data: [DatePoint]
     let color: Color
-    let unit: String
-    let axisAlignment: YAxisView.AxisAlignment
-    let hasOverlay: Bool
     
     private let yRange: (min: Double, max: Double)
     
@@ -51,7 +42,7 @@ struct BarChartView: View {
     }
     
     private func barWidth(_ source: CGSize) -> CGFloat {
-        (source.width - CGFloat(hasOverlay ? (2 * YAxisView.width) : YAxisView.width) - (spacing * CGFloat(data.count))) / CGFloat(data.count)
+        (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
     private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
         let calculated = CGFloat(y / yRange.max) * source.height
@@ -64,11 +55,6 @@ struct BarChartView: View {
     var body: some View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
-                if axisAlignment == .leading {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
-                } else if hasOverlay {
-                    Spacer().frame(width: YAxisView.width)
-                }
                 ForEach(data, id: \.x) { dataPoint in
                     ZStack {
                         PartialRoundedRectangle(top: barWidth(geo.size) / 4)
@@ -76,12 +62,6 @@ struct BarChartView: View {
                         PartialRoundedRectangle(top: barWidth(geo.size) / 4)
                             .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                     }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
-                    
-                }
-                if axisAlignment == .trailing {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
-                } else if hasOverlay {
-                    Spacer().frame(width: YAxisView.width)
                 }
             }
         }
