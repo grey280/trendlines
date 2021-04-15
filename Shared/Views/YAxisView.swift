@@ -28,13 +28,14 @@ struct YAxisView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text(max)
+            Text(max).fixedSize(horizontal: true, vertical: false)
             Spacer()
             Text(unit).rotationEffect(.degrees(-90)).fixedSize()
             Spacer()
-            Text(min)
-        }.foregroundColor(color).font(.footnote)
-        .frame(width: YAxisView.width)
+            Text(min).fixedSize(horizontal: true, vertical: false)
+        }
+        .foregroundColor(color).font(.footnote)
+//        .frame(width: YAxisView.width)
     }
 }
 
