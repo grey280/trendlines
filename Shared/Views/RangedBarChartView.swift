@@ -12,8 +12,6 @@ struct RangedBarChartView: View {
         data: [DatePoint],
         unit: String,
         color: Color = .gray,
-        axisAlignment: YAxisView.AxisAlignment = .leading,
-        hasOverlay: Bool = false,
         yRange: (min: Double, max: Double)? = nil
     ) {
         self.data = data.sorted(by: { (a, b) -> Bool in
@@ -21,21 +19,17 @@ struct RangedBarChartView: View {
         })
         self.unit = unit
         self.color = color
-        self.axisAlignment = axisAlignment
         if let overrideY = yRange {
             self.yRange = overrideY
         } else {
             let ySorted = data.flatMap { [$0.yMin, $0.yMax] }.compactMap { $0 }.sorted()
             self.yRange = (ySorted.first ?? 0.0, ySorted.last ?? 0.0)
         }
-        self.hasOverlay = hasOverlay
     }
     
     let data: [DatePoint]
     let color: Color
     let unit: String
-    let axisAlignment: YAxisView.AxisAlignment
-    let hasOverlay: Bool
     
     private let yRange: (min: Double, max: Double)
     
@@ -51,7 +45,7 @@ struct RangedBarChartView: View {
     }
     
     private func barWidth(_ source: CGSize) -> CGFloat {
-        (source.width - CGFloat(hasOverlay ? (2 * YAxisView.width) : YAxisView.width) - (spacing * CGFloat(data.count))) / CGFloat(data.count)
+        (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
     private func barOffset(_ source: CGSize, y: Double) -> CGFloat {
         CGFloat(y / yRange.max) * source.height
@@ -67,11 +61,6 @@ struct RangedBarChartView: View {
     var body: some View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
-                if axisAlignment == .leading {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
-                } else if hasOverlay {
-                   Spacer().frame(width: YAxisView.width)
-                }
                 ForEach(data, id: \.x) { dataPoint in
                     ZStack {
                         RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
@@ -79,11 +68,6 @@ struct RangedBarChartView: View {
                         RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
                             .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                     }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: (dataPoint.yMax ?? dataPoint.y) - (dataPoint.yMin ?? dataPoint.y))).padding(.bottom, barOffset(geo.size, y: dataPoint.yMin ?? dataPoint.y))
-                }
-                if axisAlignment == .trailing {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
-                } else if hasOverlay {
-                    Spacer().frame(width: YAxisView.width)
                 }
             }
         }

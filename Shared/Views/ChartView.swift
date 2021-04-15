@@ -170,7 +170,7 @@ struct ChartView_Double: View {
                 case .bar:
                     BarChartView(data: provider1.points, unit: source1.unitName, color: source1.color, yRange: s1r)
                 case .floatingBar:
-                    RangedBarChartView(data: provider1.points, unit: source1.unitName, color: source1.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+                    RangedBarChartView(data: provider1.points, unit: source1.unitName, color: source1.color, yRange: s1r)
                 case .line:
                     LineChartView(data: provider1.points, unit: source1.unitName, color: source1.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
                 }
@@ -178,7 +178,7 @@ struct ChartView_Double: View {
                 case .bar:
                     BarChartView(data: provider2.points, unit: source2.unitName, color: source2.color, yRange: s2r)
                 case .floatingBar:
-                    RangedBarChartView(data: provider2.points, unit: source2.unitName, color: source2.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
+                    RangedBarChartView(data: provider2.points, unit: source2.unitName, color: source2.color, yRange: s2r)
                 case .line:
                     LineChartView(data: provider2.points, unit: source2.unitName, color: source2.color, axisAlignment: axisAlignment, hasOverlay: hasOverlay)
                 }
