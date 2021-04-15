@@ -30,6 +30,8 @@ struct YAxisView: View {
     
     var body: some View {
         GeometryReader { geo in
+            let pref = YAxisWidthPreference(width: geo.size.width, alignment: alignment)
+            
             VStack(alignment: .center) {
                 Text(max).fixedSize(horizontal: true, vertical: false)
                 Spacer()
@@ -38,7 +40,7 @@ struct YAxisView: View {
                 Text(min).fixedSize(horizontal: true, vertical: false)
             }
             .foregroundColor(color).font(.footnote)
-            .preference(key: self.alignment == .leading ? YAxisLeadingWidthPreferenceKey.self : YAxisTrailingWidthPreferenceKey.self, value: .init(width: geo.size.width))
+            .preference(key: YAxisWidthPreferenceKey.self, value: alignment == .leading ? (leading: pref, trailing: nil) : (leading: nil, trailing: pref))
             //        .frame(width: YAxisView.width)
         }
     }
@@ -52,33 +54,21 @@ struct YAxisView_Previews: PreviewProvider {
 
 struct YAxisWidthPreference: Equatable {
     let width: CGFloat
-    //    let axis: YAxisView.AxisAlignment
+    let alignment: YAxisView.AxisAlignment
 }
 
-struct YAxisLeadingWidthPreferenceKey: PreferenceKey {
-    typealias Value = YAxisWidthPreference
-    
-    static var defaultValue: YAxisWidthPreference = .init(width: 0)
-    
-    static func reduce(value: inout YAxisWidthPreference, nextValue: () -> YAxisWidthPreference) {
-        value = nextValue()
-    }
-    
-    //    typealias Value = (leading: YAxisWidthPreference, trailing: YAxisWidthPreference)
-    
-    //    static var defaultValue: (leading: YAxisWidthPreference, trailing: YAxisWidthPreference) = (leading: .init(width: 0, axis: .leading), trailing: .init(width: 0, axis: .trailing))
-    
-    //    static func reduce(value: inout (leading: YAxisWidthPreference, trailing: YAxisWidthPreference), nextValue: () -> (leading: YAxisWidthPreference, trailing: YAxisWidthPreference)) {
-    //        <#code#>
-    //    }
-}
+struct YAxisWidthPreferenceKey: PreferenceKey {
+    typealias Value = (leading: YAxisWidthPreference?, trailing: YAxisWidthPreference?)
 
-struct YAxisTrailingWidthPreferenceKey: PreferenceKey {
-    typealias Value = YAxisWidthPreference
-    
-    static var defaultValue: YAxisWidthPreference = .init(width: 0)
-    
-    static func reduce(value: inout YAxisWidthPreference, nextValue: () -> YAxisWidthPreference) {
-        value = nextValue()
+    static var defaultValue: (leading: YAxisWidthPreference?, trailing: YAxisWidthPreference?) = (leading: .init(width: 0, alignment: .leading), trailing: .init(width: 0, alignment: .trailing))
+
+    static func reduce(value: inout (leading: YAxisWidthPreference?, trailing: YAxisWidthPreference?), nextValue: () -> (leading: YAxisWidthPreference?, trailing: YAxisWidthPreference?)) {
+        let val = nextValue()
+        if let vL = val.leading {
+            value.leading = vL
+        }
+        if let vT = val.trailing {
+            value.trailing = vT
+        }
     }
 }

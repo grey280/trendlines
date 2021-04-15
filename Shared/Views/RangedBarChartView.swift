@@ -68,7 +68,7 @@ struct RangedBarChartView: View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
                 if axisAlignment == .leading {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, alignment: axisAlignment, color: color)
                 } else if hasOverlay {
                    Spacer().frame(width: YAxisView.width)
                 }
@@ -81,7 +81,7 @@ struct RangedBarChartView: View {
                     }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: (dataPoint.yMax ?? dataPoint.y) - (dataPoint.yMin ?? dataPoint.y))).padding(.bottom, barOffset(geo.size, y: dataPoint.yMin ?? dataPoint.y))
                 }
                 if axisAlignment == .trailing {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, alignment: axisAlignment, color: color)
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }

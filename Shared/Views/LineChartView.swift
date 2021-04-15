@@ -114,14 +114,14 @@ struct LineChartView: View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
                 if axisAlignment == .leading {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, alignment: axisAlignment, color: color)
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }
                 LineChart(data: data, yRange: yRange, circleRadius: 5)
                     .stroke(color, style: StrokeStyle(lineWidth: 3.0))
                 if axisAlignment == .trailing {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, alignment: axisAlignment, color: color)
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }

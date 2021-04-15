@@ -65,7 +65,7 @@ struct BarChartView: View {
         GeometryReader { geo in
             HStack(alignment: .bottom, spacing: spacing) {
                 if axisAlignment == .leading {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, alignment: axisAlignment, color: color)
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }
@@ -75,11 +75,12 @@ struct BarChartView: View {
                             .fill(self.color.opacity(0.4))
                         PartialRoundedRectangle(top: barWidth(geo.size) / 4)
                             .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
-                    }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
+                    }
+                    .frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
                     
                 }
                 if axisAlignment == .trailing {
-                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, color: color)
+                    YAxisView(min: "0", max: .init(format: "%.0f", yRange.max), unit: unit, alignment: axisAlignment, color: color)
                 } else if hasOverlay {
                     Spacer().frame(width: YAxisView.width)
                 }
