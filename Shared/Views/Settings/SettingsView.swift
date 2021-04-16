@@ -64,8 +64,7 @@ struct SettingsView: View {
                 NavigationLink("Restore Purchase", destination: Text("Coming soon."))
             }
             Section(header: Text("Legal")) {
-                NavigationLink("Privacy Policy", destination: Text("Coming soon."))
-                #warning("Missing privacy policy")
+                NavigationLink("Privacy Policy", destination: PrivacyPolicyView())
                 NavigationLink("Licenses", destination: Text("Coming soon."))
                 #warning("Missing licenses") // TODO: GRDB license presumably
             }
