@@ -12,7 +12,7 @@ struct SettingsView: View {
     @State var editMode = EditMode.inactive
     
     @State var editingChart: Chart? = nil
-    @State var chartSaveFailure = true
+    @State var chartSaveFailure = false
     
     var editable: Bool {
         database.charts.count > 0 || database.customDataSets.count > 0
