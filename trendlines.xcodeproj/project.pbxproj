@@ -58,6 +58,8 @@
 		2D727333260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */; };
 		2D76A58226292586002CEEF0 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D76A58126292586002CEEF0 /* PrivacyPolicyView.swift */; };
 		2D76A58326292586002CEEF0 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D76A58126292586002CEEF0 /* PrivacyPolicyView.swift */; };
+		2D76A5892629291E002CEEF0 /* LicensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D76A5882629291E002CEEF0 /* LicensesView.swift */; };
+		2D76A58A2629291E002CEEF0 /* LicensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D76A5882629291E002CEEF0 /* LicensesView.swift */; };
 		2DCB046A25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 		2DCB046B25E1820500CD58F8 /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB046925E1820500CD58F8 /* DataSourceType.swift */; };
 		2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD53B625E18B3000BBA89B /* ChartType.swift */; };
@@ -104,6 +106,7 @@
 		2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTypePickerView.swift; sourceTree = "<group>"; };
 		2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetEntryCreatorView.swift; sourceTree = "<group>"; };
 		2D76A58126292586002CEEF0 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		2D76A5882629291E002CEEF0 /* LicensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesView.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		2DCD53BB25E18B5000BBA89B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
@@ -138,6 +141,7 @@
 			children = (
 				2D55673226019E7E00BC7821 /* SettingsView.swift */,
 				2D22A449260ED862001B3F62 /* CustomDataSetView.swift */,
+				2D76A5882629291E002CEEF0 /* LicensesView.swift */,
 				2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */,
 				2D76A58126292586002CEEF0 /* PrivacyPolicyView.swift */,
 			);
@@ -368,6 +372,7 @@
 				2D43463925E1DF870018D541 /* DataProvider.swift in Sources */,
 				2D1CAC55260309DB0058F038 /* DataSetEntry.swift in Sources */,
 				2D33C77E25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
+				2D76A5892629291E002CEEF0 /* LicensesView.swift in Sources */,
 				2D33C78525E0904700E3C6C3 /* LineChartView.swift in Sources */,
 				2D55673326019E7E00BC7821 /* SettingsView.swift in Sources */,
 				2D727332260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */,
@@ -404,6 +409,7 @@
 				2D43463A25E1DF870018D541 /* DataProvider.swift in Sources */,
 				2D1CAC56260309DB0058F038 /* DataSetEntry.swift in Sources */,
 				2D33C77F25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
+				2D76A58A2629291E002CEEF0 /* LicensesView.swift in Sources */,
 				2D33C78625E0904700E3C6C3 /* LineChartView.swift in Sources */,
 				2D55673426019E7E00BC7821 /* SettingsView.swift in Sources */,
 				2D727333260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */,
