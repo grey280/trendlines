@@ -220,17 +220,25 @@
 			path = ChartBuilder;
 			sourceTree = "<group>";
 		};
-		2DCB046725E1817200CD58F8 /* Views */ = {
+		2D76A58F26292BBD002CEEF0 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				2D76A58D26292B97002CEEF0 /* ChartBuilder */,
-				2D22A448260ED832001B3F62 /* Settings */,
 				2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */,
 				2D33C76225E055ED00E3C6C3 /* BarChartView.swift */,
 				2D33C78425E0904700E3C6C3 /* LineChartView.swift */,
 				2D33C77325E06DD800E3C6C3 /* PartialRoundedRectangle.swift */,
 				2D33C76E25E06D9F00E3C6C3 /* YAxisView.swift */,
 				2D43463325E1AB7D0018D541 /* ChartView.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		2DCB046725E1817200CD58F8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2D76A58F26292BBD002CEEF0 /* Chart */,
+				2D76A58D26292B97002CEEF0 /* ChartBuilder */,
+				2D22A448260ED832001B3F62 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
