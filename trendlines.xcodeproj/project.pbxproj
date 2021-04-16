@@ -99,7 +99,7 @@
 		2D55673226019E7E00BC7821 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceDisplayMode.swift; sourceTree = "<group>"; };
 		2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataSourceType+Codable.swift"; sourceTree = "<group>"; };
-		2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChartTypePickerView.swift; path = Shared/Views/ChartTypePickerView.swift; sourceTree = "<group>"; };
+		2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTypePickerView.swift; sourceTree = "<group>"; };
 		2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetEntryCreatorView.swift; sourceTree = "<group>"; };
 		2DCB046925E1820500CD58F8 /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		2DCD53B625E18B3000BBA89B /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
@@ -143,7 +143,6 @@
 		2D33C73925E0556300E3C6C3 = {
 			isa = PBXGroup;
 			children = (
-				2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */,
 				2D43463D25E1E15D0018D541 /* trendlines.entitlements */,
 				2D33C73E25E0556300E3C6C3 /* Shared */,
 				2D33C74825E0556300E3C6C3 /* iOS */,
@@ -205,6 +204,7 @@
 		2DCB046725E1817200CD58F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */,
 				2D22A448260ED832001B3F62 /* Settings */,
 				2D33C77D25E0811400E3C6C3 /* RangedBarChartView.swift */,
 				2D33C76225E055ED00E3C6C3 /* BarChartView.swift */,

@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct LineChart: Shape {
-    public init(data: [DatePoint], yRange: (min: Double, max: Double), circleRadius: CGFloat = 1) {
+    public init(data: [DatePoint], yRange: (min: Double, max: Double)) {
         self.data = data
         self.yRange = yRange
-        self.circleRadius = circleRadius
     }
     
     let data: [DatePoint]
     let yRange: (min: Double, max: Double)
-    let circleRadius: CGFloat
     
     // step size to go from an x point to the next x point
     func xStep(in width: CGFloat) -> CGFloat {
@@ -102,8 +100,9 @@ struct LineChartView: View {
         }
     }
     var body: some View {
-        LineChart(data: data, yRange: yRange, circleRadius: 5)
+        LineChart(data: data, yRange: yRange)
             .stroke(color, style: StrokeStyle(lineWidth: 3.0))
+            .rotationEffect(.degrees(180))
     }
 }
 

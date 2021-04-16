@@ -181,7 +181,8 @@ struct ChartView: View {
     }
     
     static func yRange(points: [DatePoint]) -> (min: Double, max: Double) {
-        var result = (min: Double.infinity, max: -Double.infinity)
+        #warning("May need to changed when graphs support negative numbers")
+        var result = (min: 0.0, max: -Double.infinity)
         for point in points {
             let min = point.yMin ?? point.y
             let max = point.yMax ?? point.y

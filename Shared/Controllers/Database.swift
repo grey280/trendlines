@@ -20,6 +20,11 @@ class Database: ObservableObject {
     private let logger: Logger
     private let dbQueue: DatabaseQueue
     
+    var datasetUpdatedPublisher: AnyPublisher<DataSet.ID, Never> {
+        datasetUpdatedSubject.eraseToAnyPublisher()
+    }
+    private let datasetUpdatedSubject = PassthroughSubject<DataSet.ID, Never>()
+    
     init?() {
         logger = Logger(subsystem: "net.twoeighty.trendlines", category: "Database")
         guard var url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -262,6 +267,7 @@ class Database: ObservableObject {
             }
             if (couldAdd) {
                 loadDatasets()
+                datasetUpdatedSubject.send(entry.datasetID)
                 return true
             }
             return false
@@ -275,6 +281,10 @@ class Database: ObservableObject {
         do {
             let couldDelete = try dbQueue.write { db in
                 try DataSetEntry.deleteAll(db, keys: entries.compactMap { $0.id })
+            }
+            let distinctIDs = Set(entries.map { $0.datasetID })
+            for id in distinctIDs {
+                datasetUpdatedSubject.send(id)
             }
             if (couldDelete == entries.count) {
                 return true
@@ -294,6 +304,7 @@ class Database: ObservableObject {
             try dbQueue.write { db in
                 try copy.insert(db)
             }
+            datasetUpdatedSubject.send(entry.datasetID)
             return true
         } catch {
             logger.error("Could not save entry. \(error.localizedDescription, privacy: .public)")
