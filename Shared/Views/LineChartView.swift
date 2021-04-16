@@ -102,6 +102,7 @@ struct LineChartView: View {
     var body: some View {
         LineChart(data: data, yRange: yRange)
             .stroke(color, style: StrokeStyle(lineWidth: 3.0))
+            .rotationEffect(.degrees(180))
     }
 }
 
