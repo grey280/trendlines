@@ -65,8 +65,7 @@ struct SettingsView: View {
             }
             Section(header: Text("Legal")) {
                 NavigationLink("Privacy Policy", destination: PrivacyPolicyView())
-                NavigationLink("Licenses", destination: Text("Coming soon."))
-                #warning("Missing licenses") // TODO: GRDB license presumably
+                NavigationLink("Licenses", destination: LicensesView())
             }
         }
         .listStyle(InsetGroupedListStyle())
