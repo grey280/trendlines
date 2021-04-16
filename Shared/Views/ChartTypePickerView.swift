@@ -16,7 +16,7 @@ fileprivate struct ChartTypePickerItemView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        // TODO: Needs some accessilbity hinting to indicate active state
+        // TODO: Needs some accessibility hinting to indicate active state
         HStack {
             switch type {
             case .bar:
