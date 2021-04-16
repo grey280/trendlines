@@ -12,6 +12,7 @@ struct SettingsView: View {
     @State var editMode = EditMode.inactive
     
     @State var editingChart: Chart? = nil
+    @State var chartSaveFailure = false
     
     var editable: Bool {
         database.charts.count > 0 || database.customDataSets.count > 0
@@ -64,10 +65,8 @@ struct SettingsView: View {
                 NavigationLink("Restore Purchase", destination: Text("Coming soon."))
             }
             Section(header: Text("Legal")) {
-                NavigationLink("Privacy Policy", destination: Text("Coming soon."))
-                #warning("Missing privacy policy")
-                NavigationLink("Licenses", destination: Text("Coming soon."))
-                #warning("Missing licenses") // TODO: GRDB license presumably
+                NavigationLink("Privacy Policy", destination: PrivacyPolicyView())
+                NavigationLink("Licenses", destination: LicensesView())
             }
         }
         .listStyle(InsetGroupedListStyle())
@@ -79,14 +78,16 @@ struct SettingsView: View {
                 guard let idx = database.charts.firstIndex(where: {
                     $0.id == updatedChart.id
                 }) else {
-                    #warning("Missing error handling")
+                    chartSaveFailure = true
                     return
                 }
                 database.charts[idx] = updatedChart
                 database.saveCharts()
             }
         })
-        
+        .alert(isPresented: $chartSaveFailure, content: {
+            Alert(title: Text("Unable to Save"))
+        })
     }
     
     private func onDeleteChart(offsets: IndexSet) {
@@ -107,6 +108,12 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        if let db = Database() {
+            NavigationView {
+                SettingsView().environmentObject(db)
+            }
+        } else {
+            EmptyView()
+        }
     }
 }

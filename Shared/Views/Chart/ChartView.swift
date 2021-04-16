@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-struct ChartTitleView: View {
-    let source: DataSource
-    
-    var body: some View {
-        Text(source.title)
-            .padding(6)
-            .background(RoundedRectangle(cornerRadius: 8).fill(source.color.opacity(0.5)))
-    }
-}
-
 fileprivate struct ChartView_Double: View {
     public init(source1: DataSource, source2: DataSource, database: Database) {
         self.database = database
