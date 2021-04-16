@@ -107,7 +107,9 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         if let db = Database() {
-            SettingsView().environmentObject(db)
+            NavigationView {
+                SettingsView().environmentObject(db)
+            }
         } else {
             EmptyView()
         }
