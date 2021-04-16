@@ -28,9 +28,11 @@ class DatabaseProvider: DataProvider {
     
     func loadData() {
         if updateSubscription == nil {
-            self.updateSubscription = database.datasetUpdatedPublisher.sink { (_) in
-                self.loadData()
-            }
+            self.updateSubscription = database.datasetUpdatedPublisher
+                .filter { $0 == self.dataSet.id }
+                .sink { _ in
+                    self.loadData()
+                }
         }
         guard let startDate = Calendar.current.date(byAdding: .day, value: -30, to: Date()) else {
             logger.error("Could not create '30 days ago' date.")
