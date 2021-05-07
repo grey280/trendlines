@@ -54,9 +54,13 @@ struct BarChartView: View {
     private func position(index: Int, point: DatePoint, source: CGSize) -> CGPoint {
         let barWidth = barWidth(source)
         let x: CGFloat = CGFloat(index) * (spacing + barWidth)
-        let yTop: CGFloat = CGFloat(yRange.max - yRange.min)
-        let yBottom: CGFloat = CGFloat(((point.yMax ?? 0) - yRange.min))
-        let y: CGFloat = source.height * (yTop / yBottom)
+        
+        let yTop: CGFloat = CGFloat(yRange.max - point.y)
+        let yBottom: CGFloat = CGFloat(yRange.max - yRange.min)
+        let yPercentage = yTop / yBottom
+        
+        let y = yPercentage * source.height
+        
         return CGPoint(x: x, y: y)
     }
     
