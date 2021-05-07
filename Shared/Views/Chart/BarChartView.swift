@@ -46,8 +46,8 @@ struct BarChartView: View {
     }
     private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
         let calculated = CGFloat(y / yRange.max) * source.height
-        if (calculated < 10) {
-            return 10
+        if (calculated < 1) {
+            return 1
         }
         return calculated
     }
@@ -72,7 +72,7 @@ struct BarChartView: View {
                 if let dataPoint = data[index] {
                     let pos = position(index: index, point: dataPoint, source: geo.size)
                     ZStack {
-                        if (dataPoint.y > 0) {
+                        if (dataPoint.y >= 0) {
                             PartialRoundedRectangle(top: radius)
                                 .fill(self.color.opacity(0.4))
                             PartialRoundedRectangle(top: radius)

@@ -59,9 +59,9 @@ struct RangedBarChartView: View {
     }
     
     private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
-        let calculated = CGFloat(y / yRange.max) * source.height
-        if (calculated < 10) {
-            return 10
+        let calculated = CGFloat(y / (yRange.max - yRange.min)) * source.height
+        if (calculated < 1) {
+            return 1
         }
         return calculated
     }
