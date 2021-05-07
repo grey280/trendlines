@@ -48,9 +48,17 @@ struct RangedBarChartView: View {
     private func position(index: Int, point: DatePoint, source: CGSize) -> CGPoint {
         let barWidth = barWidth(source)
         let x: CGFloat = CGFloat(index) * (spacing + barWidth)
-        let yTop: CGFloat = CGFloat(yRange.max - yRange.min)
-        let yBottom: CGFloat = CGFloat(((point.yMax ?? 0) - yRange.min))
-        let y: CGFloat = source.height * (yTop / yBottom)
+        
+        let n = source.height
+        let yn = CGFloat(point.yMax ?? 0.0)
+        let yMinus = CGFloat(yRange.min)
+        
+        let y = n * yn / yMinus
+        
+        
+//        let yTop: CGFloat = CGFloat(yRange.max - yRange.min)
+//        let yBottom: CGFloat = CGFloat(((point.yMax ?? 0) - yRange.min))
+//        let y: CGFloat = source.height * (yBottom / yTop)
         return CGPoint(x: x, y: y)
     }
     
