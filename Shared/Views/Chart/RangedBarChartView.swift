@@ -45,19 +45,6 @@ struct RangedBarChartView: View {
         (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
     
-    private func position(index: Int, point: DatePoint, source: CGSize) -> CGPoint {
-        let barWidth = barWidth(source)
-        let x: CGFloat = CGFloat(index) * (spacing + barWidth)
-        
-        let yTop: CGFloat = CGFloat(yRange.max - (point.yMax ?? point.y))
-        let yBottom: CGFloat = CGFloat(yRange.max - yRange.min)
-        let yPercentage = yTop / yBottom
-        
-        let y = yPercentage * source.height
-        
-        return CGPoint(x: x, y: y)
-    }
-    
     private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
         let calculated = CGFloat(y / (yRange.max - yRange.min)) * source.height
         if (calculated < 1) {
@@ -69,18 +56,21 @@ struct RangedBarChartView: View {
     var body: some View {
         GeometryReader { geo in
             let width = barWidth(geo.size)
+            let widthStep = spacing + width
             let radius = width / 4
             ForEach(0..<data.count) { index in
                 if let dataPoint = data[index] {
-                    let pos = position(index: index, point: dataPoint, source: geo.size)
+                    let x = CGFloat(index) * widthStep
+                    let height = barHeight(geo.size, y: (dataPoint.yMax ?? dataPoint.y) - (dataPoint.yMin ?? dataPoint.y))
+                    let y = geo.size.height - height
                     ZStack {
                         RoundedRectangle(cornerRadius: radius)
                             .fill(self.color.opacity(0.4))
                         RoundedRectangle(cornerRadius: radius)
                             .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                     }
-                    .frame(width: width, height: barHeight(geo.size, y: (dataPoint.yMax ?? dataPoint.y) - (dataPoint.yMin ?? dataPoint.y)), alignment: .center)
-                    .position(x: pos.x, y: pos.y)
+                    .frame(width: width, height: height)
+                    .position(x: x, y: y)
                 }
             }
         }

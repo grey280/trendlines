@@ -84,7 +84,7 @@ struct BarChartView: View {
                                 .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                         }
                     }
-                    .frame(width: width, height: barHeight(geo.size, y: dataPoint.y), alignment: .center)
+                    .frame(width: width, height: barHeight(geo.size, y: dataPoint.y))
                     .position(x: pos.x, y: pos.y)
                 }
             }
