@@ -45,47 +45,44 @@ struct BarChartView: View {
         (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
     private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
-        let calculated = CGFloat(y / yRange.max) * source.height
-        if (calculated < 1) {
-            return 1
+        let newY = y - yRange.min
+        let calculated = CGFloat(newY / (yRange.max - yRange.min)) * source.height
+        if (calculated < 0) {
+            return 0
         }
         return calculated
-    }
-    private func position(index: Int, point: DatePoint, source: CGSize) -> CGPoint {
-        let barWidth = barWidth(source)
-        let x: CGFloat = CGFloat(index) * (spacing + barWidth)
-        
-        let yTop: CGFloat = CGFloat(yRange.max - point.y)
-        let yBottom: CGFloat = CGFloat(yRange.max - yRange.min)
-        let yPercentage = yTop / yBottom
-        
-        let y = yPercentage * source.height
-        
-        return CGPoint(x: x, y: y)
     }
     
     var body: some View {
         GeometryReader { geo in
             let width = barWidth(geo.size)
+            let widthStep = spacing + width
             let radius = width / 4
             ForEach(0..<data.count) { index in
                 if let dataPoint = data[index] {
-                    let pos = position(index: index, point: dataPoint, source: geo.size)
-                    ZStack {
-                        if (dataPoint.y >= 0) {
-                            PartialRoundedRectangle(top: radius)
-                                .fill(self.color.opacity(0.4))
-                            PartialRoundedRectangle(top: radius)
-                                .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
-                        } else {
-                            PartialRoundedRectangle(bottom: radius)
-                                .fill(self.color.opacity(0.4))
-                            PartialRoundedRectangle(bottom: radius)
-                                .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                    let x = (CGFloat(index) * widthStep) + (width / CGFloat(2))
+                    let height = barHeight(geo.size, y: dataPoint.y)
+                    let y = (geo.size.height - height) + (height / CGFloat(2))
+                    if height > 0 {
+                        ZStack {
+                            if (dataPoint.y >= 0) {
+                                PartialRoundedRectangle(top: radius)
+                                    .fill(self.color.opacity(0.4))
+                                PartialRoundedRectangle(top: radius)
+                                    .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                            } else {
+                                PartialRoundedRectangle(bottom: radius)
+                                    .fill(self.color.opacity(0.4))
+                                PartialRoundedRectangle(bottom: radius)
+                                    .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                            }
                         }
+                        // #warning(".position places the *center* of the view, so we need to do more math to offset")
+                        // x offset is going to be width / 2
+                        // y offset is, what, height / 2
+                        .frame(width: width, height: height)
+                        .position(x: x, y: y)
                     }
-                    .frame(width: width, height: barHeight(geo.size, y: dataPoint.y))
-                    .position(x: pos.x, y: pos.y)
                 }
             }
         }
