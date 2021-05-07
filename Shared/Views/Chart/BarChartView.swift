@@ -51,17 +51,37 @@ struct BarChartView: View {
         }
         return calculated
     }
+    private func position(index: Int, point: DatePoint, source: CGSize) -> CGPoint {
+        let barWidth = barWidth(source)
+        let x: CGFloat = CGFloat(index) * (spacing + barWidth)
+        let yTop: CGFloat = CGFloat(yRange.max - yRange.min)
+        let yBottom: CGFloat = CGFloat(((point.yMax ?? 0) - yRange.min))
+        let y: CGFloat = source.height * (yTop / yBottom)
+        return CGPoint(x: x, y: y)
+    }
     
     var body: some View {
         GeometryReader { geo in
-            HStack(alignment: .bottom, spacing: spacing) {
-                ForEach(data, id: \.x) { dataPoint in
+            let width = barWidth(geo.size)
+            let radius = width / 4
+            ForEach(0..<data.count) { index in
+                if let dataPoint = data[index] {
+                    let pos = position(index: index, point: dataPoint, source: geo.size)
                     ZStack {
-                        PartialRoundedRectangle(top: barWidth(geo.size) / 4)
-                            .fill(self.color.opacity(0.4))
-                        PartialRoundedRectangle(top: barWidth(geo.size) / 4)
-                            .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
-                    }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
+                        if (dataPoint.y > 0) {
+                            PartialRoundedRectangle(top: radius)
+                                .fill(self.color.opacity(0.4))
+                            PartialRoundedRectangle(top: radius)
+                                .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                        } else {
+                            PartialRoundedRectangle(bottom: radius)
+                                .fill(self.color.opacity(0.4))
+                            PartialRoundedRectangle(bottom: radius)
+                                .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                        }
+                    }
+                    .frame(width: width, height: barHeight(geo.size, y: dataPoint.y), alignment: .center)
+                    .position(x: pos.x, y: pos.y)
                 }
             }
         }
