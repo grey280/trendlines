@@ -77,9 +77,6 @@ struct BarChartView: View {
                                     .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                             }
                         }
-                        // #warning(".position places the *center* of the view, so we need to do more math to offset")
-                        // x offset is going to be width / 2
-                        // y offset is, what, height / 2
                         .frame(width: width, height: height)
                         .position(x: x, y: y)
                     }
