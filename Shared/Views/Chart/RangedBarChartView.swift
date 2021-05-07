@@ -65,13 +65,14 @@ struct RangedBarChartView: View {
     var body: some View {
         GeometryReader { geo in
             let width = barWidth(geo.size)
+            let radius = width / 4
             ForEach(0..<data.count) { index in
                 if let dataPoint = data[index] {
                     let pos = position(index: index, point: dataPoint, source: geo.size)
                     ZStack {
-                        RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
+                        RoundedRectangle(cornerRadius: radius)
                             .fill(self.color.opacity(0.4))
-                        RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
+                        RoundedRectangle(cornerRadius: radius)
                             .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                     }
                     .frame(width: width, height: barHeight(geo.size, y: (dataPoint.yMax ?? dataPoint.y) - (dataPoint.yMin ?? dataPoint.y)), alignment: .center)
