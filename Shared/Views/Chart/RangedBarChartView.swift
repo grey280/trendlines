@@ -47,8 +47,8 @@ struct RangedBarChartView: View {
     
     private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
         let calculated = CGFloat(y / (yRange.max - yRange.min)) * source.height
-        if (calculated < 1) {
-            return 1
+        if (calculated < 0) {
+            return 0
         }
         return calculated
     }
@@ -62,15 +62,17 @@ struct RangedBarChartView: View {
                 if let dataPoint = data[index] {
                     let x = CGFloat(index) * widthStep
                     let height = barHeight(geo.size, y: (dataPoint.yMax ?? dataPoint.y) - (dataPoint.yMin ?? dataPoint.y))
-                    let y = geo.size.height - height
-                    ZStack {
-                        RoundedRectangle(cornerRadius: radius)
-                            .fill(self.color.opacity(0.4))
-                        RoundedRectangle(cornerRadius: radius)
-                            .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                    if height > 0 {
+                        let y = geo.size.height - height
+                        ZStack {
+                            RoundedRectangle(cornerRadius: radius)
+                                .fill(self.color.opacity(0.4))
+                            RoundedRectangle(cornerRadius: radius)
+                                .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                        }
+                        .frame(width: width, height: height)
+                        .position(x: x, y: y)
                     }
-                    .frame(width: width, height: height)
-                    .position(x: x, y: y)
                 }
             }
         }
