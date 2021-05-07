@@ -62,8 +62,8 @@ struct BarChartView: View {
                 if let dataPoint = data[index] {
                     let x = (CGFloat(index) * widthStep) + (width / CGFloat(2))
                     let height = barHeight(geo.size, y: dataPoint.y)
-                    let y = (geo.size.height - height) + (height / CGFloat(2))
                     if height > 0 {
+                        let y = (geo.size.height - height) + (height / CGFloat(2))
                         ZStack {
                             if (dataPoint.y >= 0) {
                                 PartialRoundedRectangle(top: radius)
