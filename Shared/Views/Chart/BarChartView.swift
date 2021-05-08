@@ -77,9 +77,11 @@ struct BarChartView: View {
             ForEach(0..<data.count) { index in
                 if let dataPoint = data[index] {
                     let x = (CGFloat(index) * widthStep) + (width / CGFloat(2))
-                    let height = barHeight(geo.size, y: dataPoint.y)
+                    
+                    let height = BarChartView.barHeight(y: dataPoint.y, yRange: yRange, size: geo.size)
                     if height > 0 {
-                        let y = barHeight(geo.size, y: yRange.max - dataPoint.y)
+                        let y = BarChartView.yCenter(y: dataPoint.y, yRange: yRange, size: geo.size)
+                        
 //                        let y = (geo.size.height - height) + (height / CGFloat(2))
                         ZStack {
                             if (dataPoint.y >= 0) {
