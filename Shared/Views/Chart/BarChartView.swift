@@ -57,14 +57,15 @@ struct BarChartView: View {
     }
     
     private static func yCenter(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
-        let height = y < 0 ? -barHeight(y: y, yRange: yRange, size: size) : barHeight(y: y, yRange: yRange, size: size)
+//        let height = y < 0 ? -barHeight(y: y, yRange: yRange, size: size) : barHeight(y: y, yRange: yRange, size: size)
+        let height = barHeight(y: y, yRange: yRange, size: CGSize(width: 1, height: 1))
         let absYRange = abs(yRange.max - yRange.min)
         let absYShift = abs(yRange.max - y)
-        let absSize = size.height
+        let absSize = CGFloat(1) //size.height
         let yBuilt = absYShift / absYRange
         let leftSide = CGFloat(yBuilt) * absSize
         let result = 0.5 * (leftSide + height)
-        return result
+        return result * size.heightg
     }
     
     
@@ -95,9 +96,11 @@ struct BarChartView: View {
                                 PartialRoundedRectangle(bottom: radius)
                                     .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                             }
+                            Text("\(dataPoint.y) \(y)") // TODO: Remove this it's debug stuff
                         }
                         .frame(width: width, height: height)
                         .position(x: x, y: y)
+                        Circle().frame(maxWidth: 5).position(x: x, y: y) // TODO: Remove this it's debug stuff
                     }
                 }
             }
