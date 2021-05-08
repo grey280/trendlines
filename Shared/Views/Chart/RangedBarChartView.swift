@@ -45,9 +45,9 @@ struct RangedBarChartView: View {
         (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
     
-    private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
+    private func barHeight(_ source: CGSize, yMin: Double, yMax: Double) -> CGFloat {
         #warning("this isn't working right - barHeight needs to know about both min and max")
-        let calculated = CGFloat(y / (yRange.max - yRange.min)) * source.height
+        let calculated = CGFloat(abs(yMax - yMin) / (yRange.max - yRange.min)) * source.height
         if (calculated < 0) {
             return 0
         }
@@ -62,10 +62,11 @@ struct RangedBarChartView: View {
             ForEach(0..<data.count) { index in
                 if let dataPoint = data[index] {
                     let x = (CGFloat(index) * widthStep) + (width / CGFloat(2))
-                    let height = barHeight(geo.size, y: (dataPoint.yMax ?? dataPoint.y) - (dataPoint.yMin ?? dataPoint.y))
+                    let height = barHeight(geo.size, yMin: dataPoint.yMin ?? dataPoint.y, yMax: dataPoint.yMax ?? dataPoint.y)
                     if height > 0 {
                         let heightDelta = (yRange.max - yRange.min) - (dataPoint.yMax ?? dataPoint.y)
-                        let y = barHeight(geo.size, y: heightDelta)
+//                        let y = barHeight(geo.size, y: heightDelta)
+                        let y = barHeight(geo.size, yMin: dataPoint.yMin ?? dataPoint.y, yMax: dataPoint.yMax ?? dataPoint.y)
 //                        let y = (geo.size.height - height) + (height / CGFloat(2))
                         ZStack {
                             RoundedRectangle(cornerRadius: radius)
