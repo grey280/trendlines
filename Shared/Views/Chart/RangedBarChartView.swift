@@ -45,13 +45,25 @@ struct RangedBarChartView: View {
         (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
     
-    private func barHeight(_ source: CGSize, yMin: Double, yMax: Double) -> CGFloat {
-        #warning("this isn't working right - barHeight needs to know about both min and max")
-        let calculated = CGFloat(abs(yMax - yMin) / (yRange.max - yRange.min)) * source.height
-        if (calculated < 0) {
-            return 0
-        }
-        return calculated
+    private static func barHeightPercentage(y: Double, yRange: (min: Double, max:Double)) -> Double {
+        let top = yRange.max - y
+        let bottom = abs(yRange.max) + abs(yRange.min)
+        return top / bottom
+    }
+    private static func barCenterPointPercentage(yMin: Double, yMax: Double, yRange: (min: Double, max: Double)) -> Double {
+        let topLeft = barHeightPercentage(y: yMax, yRange: yRange)
+        let topRight = barHeightPercentage(y: yMin, yRange: yRange)
+        return (topLeft + topRight) / 2
+    }
+    
+    private static func barHeight(size: CGSize, yMin: Double, yMax: Double, yRange: (min: Double, max: Double)) -> CGFloat {
+        let pct = abs(barHeightPercentage(y: yMax, yRange: yRange) - barHeightPercentage(y: yMin, yRange: yRange))
+        return CGFloat(pct) * size.height
+    }
+    private static func yCenter(yMin: Double, yMax: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
+        let pct = barCenterPointPercentage(yMin: yMin, yMax: yMax, yRange: yRange)
+        
+        return CGFloat(pct) * size.height
     }
     
     var body: some View {
@@ -62,11 +74,9 @@ struct RangedBarChartView: View {
             ForEach(0..<data.count) { index in
                 if let dataPoint = data[index] {
                     let x = (CGFloat(index) * widthStep) + (width / CGFloat(2))
-                    let height = barHeight(geo.size, yMin: dataPoint.yMin ?? dataPoint.y, yMax: dataPoint.yMax ?? dataPoint.y)
+                    let height = RangedBarChartView.barHeight(size: geo.size, yMin: dataPoint.yMin ?? dataPoint.y, yMax: dataPoint.yMax ?? dataPoint.y, yRange: yRange)
                     if height > 0 {
-                        let heightDelta = (yRange.max - yRange.min) - (dataPoint.yMax ?? dataPoint.y)
-//                        let y = barHeight(geo.size, y: heightDelta)
-                        let y = barHeight(geo.size, yMin: dataPoint.yMin ?? dataPoint.y, yMax: dataPoint.yMax ?? dataPoint.y)
+                        let y = RangedBarChartView.yCenter(yMin: dataPoint.yMin ?? dataPoint.y, yMax: dataPoint.yMax ?? dataPoint.y, yRange: yRange, size: geo.size)
 //                        let y = (geo.size.height - height) + (height / CGFloat(2))
                         ZStack {
                             RoundedRectangle(cornerRadius: radius)
