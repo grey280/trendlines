@@ -79,19 +79,20 @@ struct RangedBarChartView: View {
     }
 }
 
-//struct RangedBarChartView_Previews: PreviewProvider {
-//    static let testData: [RangedBarChartView<Int>.DataPoint] = [
-//        .init(x: 1, yMin: 1, yMax: 2),
-//        .init(x: 2, yMin: 2, yMax: 4),
-//        .init(x: 3, yMin: 3, yMax: 6),
-//        .init(x: 4, yMin: 1, yMax: 1)
-//    ]
-//
-//    static var previews: some View {
-//        Group {
-//            RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
-//            RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing, hasOverlay: true)
-//            RangedBarChartView<Int>(data: (0...30).map { RangedBarChartView<Int>.DataPoint(x: $0, yMin: Double($0), yMax: Double($0 + 2) )}, unit: "Things")
-//        }
-//    }
-//}
+struct RangedBarChartView_Previews: PreviewProvider {
+    private static let _points: [DatePoint] = {
+        var pointBuilder: [DatePoint] = []
+        var workingDate: Date = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
+        for i in -2..<3 {
+            let low: Double = Double(i) - (Double(i)/2)
+            let high: Double = Double(i) + (Double(i)/2)
+            pointBuilder.append(.init(workingDate, yMin: low, yMax: high))
+            workingDate = Calendar.current.date(byAdding: .day, value: 1, to: workingDate)!
+        }
+        return pointBuilder
+    }()
+    
+    static var previews: some View {
+        RangedBarChartView(data: _points)
+    }
+}
