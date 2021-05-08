@@ -46,6 +46,29 @@ struct BarChartView: View {
     }
     
     
+    private static func barHeightPercentage(y: Double, yRange: (min: Double, max:Double)) -> Double {
+        let top = yRange.max - y
+        let bottom = abs(yRange.max) + abs(yRange.min)
+        return top / bottom
+    }
+    private static func barCenterPointPercentage(y: Double, yRange: (min: Double, max: Double)) -> Double {
+        let topLeft = barHeightPercentage(y: y, yRange: yRange)
+        let topRight = barHeightPercentage(y: 0, yRange: yRange)
+        return (topLeft + topRight) / 2
+    }
+    
+    private static func barHeight(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
+        let pct = barHeightPercentage(y: y, yRange: yRange) - barHeightPercentage(y: 0, yRange: yRange)
+        return CGFloat(pct) * size.height
+    }
+    
+    private static func yCenter(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
+        let pct = barCenterPointPercentage(y: y, yRange: yRange)
+        return CGFloat(pct) * size.height
+    }
+    
+    
+    /*
     private static func barHeight(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
         let absY = abs(y)
         let absYRange = abs(yRange.max - yRange.min)
@@ -65,9 +88,9 @@ struct BarChartView: View {
         let yBuilt = absYShift / absYRange
         let leftSide = CGFloat(yBuilt) * absSize
         let result = 0.5 * (leftSide + height)
-        return result * size.heightg
+        return result * size.height
     }
-    
+    */
     
     
     var body: some View {
@@ -96,7 +119,7 @@ struct BarChartView: View {
                                 PartialRoundedRectangle(bottom: radius)
                                     .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                             }
-                            Text("\(dataPoint.y) \(y)") // TODO: Remove this it's debug stuff
+                            Text("\(dataPoint.y) \(y) \(BarChartView.barHeightPercentage(y: dataPoint.y, yRange: yRange)) \(BarChartView.barHeightPercentage(y: 0, yRange: yRange))") // TODO: Remove this it's debug stuff
                         }
                         .frame(width: width, height: height)
                         .position(x: x, y: y)
