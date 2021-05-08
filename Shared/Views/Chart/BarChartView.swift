@@ -58,7 +58,7 @@ struct BarChartView: View {
     }
     
     private static func barHeight(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
-        let pct = barHeightPercentage(y: y, yRange: yRange) - barHeightPercentage(y: 0, yRange: yRange)
+        let pct = abs(barHeightPercentage(y: y, yRange: yRange) - barHeightPercentage(y: 0, yRange: yRange))
         return CGFloat(pct) * size.height
     }
     
@@ -103,8 +103,9 @@ struct BarChartView: View {
                     let x = (CGFloat(index) * widthStep) + (width / CGFloat(2))
                     
                     let height = BarChartView.barHeight(y: dataPoint.y, yRange: yRange, size: geo.size)
+                    let y = BarChartView.yCenter(y: dataPoint.y, yRange: yRange, size: geo.size)
                     if height > 0 {
-                        let y = BarChartView.yCenter(y: dataPoint.y, yRange: yRange, size: geo.size)
+                        
                         
 //                        let y = (geo.size.height - height) + (height / CGFloat(2))
                         ZStack {
@@ -124,6 +125,10 @@ struct BarChartView: View {
                         .frame(width: width, height: height)
                         .position(x: x, y: y)
                         Circle().frame(maxWidth: 5).position(x: x, y: y) // TODO: Remove this it's debug stuff
+                        
+                    }
+                    if (index == 3) {
+                        Text("\(y) \(height)")
                     }
                 }
             }
