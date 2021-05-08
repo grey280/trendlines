@@ -86,17 +86,20 @@ struct BarChartView: View {
     }
 }
 
-//struct BarChartView_Previews: PreviewProvider {
-//    static let testData: [DatePoint] = [
-//        .init(1, y: 1),
-//        .init(2, y: 2),
-//        .init(3, y: 3)
-//    ]
-//    
-//    static var previews: some View {
-//        Group {
-//            BarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
-//            BarChartView<Int>(data: (0...30).map { DatePoint($0, y: Double($0) )}, unit: "Things")
-//        }
-//    }
-//}
+struct BarChartView_Previews: PreviewProvider {
+    private static let _points: [DatePoint] = {
+        var pointBuilder: [DatePoint] = []
+        var workingDate: Date = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
+        for i in -2..<3 {
+            let low: Double = Double(i) - (Double(i)/2)
+            let high: Double = Double(i) + (Double(i)/2)
+            pointBuilder.append(.init(workingDate, yMin: low, yMax: high))
+            workingDate = Calendar.current.date(byAdding: .day, value: 1, to: workingDate)!
+        }
+        return pointBuilder
+    }()
+    
+    static var previews: some View {
+        BarChartView(data: _points)
+    }
+}
