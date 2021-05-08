@@ -68,31 +68,6 @@ struct BarChartView: View {
     }
     
     
-    /*
-    private static func barHeight(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
-        let absY = abs(y)
-        let absYRange = abs(yRange.max - yRange.min)
-        let absSize = size.height
-        let yBuilt = absY / absYRange
-        let yFloat = CGFloat(yBuilt)
-        let result = yFloat * absSize
-        return result
-    }
-    
-    private static func yCenter(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
-//        let height = y < 0 ? -barHeight(y: y, yRange: yRange, size: size) : barHeight(y: y, yRange: yRange, size: size)
-        let height = barHeight(y: y, yRange: yRange, size: CGSize(width: 1, height: 1))
-        let absYRange = abs(yRange.max - yRange.min)
-        let absYShift = abs(yRange.max - y)
-        let absSize = CGFloat(1) //size.height
-        let yBuilt = absYShift / absYRange
-        let leftSide = CGFloat(yBuilt) * absSize
-        let result = 0.5 * (leftSide + height)
-        return result * size.height
-    }
-    */
-    
-    
     var body: some View {
         GeometryReader { geo in
             let width = barWidth(geo.size)
@@ -103,11 +78,9 @@ struct BarChartView: View {
                     let x = (CGFloat(index) * widthStep) + (width / CGFloat(2))
                     
                     let height = BarChartView.barHeight(y: dataPoint.y, yRange: yRange, size: geo.size)
-                    let y = BarChartView.yCenter(y: dataPoint.y, yRange: yRange, size: geo.size)
+                    
                     if height > 0 {
-                        
-                        
-//                        let y = (geo.size.height - height) + (height / CGFloat(2))
+                        let y = BarChartView.yCenter(y: dataPoint.y, yRange: yRange, size: geo.size)
                         ZStack {
                             if (dataPoint.y >= 0) {
                                 PartialRoundedRectangle(top: radius)
@@ -120,15 +93,10 @@ struct BarChartView: View {
                                 PartialRoundedRectangle(bottom: radius)
                                     .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
                             }
-                            Text("\(dataPoint.y) \(y) \(BarChartView.barHeightPercentage(y: dataPoint.y, yRange: yRange)) \(BarChartView.barHeightPercentage(y: 0, yRange: yRange))") // TODO: Remove this it's debug stuff
                         }
                         .frame(width: width, height: height)
                         .position(x: x, y: y)
-                        Circle().frame(maxWidth: 5).position(x: x, y: y) // TODO: Remove this it's debug stuff
                         
-                    }
-                    if (index == 3) {
-                        Text("\(y) \(height)")
                     }
                 }
             }
