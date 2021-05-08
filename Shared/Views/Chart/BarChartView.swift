@@ -44,16 +44,30 @@ struct BarChartView: View {
     private func barWidth(_ source: CGSize) -> CGFloat {
         (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
-    private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
-//        let newY = y - yRange.min
-        let newY = y
-        let calculated = CGFloat(newY / (yRange.max - yRange.min)) * source.height
-        
-        if (calculated < 0) {
-            return -calculated
-        }
-        return calculated
+    
+    
+    private static func barHeight(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
+        let absY = abs(y)
+        let absYRange = abs(yRange.max - yRange.min)
+        let absSize = size.height
+        let yBuilt = absY / absYRange
+        let yFloat = CGFloat(yBuilt)
+        let result = yFloat * absSize
+        return result
     }
+    
+    private static func yCenter(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
+        let height = y < 0 ? -barHeight(y: y, yRange: yRange, size: size) : barHeight(y: y, yRange: yRange, size: size)
+        let absYRange = abs(yRange.max - yRange.min)
+        let absYShift = abs(yRange.max - y)
+        let absSize = size.height
+        let yBuilt = absYShift / absYRange
+        let leftSide = CGFloat(yBuilt) * absSize
+        let result = 0.5 * (leftSide + height)
+        return result
+    }
+    
+    
     
     var body: some View {
         GeometryReader { geo in
