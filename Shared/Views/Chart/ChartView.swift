@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-#warning("Need support for drawing 0?")
-
 fileprivate struct ChartView_Double: View {
     public init(source1: DataSource, source2: DataSource, database: Database) {
         self.database = database
