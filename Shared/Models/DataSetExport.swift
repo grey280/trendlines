@@ -22,15 +22,7 @@ struct DataSetExport: FileDocument {
     init(configuration: ReadConfiguration) throws {
         if let data = configuration.file.regularFileContents {
             let decodedText = String(decoding: data, as: UTF8.self)
-            let splitText = decodedText.split(separator: "\n").map(String.init)
-            guard splitText.count > 1 else {
-                entries = []
-                return
-            }
-            let parsed = splitText.compactMap {
-                // convert will fail on first line, return nil, and be erased by CompactMap
-                DataSetExport.convert(csvLine: $0, dataSetID: 0)
-            }
+            let parsed = DataSetExport.convert(csv: decodedText, dataSetID: 0)
             entries = parsed
         } else {
             entries = []
@@ -59,6 +51,18 @@ struct DataSetExport: FileDocument {
             return nil
         }
         return DataSetEntry(id: nil, dateAdded: date, value: value, datasetID: dataSetID)
+    }
+    
+    static func convert(csv: String, dataSetID: DataSet.ID) -> [DataSetEntry] {
+        let splitText = csv.split(separator: "\n").map(String.init)
+        guard splitText.count > 1 else {
+            return []
+        }
+        let parsed = splitText.compactMap {
+            // convert will fail on first line, return nil, and be erased by CompactMap
+            DataSetExport.convert(csvLine: $0, dataSetID: dataSetID)
+        }
+        return parsed
     }
     
     private static var dateFormatter: ISO8601DateFormatter = {
