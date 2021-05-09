@@ -52,10 +52,6 @@ struct CustomDataSetView: View {
             }
             ToolbarItem(placement: .bottomBar) {
                 Button {
-                    guard let entries = database.loadAllDataSetEntries(dataSet: dataSet) else {
-                        #warning("Needs error handling")
-                        return
-                    }
                     exportDocument = DataSetExport(entries: entries)
                     showingExporter = true
                 } label: {
