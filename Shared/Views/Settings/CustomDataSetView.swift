@@ -16,6 +16,8 @@ struct CustomDataSetView: View {
     
     @State var showingExporter = false
     @State var exportDocument: DataSetExport? = nil
+    @State var exportResult: String? = nil
+    @State var hasExportResult = false
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -65,9 +67,17 @@ struct CustomDataSetView: View {
                 loadEntries()
             }
         }
-        .fileExporter(isPresented: $showingExporter, document: exportDocument, contentType: .commaSeparatedText) { _ in
-            // do nothing, what else would I do?
-            #warning("... show something?")
+        .alert(isPresented: $hasExportResult, content: {
+            Alert(title: Text(exportResult ?? "Something went wrong."))
+        })
+        .fileExporter(isPresented: $showingExporter, document: exportDocument, contentType: .commaSeparatedText) { result in
+            switch result {
+            case .success:
+                exportResult = "Entries exported!"
+            case .failure(let error):
+                exportResult = error.localizedDescription
+            }
+            hasExportResult = true
         }
     }
     
