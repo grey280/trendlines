@@ -259,19 +259,6 @@ class Database: ObservableObject {
         }
     }
     
-    func loadAllDataSetEntries(dataSet: DataSet) -> [DataSetEntry]? {
-        do {
-            return try dbQueue.read { db in
-                try DataSetEntry
-                    .filter(DataSetEntry.Columns.datasetID == dataSet.id)
-                    .fetchAll(db)
-            }
-        } catch {
-            logger.error("Could not export entries. \(error.localizedDescription, privacy: .public)")
-            return nil
-        }
-    }
-    
     @discardableResult
     func delete(entry: DataSetEntry) -> Bool {
         do {
