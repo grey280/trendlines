@@ -44,6 +44,8 @@
 		2D43465E25E325BB0018D541 /* SourceBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43465C25E325BB0018D541 /* SourceBuilderView.swift */; };
 		2D43466925E325FB0018D541 /* SourceTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43466825E325FB0018D541 /* SourceTypePickerView.swift */; };
 		2D43466A25E325FB0018D541 /* SourceTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43466825E325FB0018D541 /* SourceTypePickerView.swift */; };
+		2D44C2A92647928900D5C3AD /* DataSetExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D44C2A82647928900D5C3AD /* DataSetExport.swift */; };
+		2D44C2AA2647928900D5C3AD /* DataSetExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D44C2A82647928900D5C3AD /* DataSetExport.swift */; };
 		2D4B4D3925E1909A00A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3825E1909A00A34278 /* GRDB */; };
 		2D4B4D3E25E190A800A34278 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4B4D3D25E190A800A34278 /* GRDB */; };
 		2D55673326019E7E00BC7821 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55673226019E7E00BC7821 /* SettingsView.swift */; };
@@ -102,6 +104,7 @@
 		2D43465725E2CF0C0018D541 /* ChartBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBuilderView.swift; sourceTree = "<group>"; };
 		2D43465C25E325BB0018D541 /* SourceBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceBuilderView.swift; sourceTree = "<group>"; };
 		2D43466825E325FB0018D541 /* SourceTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTypePickerView.swift; sourceTree = "<group>"; };
+		2D44C2A82647928900D5C3AD /* DataSetExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetExport.swift; sourceTree = "<group>"; };
 		2D55673226019E7E00BC7821 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceDisplayMode.swift; sourceTree = "<group>"; };
 		2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataSourceType+Codable.swift"; sourceTree = "<group>"; };
@@ -259,6 +262,7 @@
 				2DCD53C825E18D0600BBA89B /* Chart.swift */,
 				2D1CAC54260309DB0058F038 /* DataSetEntry.swift */,
 				2D43463825E1DF870018D541 /* DataProvider.swift */,
+				2D44C2A82647928900D5C3AD /* DataSetExport.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -408,6 +412,7 @@
 				2DCD53C925E18D0600BBA89B /* Chart.swift in Sources */,
 				2D1CAC502603093F0058F038 /* DataSet.swift in Sources */,
 				2D43463425E1AB7D0018D541 /* ChartView.swift in Sources */,
+				2D44C2A92647928900D5C3AD /* DataSetExport.swift in Sources */,
 				2D33C75225E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76325E055ED00E3C6C3 /* BarChartView.swift in Sources */,
 				2DCD53BC25E18B5000BBA89B /* DataSource.swift in Sources */,
@@ -446,6 +451,7 @@
 				2DCD53CA25E18D0600BBA89B /* Chart.swift in Sources */,
 				2D1CAC512603093F0058F038 /* DataSet.swift in Sources */,
 				2D43463525E1AB7D0018D541 /* ChartView.swift in Sources */,
+				2D44C2AA2647928900D5C3AD /* DataSetExport.swift in Sources */,
 				2D33C75325E0556300E3C6C3 /* trendlinesApp.swift in Sources */,
 				2D33C76425E055ED00E3C6C3 /* BarChartView.swift in Sources */,
 				2DCD53BD25E18B5000BBA89B /* DataSource.swift in Sources */,
