@@ -36,7 +36,7 @@ struct DataSetExport: FileDocument {
     }
     
     private static func convertToCSVLine(entry: DataSetEntry) -> String {
-        "\(entry.value),\(entry.dateAdded)"
+        "\(entry.value),\(dateFormatter.string(from: entry.dateAdded))"
     }
     
     private static func convert(csvLine: String, dataSetID: DataSet.ID) -> DataSetEntry? {
