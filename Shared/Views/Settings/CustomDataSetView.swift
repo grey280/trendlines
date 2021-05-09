@@ -14,6 +14,14 @@ struct CustomDataSetView: View {
     @State var entries: [DataSetEntry] = []
     @State var addingEntry = false
     
+    @State var showingExporter = false
+    @State var showingImporter = false
+    @State var exportDocument: DataSetExport? = nil
+    @State var fileResult: String? = nil
+    @State var hasFileResult = false
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         List {
             ForEach(entries, id: \.id) { entry in
@@ -25,21 +33,99 @@ struct CustomDataSetView: View {
             }
             .onDelete(perform: delete)
         }
-        .navigationTitle(dataSet.name)
         .onAppear(perform: loadEntries)
-        .navigationBarItems(trailing: Button {
-            addingEntry.toggle()
-        } label: {
-            Image(systemName: "plus").accessibility(hint: Text("Add an entry"))
-        })
+        .navigationTitle(dataSet.name)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        Text("Settings")
+                    }
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    addingEntry.toggle()
+                } label: {
+                    Image(systemName: "plus").accessibility(hint: Text("Add an entry"))
+                }
+            }
+            ToolbarItemGroup(placement: .bottomBar) {
+                Button {
+                    exportDocument = DataSetExport(entries: entries)
+                    showingExporter = true
+                } label: {
+                    Image(systemName: "square.and.arrow.up").accessibility(hint: Text("Export entries"))
+                }.disabled(entries.count == 0)
+                Spacer()
+                Button {
+                    showingImporter = true
+                } label: {
+                    Image(systemName: "square.and.arrow.down").accessibility(hint: Text("Import entries"))
+                }
+            }
+        }
+        .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $addingEntry) {
             DataSetEntryCreatorView(database: database, dataSet: dataSet) {
                 loadEntries()
             }
         }
+        .alert(isPresented: $hasFileResult, content: {
+            Alert(title: Text(fileResult ?? "Something went wrong."))
+        })
+        .fileExporter(isPresented: $showingExporter, document: exportDocument, contentType: .commaSeparatedText) { result in
+            switch result {
+            case .success:
+                fileResult = "Entries exported!"
+            case .failure(let error):
+                fileResult = error.localizedDescription
+            }
+            hasFileResult = true
+        }
+        .fileImporter(isPresented: $showingImporter, allowedContentTypes: [.commaSeparatedText], onCompletion: handleImport)
+    }
+    
+    func handleImport(result: Result<URL, Error>) {
+        switch result {
+        case .failure(let error):
+            fileResult = error.localizedDescription
+            hasFileResult = true
+            return
+        case .success(let url):
+            guard let dataSetID = dataSet.id else {
+                fileResult = "Could not import data."
+                hasFileResult = true
+                return
+            }
+            guard let data = try? Data(contentsOf: url) else {
+                fileResult = "Could not load file."
+                hasFileResult = true
+                return
+            }
+            guard let parsed = String(data: data, encoding: .utf8) else {
+                fileResult = "Could not read file."
+                hasFileResult = true
+                return
+            }
+            let resultSet = DataSetExport.convert(csv: parsed, dataSetID: dataSetID)
+            if !database.add(entries: resultSet) {
+                fileResult = "Could not import entries."
+            } else {
+                fileResult = "Entries imported."
+                loadEntries()
+            }
+            hasFileResult = true
+        }
     }
     
     func loadEntries() {
+        guard dataSet.id != nil else {
+            return
+        }
         if let entries = database.loadDataSetEntries(dataSet: dataSet) {
             self.entries = entries
         }

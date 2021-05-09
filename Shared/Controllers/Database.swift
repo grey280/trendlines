@@ -312,6 +312,25 @@ class Database: ObservableObject {
         }
     }
     
+    @discardableResult
+    func add(entries: [DataSetEntry]) -> Bool {
+        do {
+            try dbQueue.write { db in
+                for var entry in entries {
+                    try entry.insert(db)
+                }
+            }
+            let insertedIDs = Set(entries.map { $0.datasetID })
+            for id in insertedIDs {
+                datasetUpdatedSubject.send(id)
+            }
+            return true
+        } catch {
+            logger.error("Could not save entry. \(error.localizedDescription, privacy: .public)")
+            return false
+        }
+    }
+    
     private func date(_ value: SQLExpressible) -> SQLExpression {
         SQLLiteral("DATE(\(value))").sqlExpression
     }
