@@ -194,6 +194,7 @@ class Database: ObservableObject {
             return try dbQueue.read { db in
                 try DataSetEntry
                     .filter(DataSetEntry.Columns.datasetID == dataSet.id)
+                    .order(DataSetEntry.Columns.dateAdded.desc)
                     .fetchAll(db)
             }
         } catch {
