@@ -232,7 +232,7 @@ class Database: ObservableObject {
                         .filter(DataSetEntry.Columns.dateAdded >= startDate)
                         .group(date(DataSetEntry.Columns.dateAdded))
                 }
-                let rows = try Row.fetchAll(db, request)
+                let rows = try Row.fetchAll(db, request.order(DataSetEntry.Columns.dateAdded.asc))
                 let results: [DatePoint]
                 switch mode {
                 case .average, .count, .sum:
