@@ -87,11 +87,37 @@ struct CustomDataSetView: View {
             }
             hasFileResult = true
         }
-        .fileImporter(isPresented: $showingImporter, allowedContentTypes: [.commaSeparatedText]) { result in
-            do {
-                
-            } catch {
-                fileResult = error.localizedDescription
+        .fileImporter(isPresented: $showingImporter, allowedContentTypes: [.commaSeparatedText], onCompletion: handleImport)
+    }
+    
+    func handleImport(result: Result<URL, Error>) {
+        switch result {
+        case .failure(let error):
+            fileResult = error.localizedDescription
+            hasFileResult = true
+            return
+        case .success(let url):
+            
+            guard let dataSetID = dataSet.id else {
+                fileResult = "Could not import data."
+                hasFileResult = true
+                return
+            }
+            guard let data = try? Data(contentsOf: url) else {
+                fileResult = "Could not load file."
+                hasFileResult = true
+                return
+            }
+            guard let parsed = String(data: data, encoding: .utf8) else {
+                fileResult = "Could not read file."
+                hasFileResult = true
+                return
+            }
+            let resultSet = DataSetExport.convert(csv: parsed, dataSetID: dataSetID)
+            if !database.add(entries: resultSet) {
+                fileResult = "Could not import entries."
+            } else {
+                fileResult = "Entries imported."
             }
             hasFileResult = true
         }
