@@ -44,41 +44,80 @@ struct BarChartView: View {
     private func barWidth(_ source: CGSize) -> CGFloat {
         (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
-    private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
-        let calculated = CGFloat(y / yRange.max) * source.height
-        if (calculated < 10) {
-            return 10
-        }
-        return calculated
+    
+    
+    private static func barHeightPercentage(y: Double, yRange: (min: Double, max:Double)) -> Double {
+        let top = yRange.max - y
+        let bottom = abs(yRange.max) + abs(yRange.min)
+        return top / bottom
     }
+    private static func barCenterPointPercentage(y: Double, yRange: (min: Double, max: Double)) -> Double {
+        let topLeft = barHeightPercentage(y: y, yRange: yRange)
+        let topRight = barHeightPercentage(y: 0, yRange: yRange)
+        return (topLeft + topRight) / 2
+    }
+    
+    private static func barHeight(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
+        let pct = abs(barHeightPercentage(y: y, yRange: yRange) - barHeightPercentage(y: 0, yRange: yRange))
+        return CGFloat(pct) * size.height
+    }
+    
+    private static func yCenter(y: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
+        let pct = barCenterPointPercentage(y: y, yRange: yRange)
+        return CGFloat(pct) * size.height
+    }
+    
     
     var body: some View {
         GeometryReader { geo in
-            HStack(alignment: .bottom, spacing: spacing) {
-                ForEach(data, id: \.x) { dataPoint in
-                    ZStack {
-                        PartialRoundedRectangle(top: barWidth(geo.size) / 4)
-                            .fill(self.color.opacity(0.4))
-                        PartialRoundedRectangle(top: barWidth(geo.size) / 4)
-                            .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
-                    }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: dataPoint.y))
+            let width = barWidth(geo.size)
+            let widthStep = spacing + width
+            let radius = width / 4
+            ForEach(0..<data.count) { index in
+                if let dataPoint = data[index] {
+                    let x = (CGFloat(index) * widthStep) + (width / CGFloat(2))
+                    
+                    let height = BarChartView.barHeight(y: dataPoint.y, yRange: yRange, size: geo.size)
+                    
+                    if height > 0 {
+                        let y = BarChartView.yCenter(y: dataPoint.y, yRange: yRange, size: geo.size)
+                        ZStack {
+                            if (dataPoint.y >= 0) {
+                                PartialRoundedRectangle(top: radius)
+                                    .fill(self.color.opacity(0.4))
+                                PartialRoundedRectangle(top: radius)
+                                    .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                            } else {
+                                PartialRoundedRectangle(bottom: radius)
+                                    .fill(self.color.opacity(0.4))
+                                PartialRoundedRectangle(bottom: radius)
+                                    .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                            }
+                        }
+                        .frame(width: width, height: height)
+                        .position(x: x, y: y)
+                        
+                    }
                 }
             }
         }
     }
 }
 
-//struct BarChartView_Previews: PreviewProvider {
-//    static let testData: [DatePoint] = [
-//        .init(1, y: 1),
-//        .init(2, y: 2),
-//        .init(3, y: 3)
-//    ]
-//    
-//    static var previews: some View {
-//        Group {
-//            BarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
-//            BarChartView<Int>(data: (0...30).map { DatePoint($0, y: Double($0) )}, unit: "Things")
-//        }
-//    }
-//}
+struct BarChartView_Previews: PreviewProvider {
+    private static let _points: [DatePoint] = {
+        var pointBuilder: [DatePoint] = []
+        var workingDate: Date = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
+        for i in -2..<3 {
+            let low: Double = Double(i) - (Double(i)/2)
+            let high: Double = Double(i) + (Double(i)/2)
+            pointBuilder.append(.init(workingDate, yMin: low, yMax: high))
+            workingDate = Calendar.current.date(byAdding: .day, value: 1, to: workingDate)!
+        }
+        return pointBuilder
+    }()
+    
+    static var previews: some View {
+        BarChartView(data: _points)
+    }
+}

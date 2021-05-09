@@ -44,46 +44,69 @@ struct RangedBarChartView: View {
     private func barWidth(_ source: CGSize) -> CGFloat {
         (source.width - (spacing * CGFloat(data.count))) / CGFloat(data.count)
     }
-    private func barOffset(_ source: CGSize, y: Double) -> CGFloat {
-        CGFloat(y / yRange.max) * source.height
+    
+    private static func barHeightPercentage(y: Double, yRange: (min: Double, max:Double)) -> Double {
+        let top = yRange.max - y
+        let bottom = abs(yRange.max) + abs(yRange.min)
+        return top / bottom
     }
-    private func barHeight(_ source: CGSize, y: Double) -> CGFloat {
-        let calculated = CGFloat(y / yRange.max) * source.height
-        if (calculated < 10) {
-            return 10
-        }
-        return calculated
+    private static func barCenterPointPercentage(yMin: Double, yMax: Double, yRange: (min: Double, max: Double)) -> Double {
+        let topLeft = barHeightPercentage(y: yMax, yRange: yRange)
+        let topRight = barHeightPercentage(y: yMin, yRange: yRange)
+        return (topLeft + topRight) / 2
+    }
+    
+    private static func barHeight(size: CGSize, yMin: Double, yMax: Double, yRange: (min: Double, max: Double)) -> CGFloat {
+        let pct = abs(barHeightPercentage(y: yMax, yRange: yRange) - barHeightPercentage(y: yMin, yRange: yRange))
+        return CGFloat(pct) * size.height
+    }
+    private static func yCenter(yMin: Double, yMax: Double, yRange: (min: Double, max: Double), size: CGSize) -> CGFloat {
+        let pct = barCenterPointPercentage(yMin: yMin, yMax: yMax, yRange: yRange)
+        
+        return CGFloat(pct) * size.height
     }
     
     var body: some View {
         GeometryReader { geo in
-            HStack(alignment: .bottom, spacing: spacing) {
-                ForEach(data, id: \.x) { dataPoint in
-                    ZStack {
-                        RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
-                            .fill(self.color.opacity(0.4))
-                        RoundedRectangle(cornerRadius: barWidth(geo.size) / 4)
-                            .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
-                    }.frame(width: barWidth(geo.size), height: barHeight(geo.size, y: (dataPoint.yMax ?? dataPoint.y) - (dataPoint.yMin ?? dataPoint.y))).padding(.bottom, barOffset(geo.size, y: dataPoint.yMin ?? dataPoint.y))
+            let width = barWidth(geo.size)
+            let widthStep = spacing + width
+            let radius = width / 4
+            ForEach(0..<data.count) { index in
+                if let dataPoint = data[index] {
+                    let x = (CGFloat(index) * widthStep) + (width / CGFloat(2))
+                    let height = RangedBarChartView.barHeight(size: geo.size, yMin: dataPoint.yMin ?? dataPoint.y, yMax: dataPoint.yMax ?? dataPoint.y, yRange: yRange)
+                    if height > 0 {
+                        let y = RangedBarChartView.yCenter(yMin: dataPoint.yMin ?? dataPoint.y, yMax: dataPoint.yMax ?? dataPoint.y, yRange: yRange, size: geo.size)
+//                        let y = (geo.size.height - height) + (height / CGFloat(2))
+                        ZStack {
+                            RoundedRectangle(cornerRadius: radius)
+                                .fill(self.color.opacity(0.4))
+                            RoundedRectangle(cornerRadius: radius)
+                                .stroke(self.color)//, style: StrokeStyle(lineWidth: 4))
+                        }
+                        .frame(width: width, height: height)
+                        .position(x: x, y: y)
+                    }
                 }
             }
         }
     }
 }
 
-//struct RangedBarChartView_Previews: PreviewProvider {
-//    static let testData: [RangedBarChartView<Int>.DataPoint] = [
-//        .init(x: 1, yMin: 1, yMax: 2),
-//        .init(x: 2, yMin: 2, yMax: 4),
-//        .init(x: 3, yMin: 3, yMax: 6),
-//        .init(x: 4, yMin: 1, yMax: 1)
-//    ]
-//
-//    static var previews: some View {
-//        Group {
-//            RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing)
-//            RangedBarChartView<Int>(data: testData, unit: "Number", axisAlignment: .trailing, hasOverlay: true)
-//            RangedBarChartView<Int>(data: (0...30).map { RangedBarChartView<Int>.DataPoint(x: $0, yMin: Double($0), yMax: Double($0 + 2) )}, unit: "Things")
-//        }
-//    }
-//}
+struct RangedBarChartView_Previews: PreviewProvider {
+    private static let _points: [DatePoint] = {
+        var pointBuilder: [DatePoint] = []
+        var workingDate: Date = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
+        for i in -2..<3 {
+            let low: Double = Double(i) - (Double(i)/2)
+            let high: Double = Double(i) + (Double(i)/2)
+            pointBuilder.append(.init(workingDate, yMin: low, yMax: high))
+            workingDate = Calendar.current.date(byAdding: .day, value: 1, to: workingDate)!
+        }
+        return pointBuilder
+    }()
+    
+    static var previews: some View {
+        RangedBarChartView(data: _points)
+    }
+}

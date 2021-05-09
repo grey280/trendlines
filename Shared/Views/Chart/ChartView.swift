@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+#warning("Need support for drawing 0?")
+
 fileprivate struct ChartView_Double: View {
     public init(source1: DataSource, source2: DataSource, database: Database) {
         self.database = database
@@ -73,22 +75,33 @@ fileprivate struct ChartView_Double: View {
         
         HStack {
             YAxisView(min: .init(format: "%.0f", s1r.min), max: .init(format: "%.0f", s1r.max), unit: source1.unitName, color: source1.color)
-            ZStack {
-                switch source1.chartType {
-                case .bar:
-                    BarChartView(data: provider1.points, color: source1.color, yRange: s1r)
-                case .floatingBar:
-                    RangedBarChartView(data: provider1.points, color: source1.color, yRange: s1r)
-                case .line:
-                    LineChartView(data: provider1.points, color: source1.color, yRange: s1r)
-                }
-                switch source2.chartType {
-                case .bar:
-                    BarChartView(data: provider2.points, color: source2.color, yRange: s2r)
-                case .floatingBar:
-                    RangedBarChartView(data: provider2.points, color: source2.color, yRange: s2r)
-                case .line:
-                    LineChartView(data: provider2.points, color: source2.color, yRange: s2r)
+            
+            GeometryReader { geo in
+                ZStack {
+                    switch source1.chartType {
+                    case .bar:
+                        BarChartView(data: provider1.points, color: source1.color, yRange: s1r)
+                    case .floatingBar:
+                        RangedBarChartView(data: provider1.points, color: source1.color, yRange: s1r)
+                    case .line:
+                        LineChartView(data: provider1.points, color: source1.color, yRange: s1r)
+                    }
+                    switch source2.chartType {
+                    case .bar:
+                        BarChartView(data: provider2.points, color: source2.color, yRange: s2r)
+                    case .floatingBar:
+                        RangedBarChartView(data: provider2.points, color: source2.color, yRange: s2r)
+                    case .line:
+                        LineChartView(data: provider2.points, color: source2.color, yRange: s2r)
+                    }
+                    Rectangle()
+                        .fill(source1.color)
+                        .frame(width: geo.size.width, height: 1, alignment: .center)
+                        .offset(x: -8, y: CGFloat(ChartView.zeroLinePercentage(yRange: s1r) - 0.5) * geo.size.height)
+                    Rectangle()
+                        .fill(source2.color)
+                        .frame(width: geo.size.width, height: 1, alignment: .center)
+                        .offset(x: 0, y: CGFloat(ChartView.zeroLinePercentage(yRange: s2r) - 0.5) * geo.size.height)
                 }
             }
             YAxisView(min: .init(format: "%.0f", s2r.min), max: .init(format: "%.0f", s2r.max), unit: source2.unitName, color: source2.color)
@@ -135,15 +148,23 @@ fileprivate struct ChartView_Single: View {
         
         HStack {
             YAxisView(min: .init(format: "%.0f", range.min), max: .init(format: "%.0f", range.max), unit: source.unitName, color: source.color)
-            switch source.chartType {
-            case .bar:
-                BarChartView(data: provider.points, color: source.color, yRange: range)
-            case .floatingBar:
-                RangedBarChartView(data: provider.points, color: source.color, yRange: range)
-            case .line:
-                LineChartView(data: provider.points, color: source.color, yRange: range)
-            }
             
+            GeometryReader { geo in
+                ZStack {
+                    switch source.chartType {
+                    case .bar:
+                        BarChartView(data: provider.points, color: source.color, yRange: range)
+                    case .floatingBar:
+                        RangedBarChartView(data: provider.points, color: source.color, yRange: range)
+                    case .line:
+                        LineChartView(data: provider.points, color: source.color, yRange: range)
+                    }
+                    Rectangle()
+                        .fill(source.color)
+                        .frame(width: geo.size.width, height: 1, alignment: .center)
+                        .offset(x: -8, y: CGFloat(ChartView.zeroLinePercentage(yRange: range) - 0.5) * geo.size.height)
+                }
+            }
         }
     }
 }
@@ -171,8 +192,8 @@ struct ChartView: View {
     }
     
     static func yRange(points: [DatePoint]) -> (min: Double, max: Double) {
-        #warning("May need to changed when graphs support negative numbers")
-        var result = (min: 0.0, max: -Double.infinity)
+        // we don't allow charts to exclude the 0 line
+        var result = (min: 0.0, max: 0.0)
         for point in points {
             let min = point.yMin ?? point.y
             let max = point.yMax ?? point.y
@@ -187,6 +208,14 @@ struct ChartView: View {
             return (min: 0, max: 0)
         }
         return result
+    }
+    
+    static func zeroLinePercentage(yRange: (min: Double, max: Double)) -> Double {
+        let bottom = yRange.max - yRange.min
+        guard bottom != 0 else {
+            return 1
+        }
+        return yRange.max / bottom
     }
 }
 
