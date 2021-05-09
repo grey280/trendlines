@@ -43,6 +43,7 @@ class DatabaseProvider: DataProvider {
             self.points = []
             return
         }
+        #warning("Need to fill empty dates with y:0")
         self.points = items
     }
 }
