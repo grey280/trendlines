@@ -194,6 +194,7 @@ class Database: ObservableObject {
             return try dbQueue.read { db in
                 try DataSetEntry
                     .filter(DataSetEntry.Columns.datasetID == dataSet.id)
+                    .order(DataSetEntry.Columns.dateAdded.desc)
                     .fetchAll(db)
             }
         } catch {
@@ -232,7 +233,7 @@ class Database: ObservableObject {
                         .filter(DataSetEntry.Columns.dateAdded >= startDate)
                         .group(date(DataSetEntry.Columns.dateAdded))
                 }
-                let rows = try Row.fetchAll(db, request)
+                let rows = try Row.fetchAll(db, request.order(DataSetEntry.Columns.dateAdded.asc))
                 let results: [DatePoint]
                 switch mode {
                 case .average, .count, .sum:
