@@ -15,6 +15,7 @@ struct CustomDataSetView: View {
     @State var addingEntry = false
     
     @State var showingExporter = false
+    @State var showingImporter = false
     @State var exportDocument: DataSetExport? = nil
     @State var fileResult: String? = nil
     @State var hasFileResult = false
@@ -60,6 +61,13 @@ struct CustomDataSetView: View {
                     Image(systemName: "square.and.arrow.up").accessibility(hint: Text("Export entries"))
                 }
             }
+            ToolbarItem(placement: .bottomBar) {
+                Button {
+                    showingImporter = true
+                } label: {
+                    Image(systemName: "square.and.arrow.down").accessibility(hint: Text("Import entries"))
+                }
+            }
         }
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $addingEntry) {
@@ -79,6 +87,11 @@ struct CustomDataSetView: View {
             }
             hasFileResult = true
         }
+        .fileImporter(isPresented: $showingImporter, allowedContentTypes: [.commaSeparatedText]) { result in
+            do {
+                
+            } catch {
+                fileResult = error.localizedDescription
             }
             hasFileResult = true
         }
