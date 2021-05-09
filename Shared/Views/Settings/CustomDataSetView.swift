@@ -33,8 +33,8 @@ struct CustomDataSetView: View {
             }
             .onDelete(perform: delete)
         }
-        .navigationTitle(dataSet.name)
         .onAppear(perform: loadEntries)
+        .navigationTitle(dataSet.name)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -59,7 +59,7 @@ struct CustomDataSetView: View {
                     showingExporter = true
                 } label: {
                     Image(systemName: "square.and.arrow.up").accessibility(hint: Text("Export entries"))
-                }
+                }.disabled(entries.count == 0)
             }
             ToolbarItem(placement: .bottomBar) {
                 Button {
@@ -97,7 +97,6 @@ struct CustomDataSetView: View {
             hasFileResult = true
             return
         case .success(let url):
-            
             guard let dataSetID = dataSet.id else {
                 fileResult = "Could not import data."
                 hasFileResult = true
@@ -124,6 +123,9 @@ struct CustomDataSetView: View {
     }
     
     func loadEntries() {
+        guard dataSet.id != nil else {
+            return
+        }
         if let entries = database.loadDataSetEntries(dataSet: dataSet) {
             self.entries = entries
         }
