@@ -38,12 +38,21 @@ class DatabaseProvider: DataProvider {
             logger.error("Could not create '30 days ago' date.")
             return
         }
-        guard let items = database.queryDataSetEntries(dataSet: dataSet, mode: mode, startDate: startDate) else {
+        guard var items = database.queryDataSetEntries(dataSet: dataSet, mode: mode, startDate: startDate) else {
             logger.error("Failed to load items; returning empty.")
             self.points = []
             return
         }
-        #warning("Need to fill empty dates with y:0")
+        var runningDate = startDate
+        while runningDate < Date() {
+            // does this date exist in the list?
+            if (!items.contains(where: { datePoint in
+                Calendar.current.compare(datePoint.x, to: runningDate, toGranularity: .day) == .orderedSame
+            })) {
+                items.append(DatePoint(runningDate, y: 0))
+            }
+            runningDate = Calendar.current.date(byAdding: .day, value: 1, to: runningDate)!
+        }
         self.points = items
     }
 }
