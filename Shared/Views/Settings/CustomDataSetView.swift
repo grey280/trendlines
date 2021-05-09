@@ -14,6 +14,9 @@ struct CustomDataSetView: View {
     @State var entries: [DataSetEntry] = []
     @State var addingEntry = false
     
+    @State var showingExporter = false
+    @State var exportDocument: DataSetExport? = nil
+    
     var body: some View {
         List {
             ForEach(entries, id: \.id) { entry in
@@ -27,15 +30,35 @@ struct CustomDataSetView: View {
         }
         .navigationTitle(dataSet.name)
         .onAppear(perform: loadEntries)
-        .navigationBarItems(trailing: Button {
-            addingEntry.toggle()
-        } label: {
-            Image(systemName: "plus").accessibility(hint: Text("Add an entry"))
-        })
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    addingEntry.toggle()
+                } label: {
+                    Image(systemName: "plus").accessibility(hint: Text("Add an entry"))
+                }
+            }
+            ToolbarItem(placement: .bottomBar) {
+                Button {
+                    guard let entries = database.loadAllDataSetEntries(dataSet: dataSet) else {
+                        #warning("Needs error handling")
+                        return
+                    }
+                    exportDocument = DataSetExport(entries: entries)
+                    showingExporter = true
+                } label: {
+                    Image(systemName: "square.and.arrow.up").accessibility(hint: Text("Export entries"))
+                }
+            }
+        }
         .sheet(isPresented: $addingEntry) {
             DataSetEntryCreatorView(database: database, dataSet: dataSet) {
                 loadEntries()
             }
+        }
+        .fileExporter(isPresented: $showingExporter, document: exportDocument, contentType: .commaSeparatedText) { _ in
+            // do nothing, what else would I do?
+            #warning("... show something?")
         }
     }
     
