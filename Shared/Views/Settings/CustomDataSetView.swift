@@ -17,6 +17,8 @@ struct CustomDataSetView: View {
     @State var showingExporter = false
     @State var exportDocument: DataSetExport? = nil
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         List {
             ForEach(entries, id: \.id) { entry in
@@ -31,7 +33,17 @@ struct CustomDataSetView: View {
         .navigationTitle(dataSet.name)
         .onAppear(perform: loadEntries)
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        Text("Settings")
+                    }
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     addingEntry.toggle()
                 } label: {
@@ -51,6 +63,7 @@ struct CustomDataSetView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $addingEntry) {
             DataSetEntryCreatorView(database: database, dataSet: dataSet) {
                 loadEntries()
