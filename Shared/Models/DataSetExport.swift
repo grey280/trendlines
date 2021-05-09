@@ -20,18 +20,54 @@ struct DataSetExport: FileDocument {
     }
     
     init(configuration: ReadConfiguration) throws {
-        <#code#>
+        if let data = configuration.file.regularFileContents {
+            let decodedText = String(decoding: data, as: UTF8.self)
+            let splitText = decodedText.split(separator: "\n").map(String.init)
+            guard splitText.count > 1 else {
+                entries = []
+                return
+            }
+            let parsed = splitText.compactMap {
+                // convert will fail on first line, return nil, and be erased by CompactMap
+                DataSetExport.convert(csvLine: $0, dataSetID: 0)
+            }
+            entries = parsed
+        } else {
+            entries = []
+        }
     }
     
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        <#code#>
+        let mapped = createCSV()
+        let data = Data(mapped.utf8)
+        return FileWrapper(regularFileWithContents: data)
     }
     
-    static func convertToCSVLine(entry: DataSetEntry) -> String {
+    private static func convertToCSVLine(entry: DataSetEntry) -> String {
         "\(entry.value),\(entry.dateAdded)"
     }
     
-    func createCSV() -> String {
+    private static func convert(csvLine: String, dataSetID: DataSet.ID) -> DataSetEntry? {
+        let split = csvLine.split(separator: ",").map(String.init)
+        guard split.count == 2 else {
+            return nil
+        }
+        guard let value = Double(split[0]) else {
+            return nil
+        }
+        guard let date = dateFormatter.date(from: split[1]) else {
+            return nil
+        }
+        return DataSetEntry(id: nil, dateAdded: date, value: value, datasetID: dataSetID)
+    }
+    
+    private static var dateFormatter: ISO8601DateFormatter = {
+       let f = ISO8601DateFormatter()
+        f.formatOptions = [.withFullDate, .withFullTime]
+        return f
+    }()
+    
+    private func createCSV() -> String {
         var result = "Value,Date\n"
         let converted = entries.map(DataSetExport.convertToCSVLine)
         result += converted.joined(separator: "\n")
