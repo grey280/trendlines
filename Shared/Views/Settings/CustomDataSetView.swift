@@ -53,15 +53,14 @@ struct CustomDataSetView: View {
                     Image(systemName: "plus").accessibility(hint: Text("Add an entry"))
                 }
             }
-            ToolbarItem(placement: .bottomBar) {
+            ToolbarItemGroup(placement: .bottomBar) {
                 Button {
                     exportDocument = DataSetExport(entries: entries)
                     showingExporter = true
                 } label: {
                     Image(systemName: "square.and.arrow.up").accessibility(hint: Text("Export entries"))
                 }.disabled(entries.count == 0)
-            }
-            ToolbarItem(placement: .bottomBar) {
+                Spacer()
                 Button {
                     showingImporter = true
                 } label: {
@@ -117,6 +116,7 @@ struct CustomDataSetView: View {
                 fileResult = "Could not import entries."
             } else {
                 fileResult = "Entries imported."
+                loadEntries()
             }
             hasFileResult = true
         }
