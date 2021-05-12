@@ -38,6 +38,13 @@ struct DatePoint {
     }
 }
 
+extension DatePoint: Identifiable {
+    typealias ObjectIdentifier = Date
+    var id: ObjectIdentifier {
+        x
+    }
+}
+
 class DataProvider: ObservableObject {
     @Published var points: [DatePoint] = []
 }
