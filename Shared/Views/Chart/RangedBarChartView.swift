@@ -71,7 +71,7 @@ struct RangedBarChartView: View {
             let width = barWidth(geo.size)
             let widthStep = spacing + width
             let radius = width / 4
-            ForEach(0..<data.count) { index in
+            ForEach(0..<data.count, id: \.self) { index in
                 if let dataPoint = data[index] {
                     let x = (CGFloat(index) * widthStep) + (width / CGFloat(2))
                     let height = RangedBarChartView.barHeight(size: geo.size, yMin: dataPoint.yMin ?? dataPoint.y, yMax: dataPoint.yMax ?? dataPoint.y, yRange: yRange)
