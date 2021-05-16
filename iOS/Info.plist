@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Used to graph your health data.</string>
+	<key>NSUserActivityTypes</key>
+	<array/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -46,7 +50,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Used to graph your health data.</string>
 </dict>
 </plist>

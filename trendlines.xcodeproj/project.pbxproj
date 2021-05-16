@@ -56,6 +56,7 @@
 		2D5B3C0E260F8F48002F3D62 /* DataSourceType+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */; };
 		2D6AA2B9260D745600CCAF9D /* ChartTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */; };
 		2D6AA2BC260D745600CCAF9D /* ChartTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */; };
+		2D6B5E052650C90900BE5230 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B5E042650C90900BE5230 /* Intents.intentdefinition */; };
 		2D727332260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */; };
 		2D727333260EDB8F00B77139 /* DataSetEntryCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */; };
 		2D76A58226292586002CEEF0 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D76A58126292586002CEEF0 /* PrivacyPolicyView.swift */; };
@@ -109,6 +110,7 @@
 		2D5B3C07260F8F0A002F3D62 /* DataSourceDisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceDisplayMode.swift; sourceTree = "<group>"; };
 		2D5B3C0C260F8F48002F3D62 /* DataSourceType+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataSourceType+Codable.swift"; sourceTree = "<group>"; };
 		2D6AA2B8260D744F00CCAF9D /* ChartTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTypePickerView.swift; sourceTree = "<group>"; };
+		2D6B5E042650C90900BE5230 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		2D727331260EDB8F00B77139 /* DataSetEntryCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetEntryCreatorView.swift; sourceTree = "<group>"; };
 		2D76A58126292586002CEEF0 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		2D76A5882629291E002CEEF0 /* LicensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesView.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			children = (
 				2D33C74925E0556300E3C6C3 /* Info.plist */,
 				2D43464225E1E5BE0018D541 /* HealthDataProvider.swift */,
+				2D6B5E042650C90900BE5230 /* Intents.intentdefinition */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				2D5B3C0D260F8F48002F3D62 /* DataSourceType+Codable.swift in Sources */,
 				2DCD53B725E18B3000BBA89B /* ChartType.swift in Sources */,
 				2D33C75425E0556300E3C6C3 /* ContentView.swift in Sources */,
+				2D6B5E052650C90900BE5230 /* Intents.intentdefinition in Sources */,
 				2D43463925E1DF870018D541 /* DataProvider.swift in Sources */,
 				2D1CAC55260309DB0058F038 /* DataSetEntry.swift in Sources */,
 				2D33C77E25E0811400E3C6C3 /* RangedBarChartView.swift in Sources */,
