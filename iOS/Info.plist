@@ -23,7 +23,9 @@
 	<key>NSHealthShareUsageDescription</key>
 	<string>Used to graph your health data.</string>
 	<key>NSUserActivityTypes</key>
-	<array/>
+	<array>
+		<string>AddDataSetEntryIntent</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
